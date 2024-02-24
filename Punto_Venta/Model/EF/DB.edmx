@@ -1,0 +1,548 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Punto_ventasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria_productos">
+          <Key>
+            <PropertyRef Name="Id_categoria" />
+          </Key>
+          <Property Name="Id_categoria" Type="int" Nullable="false" />
+          <Property Name="Nombre_categoria" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Detalles_ventas">
+          <Key>
+            <PropertyRef Name="Id_detallesVentas" />
+          </Key>
+          <Property Name="Id_detallesVentas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_venta" Type="int" />
+          <Property Name="Id_producto" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Maestro_Cliente">
+          <Key>
+            <PropertyRef Name="Id_cliente" />
+          </Key>
+          <Property Name="Id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Maestro_ctasxcobrar">
+          <Key>
+            <PropertyRef Name="Id_CxC" />
+          </Key>
+          <Property Name="Id_CxC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_venta" Type="int" />
+          <Property Name="monto" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Maestro_Detalles_ctasxcobrar">
+          <Key>
+            <PropertyRef Name="Id_detalleCxC" />
+          </Key>
+          <Property Name="Id_detalleCxC" Type="int" Nullable="false" />
+          <Property Name="Id_CxC" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Maestro_ventas">
+          <Key>
+            <PropertyRef Name="Id_venta" />
+          </Key>
+          <Property Name="Id_venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_cliente" Type="int" />
+          <Property Name="Id_producto" Type="int" />
+          <Property Name="Monto_total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="Id_producto" />
+          </Key>
+          <Property Name="Id_producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Precio_compra" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" />
+          <Property Name="Existencia" Type="int" />
+          <Property Name="Stock" Type="int" />
+          <Property Name="Id_categoria" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Detalles___Id_pr__440B1D61">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Detalles_ventas" Type="Self.Detalles_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id_producto" />
+            </Principal>
+            <Dependent Role="Detalles_ventas">
+              <PropertyRef Name="Id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalles___Id_ve__4316F928">
+          <End Role="Maestro_ventas" Type="Self.Maestro_ventas" Multiplicity="0..1" />
+          <End Role="Detalles_ventas" Type="Self.Detalles_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestro_ventas">
+              <PropertyRef Name="Id_venta" />
+            </Principal>
+            <Dependent Role="Detalles_ventas">
+              <PropertyRef Name="Id_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maestro_c__Id_ve__47DBAE45">
+          <End Role="Maestro_ventas" Type="Self.Maestro_ventas" Multiplicity="0..1" />
+          <End Role="Maestro_ctasxcobrar" Type="Self.Maestro_ctasxcobrar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestro_ventas">
+              <PropertyRef Name="Id_venta" />
+            </Principal>
+            <Dependent Role="Maestro_ctasxcobrar">
+              <PropertyRef Name="Id_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maestro_D__Id_Cx__4AB81AF0">
+          <End Role="Maestro_ctasxcobrar" Type="Self.Maestro_ctasxcobrar" Multiplicity="0..1" />
+          <End Role="Maestro_Detalles_ctasxcobrar" Type="Self.Maestro_Detalles_ctasxcobrar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestro_ctasxcobrar">
+              <PropertyRef Name="Id_CxC" />
+            </Principal>
+            <Dependent Role="Maestro_Detalles_ctasxcobrar">
+              <PropertyRef Name="Id_CxC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maestro_v__Id_cl__3E52440B">
+          <End Role="Maestro_Cliente" Type="Self.Maestro_Cliente" Multiplicity="0..1" />
+          <End Role="Maestro_ventas" Type="Self.Maestro_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestro_Cliente">
+              <PropertyRef Name="Id_cliente" />
+            </Principal>
+            <Dependent Role="Maestro_ventas">
+              <PropertyRef Name="Id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maestro_v__Id_pr__3F466844">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Maestro_ventas" Type="Self.Maestro_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id_producto" />
+            </Principal>
+            <Dependent Role="Maestro_ventas">
+              <PropertyRef Name="Id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__Id_ca__3B75D760">
+          <End Role="Categoria_productos" Type="Self.Categoria_productos" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria_productos">
+              <PropertyRef Name="Id_categoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Punto_ventasModelStoreContainer">
+          <EntitySet Name="Categoria_productos" EntityType="Self.Categoria_productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalles_ventas" EntityType="Self.Detalles_ventas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maestro_Cliente" EntityType="Self.Maestro_Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maestro_ctasxcobrar" EntityType="Self.Maestro_ctasxcobrar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maestro_Detalles_ctasxcobrar" EntityType="Self.Maestro_Detalles_ctasxcobrar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maestro_ventas" EntityType="Self.Maestro_ventas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Detalles___Id_pr__440B1D61" Association="Self.FK__Detalles___Id_pr__440B1D61">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Detalles_ventas" EntitySet="Detalles_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalles___Id_ve__4316F928" Association="Self.FK__Detalles___Id_ve__4316F928">
+            <End Role="Maestro_ventas" EntitySet="Maestro_ventas" />
+            <End Role="Detalles_ventas" EntitySet="Detalles_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maestro_c__Id_ve__47DBAE45" Association="Self.FK__Maestro_c__Id_ve__47DBAE45">
+            <End Role="Maestro_ventas" EntitySet="Maestro_ventas" />
+            <End Role="Maestro_ctasxcobrar" EntitySet="Maestro_ctasxcobrar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maestro_D__Id_Cx__4AB81AF0" Association="Self.FK__Maestro_D__Id_Cx__4AB81AF0">
+            <End Role="Maestro_ctasxcobrar" EntitySet="Maestro_ctasxcobrar" />
+            <End Role="Maestro_Detalles_ctasxcobrar" EntitySet="Maestro_Detalles_ctasxcobrar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maestro_v__Id_cl__3E52440B" Association="Self.FK__Maestro_v__Id_cl__3E52440B">
+            <End Role="Maestro_Cliente" EntitySet="Maestro_Cliente" />
+            <End Role="Maestro_ventas" EntitySet="Maestro_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maestro_v__Id_pr__3F466844" Association="Self.FK__Maestro_v__Id_pr__3F466844">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Maestro_ventas" EntitySet="Maestro_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__Id_ca__3B75D760" Association="Self.FK__Productos__Id_ca__3B75D760">
+            <End Role="Categoria_productos" EntitySet="Categoria_productos" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Punto_ventasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria_productos">
+          <Key>
+            <PropertyRef Name="Id_categoria" />
+          </Key>
+          <Property Name="Id_categoria" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__Id_ca__3B75D760" FromRole="Categoria_productos" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Detalles_ventas">
+          <Key>
+            <PropertyRef Name="Id_detallesVentas" />
+          </Key>
+          <Property Name="Id_detallesVentas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_venta" Type="Int32" />
+          <Property Name="Id_producto" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Precio_venta" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__Detalles___Id_pr__440B1D61" FromRole="Detalles_ventas" ToRole="Productos" />
+          <NavigationProperty Name="Maestro_ventas" Relationship="Self.FK__Detalles___Id_ve__4316F928" FromRole="Detalles_ventas" ToRole="Maestro_ventas" />
+        </EntityType>
+        <EntityType Name="Maestro_Cliente">
+          <Key>
+            <PropertyRef Name="Id_cliente" />
+          </Key>
+          <Property Name="Id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Maestro_ventas" Relationship="Self.FK__Maestro_v__Id_cl__3E52440B" FromRole="Maestro_Cliente" ToRole="Maestro_ventas" />
+        </EntityType>
+        <EntityType Name="Maestro_ctasxcobrar">
+          <Key>
+            <PropertyRef Name="Id_CxC" />
+          </Key>
+          <Property Name="Id_CxC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_venta" Type="Int32" />
+          <Property Name="monto" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Maestro_ventas" Relationship="Self.FK__Maestro_c__Id_ve__47DBAE45" FromRole="Maestro_ctasxcobrar" ToRole="Maestro_ventas" />
+          <NavigationProperty Name="Maestro_Detalles_ctasxcobrar" Relationship="Self.FK__Maestro_D__Id_Cx__4AB81AF0" FromRole="Maestro_ctasxcobrar" ToRole="Maestro_Detalles_ctasxcobrar" />
+        </EntityType>
+        <EntityType Name="Maestro_Detalles_ctasxcobrar">
+          <Key>
+            <PropertyRef Name="Id_detalleCxC" />
+          </Key>
+          <Property Name="Id_detalleCxC" Type="Int32" Nullable="false" />
+          <Property Name="Id_CxC" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Maestro_ctasxcobrar" Relationship="Self.FK__Maestro_D__Id_Cx__4AB81AF0" FromRole="Maestro_Detalles_ctasxcobrar" ToRole="Maestro_ctasxcobrar" />
+        </EntityType>
+        <EntityType Name="Maestro_ventas">
+          <Key>
+            <PropertyRef Name="Id_venta" />
+          </Key>
+          <Property Name="Id_venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_cliente" Type="Int32" />
+          <Property Name="Id_producto" Type="Int32" />
+          <Property Name="Monto_total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Detalles_ventas" Relationship="Self.FK__Detalles___Id_ve__4316F928" FromRole="Maestro_ventas" ToRole="Detalles_ventas" />
+          <NavigationProperty Name="Maestro_Cliente" Relationship="Self.FK__Maestro_v__Id_cl__3E52440B" FromRole="Maestro_ventas" ToRole="Maestro_Cliente" />
+          <NavigationProperty Name="Maestro_ctasxcobrar" Relationship="Self.FK__Maestro_c__Id_ve__47DBAE45" FromRole="Maestro_ventas" ToRole="Maestro_ctasxcobrar" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__Maestro_v__Id_pr__3F466844" FromRole="Maestro_ventas" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id_producto" />
+          </Key>
+          <Property Name="Id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Precio_compra" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Precio_venta" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Existencia" Type="Int32" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="Id_categoria" Type="Int32" />
+          <NavigationProperty Name="Categoria_productos" Relationship="Self.FK__Productos__Id_ca__3B75D760" FromRole="Productos" ToRole="Categoria_productos" />
+          <NavigationProperty Name="Detalles_ventas" Relationship="Self.FK__Detalles___Id_pr__440B1D61" FromRole="Productos" ToRole="Detalles_ventas" />
+          <NavigationProperty Name="Maestro_ventas" Relationship="Self.FK__Maestro_v__Id_pr__3F466844" FromRole="Productos" ToRole="Maestro_ventas" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__Productos__Id_ca__3B75D760">
+          <End Role="Categoria_productos" Type="Self.Categoria_productos" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria_productos">
+              <PropertyRef Name="Id_categoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalles___Id_pr__440B1D61">
+          <End Role="Productos" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="Detalles_ventas" Type="Self.Detalles_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id_producto" />
+            </Principal>
+            <Dependent Role="Detalles_ventas">
+              <PropertyRef Name="Id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalles___Id_ve__4316F928">
+          <End Role="Maestro_ventas" Type="Self.Maestro_ventas" Multiplicity="0..1" />
+          <End Role="Detalles_ventas" Type="Self.Detalles_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestro_ventas">
+              <PropertyRef Name="Id_venta" />
+            </Principal>
+            <Dependent Role="Detalles_ventas">
+              <PropertyRef Name="Id_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maestro_v__Id_cl__3E52440B">
+          <End Role="Maestro_Cliente" Type="Self.Maestro_Cliente" Multiplicity="0..1" />
+          <End Role="Maestro_ventas" Type="Self.Maestro_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestro_Cliente">
+              <PropertyRef Name="Id_cliente" />
+            </Principal>
+            <Dependent Role="Maestro_ventas">
+              <PropertyRef Name="Id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maestro_c__Id_ve__47DBAE45">
+          <End Role="Maestro_ventas" Type="Self.Maestro_ventas" Multiplicity="0..1" />
+          <End Role="Maestro_ctasxcobrar" Type="Self.Maestro_ctasxcobrar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestro_ventas">
+              <PropertyRef Name="Id_venta" />
+            </Principal>
+            <Dependent Role="Maestro_ctasxcobrar">
+              <PropertyRef Name="Id_venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maestro_D__Id_Cx__4AB81AF0">
+          <End Role="Maestro_ctasxcobrar" Type="Self.Maestro_ctasxcobrar" Multiplicity="0..1" />
+          <End Role="Maestro_Detalles_ctasxcobrar" Type="Self.Maestro_Detalles_ctasxcobrar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestro_ctasxcobrar">
+              <PropertyRef Name="Id_CxC" />
+            </Principal>
+            <Dependent Role="Maestro_Detalles_ctasxcobrar">
+              <PropertyRef Name="Id_CxC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maestro_v__Id_pr__3F466844">
+          <End Role="Productos" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="Maestro_ventas" Type="Self.Maestro_ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id_producto" />
+            </Principal>
+            <Dependent Role="Maestro_ventas">
+              <PropertyRef Name="Id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Punto_ventasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria_productos" EntityType="Self.Categoria_productos" />
+          <EntitySet Name="Detalles_ventas" EntityType="Self.Detalles_ventas" />
+          <EntitySet Name="Maestro_Cliente" EntityType="Self.Maestro_Cliente" />
+          <EntitySet Name="Maestro_ctasxcobrar" EntityType="Self.Maestro_ctasxcobrar" />
+          <EntitySet Name="Maestro_Detalles_ctasxcobrar" EntityType="Self.Maestro_Detalles_ctasxcobrar" />
+          <EntitySet Name="Maestro_ventas" EntityType="Self.Maestro_ventas" />
+          <EntitySet Name="Productos" EntityType="Self.Producto" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK__Productos__Id_ca__3B75D760" Association="Self.FK__Productos__Id_ca__3B75D760">
+            <End Role="Categoria_productos" EntitySet="Categoria_productos" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalles___Id_pr__440B1D61" Association="Self.FK__Detalles___Id_pr__440B1D61">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Detalles_ventas" EntitySet="Detalles_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalles___Id_ve__4316F928" Association="Self.FK__Detalles___Id_ve__4316F928">
+            <End Role="Maestro_ventas" EntitySet="Maestro_ventas" />
+            <End Role="Detalles_ventas" EntitySet="Detalles_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maestro_v__Id_cl__3E52440B" Association="Self.FK__Maestro_v__Id_cl__3E52440B">
+            <End Role="Maestro_Cliente" EntitySet="Maestro_Cliente" />
+            <End Role="Maestro_ventas" EntitySet="Maestro_ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maestro_c__Id_ve__47DBAE45" Association="Self.FK__Maestro_c__Id_ve__47DBAE45">
+            <End Role="Maestro_ventas" EntitySet="Maestro_ventas" />
+            <End Role="Maestro_ctasxcobrar" EntitySet="Maestro_ctasxcobrar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maestro_D__Id_Cx__4AB81AF0" Association="Self.FK__Maestro_D__Id_Cx__4AB81AF0">
+            <End Role="Maestro_ctasxcobrar" EntitySet="Maestro_ctasxcobrar" />
+            <End Role="Maestro_Detalles_ctasxcobrar" EntitySet="Maestro_Detalles_ctasxcobrar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maestro_v__Id_pr__3F466844" Association="Self.FK__Maestro_v__Id_pr__3F466844">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Maestro_ventas" EntitySet="Maestro_ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Punto_ventasModelStoreContainer" CdmEntityContainer="Punto_ventasEntities">
+          <EntitySetMapping Name="Categoria_productos">
+            <EntityTypeMapping TypeName="Punto_ventasModel.Categoria_productos">
+              <MappingFragment StoreEntitySet="Categoria_productos">
+                <ScalarProperty Name="Id_categoria" ColumnName="Id_categoria" />
+                <ScalarProperty Name="Nombre_categoria" ColumnName="Nombre_categoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalles_ventas">
+            <EntityTypeMapping TypeName="Punto_ventasModel.Detalles_ventas">
+              <MappingFragment StoreEntitySet="Detalles_ventas">
+                <ScalarProperty Name="Id_detallesVentas" ColumnName="Id_detallesVentas" />
+                <ScalarProperty Name="Id_venta" ColumnName="Id_venta" />
+                <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio_venta" ColumnName="Precio_venta" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maestro_Cliente">
+            <EntityTypeMapping TypeName="Punto_ventasModel.Maestro_Cliente">
+              <MappingFragment StoreEntitySet="Maestro_Cliente">
+                <ScalarProperty Name="Id_cliente" ColumnName="Id_cliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maestro_ctasxcobrar">
+            <EntityTypeMapping TypeName="Punto_ventasModel.Maestro_ctasxcobrar">
+              <MappingFragment StoreEntitySet="Maestro_ctasxcobrar">
+                <ScalarProperty Name="Id_CxC" ColumnName="Id_CxC" />
+                <ScalarProperty Name="Id_venta" ColumnName="Id_venta" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maestro_Detalles_ctasxcobrar">
+            <EntityTypeMapping TypeName="Punto_ventasModel.Maestro_Detalles_ctasxcobrar">
+              <MappingFragment StoreEntitySet="Maestro_Detalles_ctasxcobrar">
+                <ScalarProperty Name="Id_detalleCxC" ColumnName="Id_detalleCxC" />
+                <ScalarProperty Name="Id_CxC" ColumnName="Id_CxC" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maestro_ventas">
+            <EntityTypeMapping TypeName="Punto_ventasModel.Maestro_ventas">
+              <MappingFragment StoreEntitySet="Maestro_ventas">
+                <ScalarProperty Name="Id_venta" ColumnName="Id_venta" />
+                <ScalarProperty Name="Id_cliente" ColumnName="Id_cliente" />
+                <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+                <ScalarProperty Name="Monto_total" ColumnName="Monto_total" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="Punto_ventasModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio_compra" ColumnName="Precio_compra" />
+                <ScalarProperty Name="Precio_venta" ColumnName="Precio_venta" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Id_categoria" ColumnName="Id_categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Punto_ventasModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

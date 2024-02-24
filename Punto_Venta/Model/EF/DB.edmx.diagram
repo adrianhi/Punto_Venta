@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="727ea6fc81e34fbe9c619a5a36995ce1" Name="Diagram1">
+        <EntityTypeShape EntityType="Punto_ventasModel.Categoria_productos" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Detalles_ventas" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_Cliente" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_ctasxcobrar" Width="1.5" PointX="10.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_Detalles_ctasxcobrar" Width="1.5" PointX="12.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_ventas" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Producto" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="Punto_ventasModel.FK__Productos__Id_ca__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="Punto_ventasModel.FK__Detalles___Id_pr__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Punto_ventasModel.FK__Detalles___Id_ve__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="Punto_ventasModel.FK__Maestro_v__Id_cl__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Punto_ventasModel.FK__Maestro_c__Id_ve__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Punto_ventasModel.FK__Maestro_D__Id_Cx__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Punto_ventasModel.FK__Maestro_v__Id_pr__3F466844" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

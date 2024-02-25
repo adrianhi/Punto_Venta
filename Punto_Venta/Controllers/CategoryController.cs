@@ -60,7 +60,6 @@ public bool CategoryExists(int idCategoria)
         }
 
     }
-
-
+    
 
 }

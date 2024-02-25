@@ -1,4 +1,6 @@
-﻿using Punto_Venta.Controllers;
+﻿using DevExpress.Internal.WinApi.Windows.UI.Notifications;
+using DevExpress.XtraGrid.Views.Grid;
+using Punto_Venta.Controllers;
 using Punto_Venta.Model.EF;
 using System;
 using System.Windows.Forms;
@@ -17,6 +19,13 @@ namespace Punto_Venta.View
             gridViewProducts.FocusedRowChanged += gridViewProducts_FocusedRowChanged;
         }
 
+        private int getCurrentRowId ( )
+        {
+            int rowIndex = gridViewProducts.FocusedRowHandle;
+
+            int productId = Convert.ToInt32(gridViewProducts.GetRowCellValue(rowIndex, "Id_producto"));
+            return productId;
+        }
         private void LoadData ( )
         {
             var productList = productController.getList();
@@ -37,6 +46,7 @@ namespace Punto_Venta.View
             txtStock.Text = "";
             txtIdCategoria.Text = "";
             btnAgregar.Enabled = true;
+         
         }
         private void FillTextBox (Producto selectedProduct)
         {
@@ -95,37 +105,42 @@ namespace Punto_Venta.View
                 LoadData();
                 ClearTextBox();
             }
+            ClearTextBox();
+
         }
+
         private void UpdateProduct ( )
         {
-            string codigoProducto = txtCodigoProducto.Text.Trim();
-            string nuevoNombre = txtNombreProducto.Text.Trim();
-            decimal nuevoPrecioCompra;
-            decimal nuevoPrecioVenta;
-            string nuevoEstado = txtEstado.Text.Trim();
-            int nuevaExistencia;
-            int nuevoStock;
-            int nuevoIdCategoria;
+            int productId = getCurrentRowId();
+            string codigoProducto = txtCodigoProducto.Text;
+            string nuevoNombre = txtNombreProducto.Text;
+            decimal nuevoPrecioCompra = Convert.ToDecimal(txtPrecioCompra.Text);
+            decimal nuevoPrecioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
+            string nuevoEstado = txtEstado.Text;
+            int nuevaExistencia = Convert.ToInt32(txtExistencia.Text);
+            int nuevoStock = Convert.ToInt32(txtStock.Text);
+            int nuevoIdCategoria = Convert.ToInt32(txtIdCategoria.Text);
+
+            productController.updateProduct(productId, codigoProducto, nuevoNombre, nuevoPrecioCompra, nuevoPrecioVenta, nuevoEstado, nuevaExistencia, nuevoStock, nuevoIdCategoria);
 
 
-            if (!decimal.TryParse(txtPrecioCompra.Text.Trim(), out nuevoPrecioCompra) ||
-                !decimal.TryParse(txtPrecioVenta.Text.Trim(), out nuevoPrecioVenta) ||
-                !int.TryParse(txtExistencia.Text.Trim(), out nuevaExistencia) ||
-                !int.TryParse(txtStock.Text.Trim(), out nuevoStock) ||
-                !int.TryParse(txtIdCategoria.Text.Trim(), out nuevoIdCategoria))
+           
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas actualizar el producto con el código " + codigoProducto + "?", "Confirmar actualizacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
             {
-                MessageBox.Show("Por favor, ingrese valores numéricos válidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+            productController.updateProduct(productId, codigoProducto, nuevoNombre, nuevoPrecioCompra, nuevoPrecioVenta, nuevoEstado, nuevaExistencia, nuevoStock, nuevoIdCategoria);
+
+                MessageBox.Show("Producto con el id " + productId + " actualizado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearTextBox();
+                LoadData();
             }
 
-            productController.UpdateProduct(codigoProducto, nuevoNombre, nuevoPrecioCompra, nuevoPrecioVenta, nuevoEstado, nuevaExistencia, nuevoStock, nuevoIdCategoria);
-
-            MessageBox.Show("Producto actualizado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             ClearTextBox();
-            LoadData();
+
+
 
         }
-
 
         private void gridViewProducts_FocusedRowChanged (object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
@@ -133,9 +148,12 @@ namespace Punto_Venta.View
             {
                 if (gridView.GetRow(e.FocusedRowHandle) is Producto selectedProduct)
                 {
+                   
+                    
 
                     FillTextBox(selectedProduct);
                     btnAgregar.Enabled = false;
+                    
                 }
             }
         }
@@ -154,11 +172,12 @@ namespace Punto_Venta.View
         {
             DeleteProduct();
         }
-
         private void btnActualizar_Click (object sender, EventArgs e)
         {
             UpdateProduct();
         }
+
+
 
 
     }

@@ -111,7 +111,6 @@
     <Compile Include="Model\EF\sysdiagram.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Venta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\FrmCategoryList.cs">

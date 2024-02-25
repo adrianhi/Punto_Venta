@@ -20,7 +20,7 @@ namespace Punto_Venta
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new View.FrmMenu());
+            Application.Run(new View.FrmVentas());
         }
     }
 }

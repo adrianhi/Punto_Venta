@@ -112,76 +112,102 @@ namespace Punto_Venta.View
                 return;
             }
         }
+
+
+
+
         //CRUD ACTIONS
         private void AddProduct ( )
         {
-          
-            Producto nuevoProducto = new Producto
+            try
             {
-                Codigo = txtCodigoProducto.Text,
-                Nombre = txtNombreProducto.Text,
-                Precio_compra = Convert.ToDecimal(txtPrecioCompra.Text),
-                Precio_venta = Convert.ToDecimal(txtPrecioVenta.Text),
-                Estado =cmbEstado.SelectedItem.ToString(),
-                Existencia = Convert.ToInt32(txtExistencia.Text),
-                Stock = Convert.ToInt32(txtStock.Text),
-                Id_categoria = Convert.ToInt32(lkCategories.EditValue)
-            };
+                Producto nuevoProducto = new Producto
+                {
+                    Codigo = txtCodigoProducto.Text,
+                    Nombre = txtNombreProducto.Text,
+                    Precio_compra = Convert.ToDecimal(txtPrecioCompra.Text),
+                    Precio_venta = Convert.ToDecimal(txtPrecioVenta.Text),
+                    Estado = cmbEstado.SelectedItem.ToString(),
+                    Existencia = Convert.ToInt32(txtExistencia.Text),
+                    Stock = Convert.ToInt32(txtStock.Text),
+                    Id_categoria = Convert.ToInt32(lkCategories.EditValue)
+                };
 
-            productController.AddProduct(nuevoProducto);
-            LoadData();
-            ClearTextBox();
+                productController.AddProduct(nuevoProducto);
+                LoadData();
+                ClearTextBox();
+            }
+         
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void DeleteProduct ( )
         {
-            int productId = getCurrentRowId();
-            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar el producto con el id " + productId + "?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            try
             {
-                productExist(productId);
-                productController.DeleteProduct(productId);
-                MessageBox.Show("Producto con el id " + productId+ " eliminado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadData();
+                int productId = getCurrentRowId();
+                DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar el producto con el id " + productId + "?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    productExist(productId);
+                    productController.DeleteProduct(productId);
+                    MessageBox.Show("Producto con el id " + productId + " eliminado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData();
+                    ClearTextBox();
+                }
                 ClearTextBox();
             }
-            ClearTextBox();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private void UpdateProduct ( )
         {
-            int productId = getCurrentRowId();
-            string codigoProducto = txtCodigoProducto.Text;
-            string nuevoNombre = txtNombreProducto.Text;
-            decimal nuevoPrecioCompra = Convert.ToDecimal(txtPrecioCompra.Text);
-            decimal nuevoPrecioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
-            string nuevoEstado = cmbEstado.SelectedItem.ToString();
-            int nuevaExistencia = Convert.ToInt32(txtExistencia.Text);
-            int nuevoStock = Convert.ToInt32(txtStock.Text);
-            int nuevoIdCategoria = Convert.ToInt32(lkCategories.EditValue);
 
-            
-           
-            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas actualizar el producto con el código " + codigoProducto + "?", "Confirmar actualizacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            try
             {
-                productExist(productId);
+                int productId = getCurrentRowId();
+                string codigoProducto = txtCodigoProducto.Text;
+                string nuevoNombre = txtNombreProducto.Text;
+                decimal nuevoPrecioCompra = Convert.ToDecimal(txtPrecioCompra.Text);
+                decimal nuevoPrecioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
+                string nuevoEstado = cmbEstado.SelectedItem.ToString();
+                int nuevaExistencia = Convert.ToInt32(txtExistencia.Text);
+                int nuevoStock = Convert.ToInt32(txtStock.Text);
+                int nuevoIdCategoria = Convert.ToInt32(lkCategories.EditValue);
 
-                productController.UpdateProduct(productId, codigoProducto, nuevoNombre, nuevoPrecioCompra, nuevoPrecioVenta, nuevoEstado, nuevaExistencia, nuevoStock, nuevoIdCategoria);
+                DialogResult result = MessageBox.Show("¿Estás seguro de que deseas actualizar el producto con el código " + codigoProducto + "?", "Confirmar actualizacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                MessageBox.Show("Producto con el id " + productId + " actualizado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                {
+                    productExist(productId);
+
+                    productController.UpdateProduct(productId, codigoProducto, nuevoNombre, nuevoPrecioCompra, nuevoPrecioVenta, nuevoEstado, nuevaExistencia, nuevoStock, nuevoIdCategoria);
+
+                    MessageBox.Show("Producto con el id " + productId + " actualizado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearTextBox();
+                    LoadData();
+                }
+
                 ClearTextBox();
-                LoadData();
             }
-
-            ClearTextBox();
+           
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar producto " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
 
         }
 
-       
+
         //Acciones
         private void txtLimpiar_Click (object sender, EventArgs e)
         {

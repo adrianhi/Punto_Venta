@@ -29,7 +29,7 @@ public class VentaController
 
     public bool ClientExist (string correo)
     {
-        var client = dbContext.Maestro_Cliente.FirstOrDefault(c => c.CorreoElectronico == correo);
+        var client = dbContext.Maestro_Clientes.FirstOrDefault(c => c.correo == correo);
         return client != null;
     }
     public int FindClientID (string correoCliente)
@@ -37,12 +37,12 @@ public class VentaController
         try
         {
 
-            var cliente = dbContext.Maestro_Cliente.FirstOrDefault(c => c.CorreoElectronico == correoCliente);
+            var cliente = dbContext.Maestro_Clientes.FirstOrDefault(c => c.correo == correoCliente);
 
 
             if (cliente != null)
             {
-                return cliente.Id_cliente;
+                return cliente.idCliente;
             }
             else
             {

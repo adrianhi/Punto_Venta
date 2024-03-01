@@ -12,19 +12,20 @@ namespace Punto_Venta.Model.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Maestro_Cliente
+    public partial class Maestro_Clientes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Maestro_Cliente()
+        public Maestro_Clientes()
         {
             this.Maestro_ventas = new HashSet<Maestro_ventas>();
         }
     
-        public int Id_cliente { get; set; }
-        public string Nombre { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
-        public string CorreoElectronico { get; set; }
+        public int idCliente { get; set; }
+        public string cedula { get; set; }
+        public string direccion { get; set; }
+        public string correo { get; set; }
+        public string telefono { get; set; }
+        public string nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Maestro_ventas> Maestro_ventas { get; set; }

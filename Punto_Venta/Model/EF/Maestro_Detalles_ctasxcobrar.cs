@@ -18,7 +18,5 @@ namespace Punto_Venta.Model.EF
         public Nullable<int> Id_CxC { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public string Estado { get; set; }
-    
-        public virtual Maestro_ctasxcobrar Maestro_ctasxcobrar { get; set; }
     }
 }

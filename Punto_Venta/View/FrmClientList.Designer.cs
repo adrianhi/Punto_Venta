@@ -32,7 +32,6 @@
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.txtCorreo = new DevExpress.XtraEditors.TextEdit();
             this.txtTelefono = new DevExpress.XtraEditors.TextEdit();
             this.txtDireccion = new DevExpress.XtraEditors.TextEdit();
             this.txtNombreCliente = new DevExpress.XtraEditors.TextEdit();
@@ -44,15 +43,28 @@
             this.btnEliminar = new DevExpress.XtraEditors.SimpleButton();
             this.btnActualizar = new DevExpress.XtraEditors.SimpleButton();
             this.btnAgregar = new DevExpress.XtraEditors.SimpleButton();
+            this.txtCedula = new DevExpress.XtraEditors.TextEdit();
+            this.lblCedula = new DevExpress.XtraEditors.LabelControl();
             this.gridControlClients = new DevExpress.XtraGrid.GridControl();
             this.gridViewClients = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colidCliente = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colcedula = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colnombre = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coldireccion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colcorreo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coltelefono = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txtIdCliente = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.txtCorreo = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCorreo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTelefono.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDireccion.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreCliente.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCedula.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlClients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewClients)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtIdCliente.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCorreo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -94,18 +106,9 @@
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(964, 22);
             // 
-            // txtCorreo
-            // 
-            this.txtCorreo.Location = new System.Drawing.Point(123, 276);
-            this.txtCorreo.MenuManager = this.ribbon;
-            this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(150, 20);
-            this.txtCorreo.TabIndex = 31;
-            this.txtCorreo.TextChanged += new System.EventHandler(this.txtCorreo_TextChanged);
-            // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(123, 250);
+            this.txtTelefono.Location = new System.Drawing.Point(123, 276);
             this.txtTelefono.MenuManager = this.ribbon;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(150, 20);
@@ -113,7 +116,7 @@
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(123, 219);
+            this.txtDireccion.Location = new System.Drawing.Point(123, 251);
             this.txtDireccion.MenuManager = this.ribbon;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(150, 20);
@@ -121,7 +124,7 @@
             // 
             // txtNombreCliente
             // 
-            this.txtNombreCliente.Location = new System.Drawing.Point(123, 194);
+            this.txtNombreCliente.Location = new System.Drawing.Point(123, 199);
             this.txtNombreCliente.MenuManager = this.ribbon;
             this.txtNombreCliente.Name = "txtNombreCliente";
             this.txtNombreCliente.Size = new System.Drawing.Size(150, 20);
@@ -131,7 +134,7 @@
             // 
             this.lblNombre.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombre.Appearance.Options.UseFont = true;
-            this.lblNombre.Location = new System.Drawing.Point(36, 197);
+            this.lblNombre.Location = new System.Drawing.Point(36, 202);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(57, 19);
             this.lblNombre.TabIndex = 32;
@@ -141,7 +144,7 @@
             // 
             this.lblDireccion.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDireccion.Appearance.Options.UseFont = true;
-            this.lblDireccion.Location = new System.Drawing.Point(36, 226);
+            this.lblDireccion.Location = new System.Drawing.Point(36, 249);
             this.lblDireccion.Name = "lblDireccion";
             this.lblDireccion.Size = new System.Drawing.Size(65, 19);
             this.lblDireccion.TabIndex = 33;
@@ -151,7 +154,7 @@
             // 
             this.lblTelefono.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTelefono.Appearance.Options.UseFont = true;
-            this.lblTelefono.Location = new System.Drawing.Point(36, 248);
+            this.lblTelefono.Location = new System.Drawing.Point(36, 277);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(62, 19);
             this.lblTelefono.TabIndex = 34;
@@ -161,7 +164,7 @@
             // 
             this.lblCorreo.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCorreo.Appearance.Options.UseFont = true;
-            this.lblCorreo.Location = new System.Drawing.Point(36, 274);
+            this.lblCorreo.Location = new System.Drawing.Point(36, 303);
             this.lblCorreo.Name = "lblCorreo";
             this.lblCorreo.Size = new System.Drawing.Size(48, 19);
             this.lblCorreo.TabIndex = 35;
@@ -211,39 +214,151 @@
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // txtCedula
+            // 
+            this.txtCedula.Location = new System.Drawing.Point(123, 225);
+            this.txtCedula.MenuManager = this.ribbon;
+            this.txtCedula.Name = "txtCedula";
+            this.txtCedula.Size = new System.Drawing.Size(150, 20);
+            this.txtCedula.TabIndex = 52;
+            // 
+            // lblCedula
+            // 
+            this.lblCedula.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCedula.Appearance.Options.UseFont = true;
+            this.lblCedula.Location = new System.Drawing.Point(36, 226);
+            this.lblCedula.Name = "lblCedula";
+            this.lblCedula.Size = new System.Drawing.Size(48, 19);
+            this.lblCedula.TabIndex = 53;
+            this.lblCedula.Text = "Cedula";
+            // 
             // gridControlClients
             // 
-            this.gridControlClients.Location = new System.Drawing.Point(409, 164);
+            this.gridControlClients.DataSource = typeof(Punto_Venta.Model.EF.Maestro_Clientes);
+            this.gridControlClients.Location = new System.Drawing.Point(418, 164);
             this.gridControlClients.MainView = this.gridViewClients;
             this.gridControlClients.MenuManager = this.ribbon;
             this.gridControlClients.Name = "gridControlClients";
-            this.gridControlClients.Size = new System.Drawing.Size(486, 264);
-            this.gridControlClients.TabIndex = 49;
+            this.gridControlClients.Size = new System.Drawing.Size(519, 258);
+            this.gridControlClients.TabIndex = 65;
             this.gridControlClients.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewClients});
             // 
             // gridViewClients
             // 
-            this.gridViewClients.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridViewClients.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colidCliente,
+            this.colcedula,
+            this.colnombre,
+            this.coldireccion,
+            this.colcorreo,
+            this.coltelefono});
             this.gridViewClients.GridControl = this.gridControlClients;
             this.gridViewClients.Name = "gridViewClients";
             this.gridViewClients.OptionsBehavior.ReadOnly = true;
-            this.gridViewClients.OptionsScrollAnnotations.ShowSelectedRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewClients.OptionsView.ColumnAutoWidth = false;
-            this.gridViewClients.OptionsView.HeaderFilterButtonShowMode = DevExpress.XtraEditors.Controls.FilterButtonShowMode.Button;
+            this.gridViewClients.OptionsBehavior.UnboundColumnExpressionEditorMode = DevExpress.XtraEditors.ExpressionEditorMode.Standard;
+            this.gridViewClients.OptionsCustomization.AllowColumnMoving = false;
+            this.gridViewClients.OptionsCustomization.AllowColumnResizing = false;
+            this.gridViewClients.OptionsMenu.EnableColumnMenu = false;
+            this.gridViewClients.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridViewClients.OptionsSelection.EnableAppearanceHideSelection = false;
+            this.gridViewClients.OptionsView.AnimationType = DevExpress.XtraGrid.Views.Base.GridAnimationType.AnimateFocusedItem;
+            this.gridViewClients.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewClients.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.Hidden;
+            this.gridViewClients.OptionsView.HeaderFilterButtonShowMode = DevExpress.XtraEditors.Controls.FilterButtonShowMode.SmartTag;
             this.gridViewClients.OptionsView.RowAutoHeight = true;
             this.gridViewClients.OptionsView.ShowAutoFilterRow = true;
+            this.gridViewClients.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridViewClients.OptionsView.ShowGroupPanel = false;
             this.gridViewClients.OptionsView.ShowViewCaption = true;
-            this.gridViewClients.ViewCaption = "Clientes";
-            this.gridViewClients.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewClients_FocusedRowChanged);
+            this.gridViewClients.ViewCaption = "Lista de Clientes";
+            // 
+            // colidCliente
+            // 
+            this.colidCliente.Caption = "Id Cliente";
+            this.colidCliente.FieldName = "idCliente";
+            this.colidCliente.Name = "colidCliente";
+            this.colidCliente.Visible = true;
+            this.colidCliente.VisibleIndex = 0;
+            // 
+            // colcedula
+            // 
+            this.colcedula.Caption = "Cedula";
+            this.colcedula.FieldName = "cedula";
+            this.colcedula.Name = "colcedula";
+            this.colcedula.Visible = true;
+            this.colcedula.VisibleIndex = 1;
+            // 
+            // colnombre
+            // 
+            this.colnombre.Caption = "Nombre";
+            this.colnombre.FieldName = "nombre";
+            this.colnombre.Name = "colnombre";
+            this.colnombre.Visible = true;
+            this.colnombre.VisibleIndex = 5;
+            // 
+            // coldireccion
+            // 
+            this.coldireccion.Caption = "Dirección";
+            this.coldireccion.FieldName = "direccion";
+            this.coldireccion.Name = "coldireccion";
+            this.coldireccion.Visible = true;
+            this.coldireccion.VisibleIndex = 2;
+            // 
+            // colcorreo
+            // 
+            this.colcorreo.Caption = "Correo";
+            this.colcorreo.FieldName = "correo";
+            this.colcorreo.Name = "colcorreo";
+            this.colcorreo.Visible = true;
+            this.colcorreo.VisibleIndex = 3;
+            // 
+            // coltelefono
+            // 
+            this.coltelefono.Caption = "Teléfono";
+            this.coltelefono.FieldName = "telefono";
+            this.coltelefono.Name = "coltelefono";
+            this.coltelefono.Visible = true;
+            this.coltelefono.VisibleIndex = 4;
+            // 
+            // txtIdCliente
+            // 
+            this.txtIdCliente.Location = new System.Drawing.Point(123, 174);
+            this.txtIdCliente.MenuManager = this.ribbon;
+            this.txtIdCliente.Name = "txtIdCliente";
+            this.txtIdCliente.Size = new System.Drawing.Size(150, 20);
+            this.txtIdCliente.TabIndex = 68;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(36, 177);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(68, 19);
+            this.labelControl1.TabIndex = 69;
+            this.labelControl1.Text = "Id Cliente";
+            // 
+            // txtCorreo
+            // 
+            this.txtCorreo.Location = new System.Drawing.Point(123, 302);
+            this.txtCorreo.MenuManager = this.ribbon;
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(150, 20);
+            this.txtCorreo.TabIndex = 72;
+            this.txtCorreo.TextChanged += new System.EventHandler(this.textEdit1_TextChanged);
             // 
             // FrmClientList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 473);
+            this.Controls.Add(this.txtCorreo);
+            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.txtIdCliente);
             this.Controls.Add(this.gridControlClients);
+            this.Controls.Add(this.lblCedula);
+            this.Controls.Add(this.txtCedula);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnActualizar);
@@ -252,7 +367,6 @@
             this.Controls.Add(this.lblTelefono);
             this.Controls.Add(this.lblDireccion);
             this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.txtNombreCliente);
@@ -265,12 +379,14 @@
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "FrmClientList";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCorreo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTelefono.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDireccion.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreCliente.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCedula.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlClients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewClients)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtIdCliente.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCorreo.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,7 +398,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
-        private DevExpress.XtraEditors.TextEdit txtCorreo;
         private DevExpress.XtraEditors.TextEdit txtTelefono;
         private DevExpress.XtraEditors.TextEdit txtDireccion;
         private DevExpress.XtraEditors.TextEdit txtNombreCliente;
@@ -294,7 +409,18 @@
         private DevExpress.XtraEditors.SimpleButton btnEliminar;
         private DevExpress.XtraEditors.SimpleButton btnActualizar;
         private DevExpress.XtraEditors.SimpleButton btnAgregar;
+        private DevExpress.XtraEditors.TextEdit txtCedula;
+        private DevExpress.XtraEditors.LabelControl lblCedula;
         private DevExpress.XtraGrid.GridControl gridControlClients;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewClients;
+        private DevExpress.XtraGrid.Columns.GridColumn colidCliente;
+        private DevExpress.XtraGrid.Columns.GridColumn colcedula;
+        private DevExpress.XtraGrid.Columns.GridColumn colnombre;
+        private DevExpress.XtraGrid.Columns.GridColumn coldireccion;
+        private DevExpress.XtraGrid.Columns.GridColumn colcorreo;
+        private DevExpress.XtraGrid.Columns.GridColumn coltelefono;
+        private DevExpress.XtraEditors.TextEdit txtIdCliente;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.TextEdit txtCorreo;
     }
 }

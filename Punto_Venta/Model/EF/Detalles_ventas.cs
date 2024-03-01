@@ -21,7 +21,6 @@ namespace Punto_Venta.Model.EF
         public Nullable<decimal> Precio_venta { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
     
-        public virtual Producto Producto { get; set; }
         public virtual Maestro_ventas Maestro_ventas { get; set; }
     }
 }

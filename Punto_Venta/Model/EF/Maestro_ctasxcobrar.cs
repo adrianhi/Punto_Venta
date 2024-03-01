@@ -14,18 +14,8 @@ namespace Punto_Venta.Model.EF
     
     public partial class Maestro_ctasxcobrar
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Maestro_ctasxcobrar()
-        {
-            this.Maestro_Detalles_ctasxcobrar = new HashSet<Maestro_Detalles_ctasxcobrar>();
-        }
-    
         public int Id_CxC { get; set; }
         public Nullable<int> Id_venta { get; set; }
         public Nullable<decimal> monto { get; set; }
-    
-        public virtual Maestro_ventas Maestro_ventas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Maestro_Detalles_ctasxcobrar> Maestro_Detalles_ctasxcobrar { get; set; }
     }
 }

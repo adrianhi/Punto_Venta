@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Punto_Venta.Controllers
 {
@@ -18,6 +19,14 @@ namespace Punto_Venta.Controllers
         {
             return dbContext.Productos.ToList();
         }
+        public List<int> GetCategoryIds ( )
+        {
+            // Get all categories
+            var categories = dbContext.Categoria_productos.ToList();
+
+            // Extract and return category IDs
+            return categories.Select(c => c.Id_categoria).ToList();
+        }
         public string GetProductCode (string codigoProducto)
         {
             string codigoActual = string.Empty;
@@ -30,26 +39,36 @@ namespace Punto_Venta.Controllers
 
             return codigoActual;
         }
-        public void AddProduct(Producto nuevoProducto)
+        public void AddProduct(Producto newProduct)
         {
-            dbContext.Productos.Add(nuevoProducto);
-            dbContext.SaveChanges();
+            try
+            {
+                dbContext.Productos.Add(newProduct);
+                dbContext.SaveChanges();
+                MessageBox.Show("Producto agregado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception e) { 
+                MessageBox.Show(e.Message, "Error al agregar Producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
         }
-        public void DeleteProduct(string codigoProducto)
+        public void DeleteProduct(int idProducto)
         {
-            var productoAEliminar = dbContext.Productos.FirstOrDefault(p => p.Codigo == codigoProducto);
+            var productoAEliminar = dbContext.Productos.FirstOrDefault(p => p.Id_producto == idProducto);
             if (productoAEliminar != null)
             {
                 dbContext.Productos.Remove(productoAEliminar);
                 dbContext.SaveChanges();
             }
         }
-        public bool ProductExist(string codigoProducto)
+        public bool ProductExist(int idProducto)
         {
-            return dbContext.Productos.Any(p => p.Codigo == codigoProducto);
+            return dbContext.Productos.Any(p => p.Id_producto == idProducto);
         }
 
-        public void updateProduct (int id_producto,string codigoProducto, string nuevoNombre, decimal nuevoPrecioCompra, decimal nuevoPrecioVenta, string nuevoEstado, int nuevaExistencia, int nuevoStock, int nuevoIdCategoria)
+        public void UpdateProduct (int id_producto,string codigoProducto, string nuevoNombre, decimal nuevoPrecioCompra, decimal nuevoPrecioVenta, string nuevoEstado, int nuevaExistencia, int nuevoStock, int nuevoIdCategoria)
         {
             var productoActualizar = dbContext.Productos.FirstOrDefault(p => p.Id_producto== id_producto);
             if (productoActualizar != null)

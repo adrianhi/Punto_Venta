@@ -64,8 +64,8 @@
             this.btnLimpiar = new DevExpress.XtraEditors.SimpleButton();
             this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.lkCategories = new DevExpress.XtraEditors.LookUpEdit();
-            this.punto_ventasDataSet = new Punto_Venta.Punto_ventasDataSet();
             this.categoriaproductosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.punto_ventasDataSet = new Punto_Venta.Punto_ventasDataSet();
             this.categoria_productosTableAdapter = new Punto_Venta.Punto_ventasDataSetTableAdapters.Categoria_productosTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewProducts)).BeginInit();
@@ -77,8 +77,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreProducto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodigoProducto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkCategories.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_ventasDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaproductosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punto_ventasDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -423,15 +423,15 @@
             this.lkCategories.Size = new System.Drawing.Size(150, 20);
             this.lkCategories.TabIndex = 72;
             // 
-            // punto_ventasDataSet
-            // 
-            this.punto_ventasDataSet.DataSetName = "Punto_ventasDataSet";
-            this.punto_ventasDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // categoriaproductosBindingSource
             // 
             this.categoriaproductosBindingSource.DataMember = "Categoria_productos";
             this.categoriaproductosBindingSource.DataSource = this.punto_ventasDataSet;
+            // 
+            // punto_ventasDataSet
+            // 
+            this.punto_ventasDataSet.DataSetName = "Punto_ventasDataSet";
+            this.punto_ventasDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // categoria_productosTableAdapter
             // 
@@ -485,8 +485,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreProducto.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodigoProducto.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lkCategories.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.punto_ventasDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaproductosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.punto_ventasDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

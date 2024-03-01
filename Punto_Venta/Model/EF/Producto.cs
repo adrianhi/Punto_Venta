@@ -14,13 +14,6 @@ namespace Punto_Venta.Model.EF
     
     public partial class Producto
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Producto()
-        {
-            this.Detalles_ventas = new HashSet<Detalles_ventas>();
-            this.Maestro_ventas = new HashSet<Maestro_ventas>();
-        }
-    
         public int Id_producto { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
@@ -32,9 +25,5 @@ namespace Punto_Venta.Model.EF
         public Nullable<int> Id_categoria { get; set; }
     
         public virtual Categoria_productos Categoria_productos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalles_ventas> Detalles_ventas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Maestro_ventas> Maestro_ventas { get; set; }
     }
 }

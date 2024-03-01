@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
+using Punto_Venta.Model.EF;
 using System;
 using System.Windows.Forms;
 
@@ -15,7 +16,12 @@ namespace Punto_Venta.View
             InitializeComponent();
             ventaController = new VentaController();
             btnProcesar.Enabled = false;
+            txtMontoPagar.Enabled = false;
+
+
         }
+
+
 
         private bool ClientExist ( )
         {
@@ -104,6 +110,7 @@ namespace Punto_Venta.View
             txtMontoPagar.Text = totalPrice.ToString("C");
 
             btnProcesar.Enabled = true;
+            txtMontoPagar.Enabled = true;
         }
 
         private void btnProcesar_Click (object sender, EventArgs e)
@@ -117,10 +124,24 @@ namespace Punto_Venta.View
             decimal montoTotal = cantidad * precioProducto;
 
             string correoCliente = txtCorreo.Text;
+            bool updated = ventaController.ActualizarCantidadProducto(idProducto, cantidad);
+            if (!updated)
+            {
+                ShowWarningMessage("Error al actualizar la cantidad en la base de datos.");
+                return;
+            }
+
+            int idCliente=ventaController.FindClientID(correoCliente);
+            Maestro_ventas nuevaVenta = new Maestro_ventas
+            {
+                Id_cliente = idCliente,
+                Id_producto=idProducto,
+                Monto_total=montoTotal,
+                Fecha=DateTime.Now
+            };
 
 
-
-            ShowSuccessMessage($"¡Proceso de venta completado");
+            ventaController.RealizarVenta(nuevaVenta);
             ClearTextBox();
 
         }

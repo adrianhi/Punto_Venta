@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -38,16 +39,27 @@
             this.txtIdCategoria = new DevExpress.XtraEditors.TextEdit();
             this.txtNombreCategoria = new DevExpress.XtraEditors.TextEdit();
             this.rtxtDescripcion = new System.Windows.Forms.RichTextBox();
-            this.gridControlCategories = new DevExpress.XtraGrid.GridControl();
-            this.gridViewCategories = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.categoria_productosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pLinqServerModeSource1 = new DevExpress.Data.PLinq.PLinqServerModeSource();
+            this.entityInstantFeedbackSource1 = new DevExpress.Data.Linq.EntityInstantFeedbackSource();
+            this.pLinqInstantFeedbackSource1 = new DevExpress.Data.PLinq.PLinqInstantFeedbackSource();
             this.btnLimpiar = new DevExpress.XtraEditors.SimpleButton();
             this.btnEliminar = new DevExpress.XtraEditors.SimpleButton();
             this.btnActualizar = new DevExpress.XtraEditors.SimpleButton();
             this.btnAgregar = new DevExpress.XtraEditors.SimpleButton();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.categoriaproductosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gridViewCategories = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colId_categoria = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNombre_categoria = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDescripcion = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdCategoria.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreCategoria.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlCategories)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoria_productosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pLinqServerModeSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaproductosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCategories)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,28 +162,25 @@
             this.rtxtDescripcion.TabIndex = 8;
             this.rtxtDescripcion.Text = "";
             // 
-            // gridControlCategories
+            // categoria_productosBindingSource
             // 
-            this.gridControlCategories.Location = new System.Drawing.Point(459, 174);
-            this.gridControlCategories.MainView = this.gridViewCategories;
-            this.gridControlCategories.MenuManager = this.ribbon;
-            this.gridControlCategories.Name = "gridControlCategories";
-            this.gridControlCategories.Size = new System.Drawing.Size(644, 243);
-            this.gridControlCategories.TabIndex = 11;
-            this.gridControlCategories.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewCategories});
+            this.categoria_productosBindingSource.DataSource = typeof(Punto_Venta.Model.EF.Categoria_productos);
             // 
-            // gridViewCategories
+            // pLinqServerModeSource1
             // 
-            this.gridViewCategories.GridControl = this.gridControlCategories;
-            this.gridViewCategories.Name = "gridViewCategories";
-            this.gridViewCategories.OptionsBehavior.ReadOnly = true;
-            this.gridViewCategories.OptionsView.RowAutoHeight = true;
-            this.gridViewCategories.OptionsView.ShowAutoFilterRow = true;
-            this.gridViewCategories.OptionsView.ShowGroupPanel = false;
-            this.gridViewCategories.OptionsView.ShowViewCaption = true;
-            this.gridViewCategories.ViewCaption = "Categorias";
-            this.gridViewCategories.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewCategories_FocusedRowChanged);
+            this.pLinqServerModeSource1.DefaultSorting = "Id_categoria ASC";
+            this.pLinqServerModeSource1.ElementType = typeof(Punto_Venta.Model.EF.Categoria_productos);
+            // 
+            // entityInstantFeedbackSource1
+            // 
+            this.entityInstantFeedbackSource1.DefaultSorting = "Id_categoria ASC";
+            this.entityInstantFeedbackSource1.DesignTimeElementType = typeof(Punto_Venta.Model.EF.Categoria_productos);
+            this.entityInstantFeedbackSource1.KeyExpression = "Id_categoria";
+            // 
+            // pLinqInstantFeedbackSource1
+            // 
+            this.pLinqInstantFeedbackSource1.DefaultSorting = "Id_categoria ASC";
+            this.pLinqInstantFeedbackSource1.DesignTimeElementType = typeof(Punto_Venta.Model.EF.Categoria_productos);
             // 
             // btnLimpiar
             // 
@@ -221,16 +230,76 @@
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // gridControl1
+            // 
+            this.gridControl1.DataSource = this.categoriaproductosBindingSource;
+            this.gridControl1.Location = new System.Drawing.Point(532, 141);
+            this.gridControl1.MainView = this.gridViewCategories;
+            this.gridControl1.MenuManager = this.ribbon;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.Size = new System.Drawing.Size(508, 281);
+            this.gridControl1.TabIndex = 51;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewCategories});
+            // 
+            // categoriaproductosBindingSource
+            // 
+            this.categoriaproductosBindingSource.DataSource = typeof(Punto_Venta.Model.EF.Categoria_productos);
+            // 
+            // gridViewCategories
+            // 
+            this.gridViewCategories.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.gridViewCategories.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colId_categoria,
+            this.colNombre_categoria,
+            this.colDescripcion});
+            this.gridViewCategories.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFullFocus;
+            this.gridViewCategories.GridControl = this.gridControl1;
+            this.gridViewCategories.Name = "gridViewCategories";
+            this.gridViewCategories.OptionsBehavior.ReadOnly = true;
+            this.gridViewCategories.OptionsCustomization.AllowRowSizing = true;
+            this.gridViewCategories.OptionsView.AnimationType = DevExpress.XtraGrid.Views.Base.GridAnimationType.AnimateFocusedItem;
+            this.gridViewCategories.OptionsView.RowAutoHeight = true;
+            this.gridViewCategories.OptionsView.ShowAutoFilterRow = true;
+            this.gridViewCategories.OptionsView.ShowGroupPanel = false;
+            this.gridViewCategories.OptionsView.ShowIndicator = false;
+            this.gridViewCategories.OptionsView.ShowViewCaption = true;
+            this.gridViewCategories.ViewCaption = "Categorias";
+            // 
+            // colId_categoria
+            // 
+            this.colId_categoria.FieldName = "Id_categoria";
+            this.colId_categoria.Name = "colId_categoria";
+            this.colId_categoria.Visible = true;
+            this.colId_categoria.VisibleIndex = 0;
+            this.colId_categoria.Width = 45;
+            // 
+            // colNombre_categoria
+            // 
+            this.colNombre_categoria.FieldName = "Nombre_categoria";
+            this.colNombre_categoria.Name = "colNombre_categoria";
+            this.colNombre_categoria.Visible = true;
+            this.colNombre_categoria.VisibleIndex = 1;
+            this.colNombre_categoria.Width = 125;
+            // 
+            // colDescripcion
+            // 
+            this.colDescripcion.FieldName = "Descripcion";
+            this.colDescripcion.Name = "colDescripcion";
+            this.colDescripcion.Visible = true;
+            this.colDescripcion.VisibleIndex = 2;
+            this.colDescripcion.Width = 338;
+            // 
             // FrmCategoryList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1115, 512);
+            this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.gridControlCategories);
             this.Controls.Add(this.rtxtDescripcion);
             this.Controls.Add(this.txtNombreCategoria);
             this.Controls.Add(this.txtIdCategoria);
@@ -249,7 +318,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdCategoria.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreCategoria.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlCategories)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoria_productosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pLinqServerModeSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaproductosBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCategories)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -268,11 +340,19 @@
         private DevExpress.XtraEditors.TextEdit txtIdCategoria;
         private DevExpress.XtraEditors.TextEdit txtNombreCategoria;
         private System.Windows.Forms.RichTextBox rtxtDescripcion;
-        private DevExpress.XtraGrid.GridControl gridControlCategories;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewCategories;
         private DevExpress.XtraEditors.SimpleButton btnLimpiar;
         private DevExpress.XtraEditors.SimpleButton btnEliminar;
         private DevExpress.XtraEditors.SimpleButton btnActualizar;
         private DevExpress.XtraEditors.SimpleButton btnAgregar;
+        private DevExpress.Data.PLinq.PLinqInstantFeedbackSource pLinqInstantFeedbackSource1;
+        private DevExpress.Data.Linq.EntityInstantFeedbackSource entityInstantFeedbackSource1;
+        private DevExpress.Data.PLinq.PLinqServerModeSource pLinqServerModeSource1;
+        private System.Windows.Forms.BindingSource categoria_productosBindingSource;
+        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewCategories;
+        private System.Windows.Forms.BindingSource categoriaproductosBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colId_categoria;
+        private DevExpress.XtraGrid.Columns.GridColumn colNombre_categoria;
+        private DevExpress.XtraGrid.Columns.GridColumn colDescripcion;
     }
 }

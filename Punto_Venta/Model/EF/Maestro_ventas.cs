@@ -18,7 +18,6 @@ namespace Punto_Venta.Model.EF
         public Maestro_ventas()
         {
             this.Detalles_ventas = new HashSet<Detalles_ventas>();
-            this.Maestro_ctasxcobrar = new HashSet<Maestro_ctasxcobrar>();
         }
     
         public int Id_venta { get; set; }
@@ -29,9 +28,6 @@ namespace Punto_Venta.Model.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalles_ventas> Detalles_ventas { get; set; }
-        public virtual Maestro_Cliente Maestro_Cliente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Maestro_ctasxcobrar> Maestro_ctasxcobrar { get; set; }
-        public virtual Producto Producto { get; set; }
+        public virtual Maestro_Clientes Maestro_Clientes { get; set; }
     }
 }

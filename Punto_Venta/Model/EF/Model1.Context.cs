@@ -16,7 +16,7 @@ namespace Punto_Venta.Model.EF
     public partial class Punto_ventasEntities : DbContext
     {
         public Punto_ventasEntities()
-            : base("name=Punto_ventasEntities")
+            : base("name=Punto_ventasEntities1")
         {
         }
     
@@ -27,7 +27,7 @@ namespace Punto_Venta.Model.EF
     
         public virtual DbSet<Categoria_productos> Categoria_productos { get; set; }
         public virtual DbSet<Detalles_ventas> Detalles_ventas { get; set; }
-        public virtual DbSet<Maestro_Cliente> Maestro_Cliente { get; set; }
+        public virtual DbSet<Maestro_Clientes> Maestro_Clientes { get; set; }
         public virtual DbSet<Maestro_ctasxcobrar> Maestro_ctasxcobrar { get; set; }
         public virtual DbSet<Maestro_Detalles_ctasxcobrar> Maestro_Detalles_ctasxcobrar { get; set; }
         public virtual DbSet<Maestro_ventas> Maestro_ventas { get; set; }

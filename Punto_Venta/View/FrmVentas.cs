@@ -1,7 +1,8 @@
-﻿using DevExpress.XtraBars;
-using DevExpress.XtraBars.Ribbon;
+﻿using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
+using Punto_Venta.Controller;
 using Punto_Venta.Model.EF;
+using Punto_Venta.View.Mdi;
 using System;
 using System.Windows.Forms;
 
@@ -17,52 +18,142 @@ namespace Punto_Venta.View
             ventaController = new VentaController();
             btnProcesar.Enabled = false;
             txtMontoPagar.Enabled = false;
-
-
         }
 
-
-
-        private bool ClientExist ( )
-        {
-            if (!string.IsNullOrEmpty(txtCorreo.Text))
-            {
-                string correoCliente = txtCorreo.Text;
-                if (!ventaController.ClientExist(correoCliente))
-                {
-                    MessageBox.Show("El cliente no existe. Por favor, agréguelo antes de procesar la venta.", "Cliente no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
-        private (bool exists, decimal price) GetProductInfo (int productId)
-        {
-            return ventaController.ProductExist(productId);
-        }
-
-        private decimal CalculateTotalPrice (decimal unitPrice, int quantity)
-        {
-            return unitPrice * quantity;
-        }
-
+        /// <summary>
+        /// Messages
+        /// </summary>
         private void ShowWarningMessage (string message)
         {
-            MessageBox.Show(message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            XtraMessageBox.Show(message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void ShowSuccessMessage (string message)
         {
-            MessageBox.Show(message, "Venta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show(message, "Venta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        ///MDI
+        private void openMdiClients ( )
+        {
+            // Crear una instancia del formulario mdiClients
+            mdiClients mdiClientes = new mdiClients();
+
+            // Mostrar el formulario
+            mdiClientes.ShowDialog();
+
+            // Acceder a los valores seleccionados después de cerrar el formulario
+            string cedula = mdiClientes.CedulaSeleccionada;
+            string nombre = mdiClientes.NombreSeleccionado;
+            string correo = mdiClientes.CorreoSeleccionado;
+
+            // Mostrar los valores en los TextBoxes
+            txtCedula.Text = cedula;
+            txtNombreCliente.Text = nombre;
+            txtCorreo.Text = correo;
+        }
+        private void openMdiProducts ( )
+        {
+            // Create an instance of the mdiProducts form
+            mdiProducts mdiProductos = new mdiProducts();
+
+            // Show the form
+            mdiProductos.ShowDialog();
+
+            // Access the selected values after closing the form
+            int id = mdiProductos.IdSeleccionado;
+            string nombre = mdiProductos.NombreSeleccionado;
+            decimal precio = mdiProductos.PrecioSeleccionado;
+            int stock = mdiProductos.StockSeleccionado;
+
+            // Show the values in the text boxes
+            txtIdProducto.Text = id.ToString();
+            txtNombreProducto.Text = nombre;
+            txtPrecioProducto.Text = precio.ToString();
+            txtStockProducto.Text = stock.ToString();
+        }
+
+        /// <summary>
+        /// Actions
+        /// </summary>
+        //Clients
+        private void CheckClient ( )
+        {
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
+            {
+                openMdiClients();
+            }
+            else
+            {
+                CheckClientExistence();
+            }
+        }
+        private void CheckClientExistence ( )
+        {
+            var clientInfo = ClientExist(txtCedula.Text);
+            if (clientInfo == null)
+            {
+                ShowWarningMessage("Cliente no encontrado. Por favor, agregue un cliente antes de procesar la venta.");
+                txtNombreCliente.Text = "";
+                txtCorreo.Text = "";
+                return;
+            }
+
+            var clientData = (dynamic)clientInfo;
+            txtCedula.Text = clientData.Cedula;
+            txtNombreCliente.Text = clientData.Nombre;
+            txtCorreo.Text = clientData.Correo;
+        }
+        //Products
+        private void CheckProduct ( )
+        {
+            if (string.IsNullOrWhiteSpace(txtIdProducto.Text))
+            {
+                openMdiProducts();
+            }
+            else
+            {
+                CheckProductExistence();
+            }
+
+
+        }
+        private void CheckProductExistence ( )
+        {
+            var productInfo = ProductExist(Convert.ToInt32(txtIdProducto.Text));
+
+            if (productInfo == null || productInfo.ToString() == "Producto no encontrado")
+            {
+                ShowWarningMessage("Producto no encontrado. Por favor, verifique el ID del producto.");
+                txtNombreProducto.Text = "";
+                txtPrecioProducto.Text = "";
+                txtStockProducto.Text = "";
+                return;
+            }
+
+            var productData = (dynamic)productInfo;
+            txtNombreProducto.Text = productData.Nombre;
+            txtPrecioProducto.Text = productData.Precio.ToString();
+            txtStockProducto.Text = productData.Stock.ToString();
+        }
+
+
+        private void ClearProductTextBox ( )
+        {
+            txtIdProducto.Clear();
+            txtCantidadProducto.Clear();
+            txtPrecioProducto.Clear();
+            txtMontoPagar.Clear();
+        }
+/*
+        private (bool exists, decimal price) GetProductInfo (int productId)
+        {
+            return ventaController.ProductExist(productId);
+        }*/
+
+        private decimal CalculateTotalPrice (decimal unitPrice, int quantity)
+        {
+            return unitPrice * quantity;
         }
         private void ClearTextBox ( )
         {
@@ -73,16 +164,19 @@ namespace Punto_Venta.View
         }
 
 
+        //DB checks
+        private object ClientExist (string cedula)
+        {
+            return ventaController.GetClientInfo(cedula);
+        }
+        private object ProductExist (int idProducto)
+        {
+            return ventaController.ProductExist(idProducto);
+        }
 
 
         private void btnBuscar_Click (object sender, EventArgs e)
-        {
-            if (!ClientExist())
-            {
-                ShowWarningMessage("Cliente no encontrado. Por favor, agregue un cliente antes de procesar la venta.");
-                return;
-            }
-
+        {/*
             int productId;
             if (!int.TryParse(txtIdProducto.Text, out productId))
             {
@@ -110,20 +204,16 @@ namespace Punto_Venta.View
             txtMontoPagar.Text = totalPrice.ToString("C");
 
             btnProcesar.Enabled = true;
-            txtMontoPagar.Enabled = true;
+            txtMontoPagar.Enabled = true;*/
         }
 
         private void btnProcesar_Click (object sender, EventArgs e)
         {
             int idProducto = Convert.ToInt32(txtIdProducto.Text);
             int cantidad = Convert.ToInt32(txtCantidadProducto.Text);
-
-            string precioProductoText = txtPrecioProducto.Text.Replace("$", "");
-            decimal precioProducto = Convert.ToDecimal(precioProductoText);
-
+            decimal precioProducto = Convert.ToDecimal(txtPrecioProducto.Text, System.Globalization.CultureInfo.CurrentCulture);
             decimal montoTotal = cantidad * precioProducto;
-
-            string correoCliente = txtCorreo.Text;
+            string correoCliente = txtCedula.Text;
             bool updated = ventaController.ActualizarCantidadProducto(idProducto, cantidad);
             if (!updated)
             {
@@ -131,21 +221,27 @@ namespace Punto_Venta.View
                 return;
             }
 
-            int idCliente=ventaController.FindClientID(correoCliente);
             Maestro_ventas nuevaVenta = new Maestro_ventas
             {
-                Id_cliente = idCliente,
-                Id_producto=idProducto,
-                Monto_total=montoTotal,
-                Fecha=DateTime.Now
+                // Id_cliente = ventaController.FindClientID(correoCliente),
+                Id_producto = idProducto,
+                Monto_total = montoTotal,
+                Fecha = DateTime.Now
             };
-
 
             ventaController.RealizarVenta(nuevaVenta);
             ClearTextBox();
-
         }
 
+        private void btnSearchCedula_Click (object sender, EventArgs e)
+        {
+            CheckClient();
+           
+        }
 
+        private void btnSearchProduct_Click (object sender, EventArgs e)
+        {
+            CheckProduct();
+        }
     }
 }

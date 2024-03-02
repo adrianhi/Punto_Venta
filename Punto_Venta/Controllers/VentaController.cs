@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System;
+using System.Windows.Forms;
 public class VentaController
 {
     private readonly Punto_ventasEntities dbContext;
@@ -14,47 +15,33 @@ public class VentaController
     }
 
 
-    public (bool exists, decimal price) ProductExist (int idProducto)
+    public object ProductExist (int idProducto)
     {
-        var product = dbContext.Productos.Find(idProducto);
+        var product = dbContext.Productos.FirstOrDefault(p => p.Id_producto == idProducto);
+
         if (product != null)
         {
-            return (true, product.Precio_venta ?? 0);
+            return new { Nombre = product.Nombre, Precio = product.Precio_venta ?? 0, Stock = product.Stock };
         }
         else
         {
-            return (false, 0);
+            MessageBox.Show("Producto no encontrado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return null;
         }
     }
 
-    public bool ClientExist (string correo)
+    public object GetClientInfo (string cedula)
     {
-        var client = dbContext.Maestro_Clientes.FirstOrDefault(c => c.correo == correo);
-        return client != null;
-    }
-    public int FindClientID (string correoCliente)
-    {
-        try
+        var client = dbContext.Maestro_Clientes.FirstOrDefault(c => c.cedula == cedula);
+
+        if (client != null)
         {
-
-            var cliente = dbContext.Maestro_Clientes.FirstOrDefault(c => c.correo == correoCliente);
-
-
-            if (cliente != null)
-            {
-                return cliente.idCliente;
-            }
-            else
-            {
-
-                return -1;
-            }
+            return new { Cedula = client.cedula, Nombre = client.nombre, Correo = client.correo };
         }
-        catch (Exception ex)
+        else
         {
-
-            Console.WriteLine("Error al buscar el ID del cliente: " + ex.Message);
-            return -1;
+            MessageBox.Show("Cliente no encontrado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return null;
         }
     }
 

@@ -45,9 +45,7 @@
             this.colId_categoria = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControlProducts = new DevExpress.XtraGrid.GridControl();
             this.lblStock = new DevExpress.XtraEditors.LabelControl();
-            this.txtStock = new DevExpress.XtraEditors.TextEdit();
             this.Existencia = new DevExpress.XtraEditors.LabelControl();
-            this.txtExistencia = new DevExpress.XtraEditors.TextEdit();
             this.lblEstado = new DevExpress.XtraEditors.LabelControl();
             this.lblPrecioVenta = new DevExpress.XtraEditors.LabelControl();
             this.txtPrecioVenta = new DevExpress.XtraEditors.TextEdit();
@@ -62,16 +60,16 @@
             this.btnActualizar = new DevExpress.XtraEditors.SimpleButton();
             this.btnEliminar = new DevExpress.XtraEditors.SimpleButton();
             this.btnLimpiar = new DevExpress.XtraEditors.SimpleButton();
-            this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.lkCategories = new DevExpress.XtraEditors.LookUpEdit();
             this.categoriaproductosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.punto_ventasDataSet = new Punto_Venta.Punto_ventasDataSet();
             this.categoria_productosTableAdapter = new Punto_Venta.Punto_ventasDataSetTableAdapters.Categoria_productosTableAdapter();
+            this.txtStock = new DevExpress.XtraEditors.SpinEdit();
+            this.cmbEstado = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtExistencia = new DevExpress.XtraEditors.SpinEdit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlProducts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStock.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtExistencia.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrecioVenta.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrecioCompra.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreProducto.Properties)).BeginInit();
@@ -79,6 +77,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.lkCategories.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaproductosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.punto_ventasDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStock.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbEstado.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExistencia.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -237,14 +238,6 @@
             this.lblStock.TabIndex = 34;
             this.lblStock.Text = "Stock";
             // 
-            // txtStock
-            // 
-            this.txtStock.Location = new System.Drawing.Point(183, 305);
-            this.txtStock.MenuManager = this.ribbon;
-            this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new System.Drawing.Size(150, 20);
-            this.txtStock.TabIndex = 33;
-            // 
             // Existencia
             // 
             this.Existencia.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -254,14 +247,6 @@
             this.Existencia.Size = new System.Drawing.Size(69, 19);
             this.Existencia.TabIndex = 32;
             this.Existencia.Text = "Existencia";
-            // 
-            // txtExistencia
-            // 
-            this.txtExistencia.Location = new System.Drawing.Point(183, 280);
-            this.txtExistencia.MenuManager = this.ribbon;
-            this.txtExistencia.Name = "txtExistencia";
-            this.txtExistencia.Size = new System.Drawing.Size(150, 20);
-            this.txtExistencia.TabIndex = 31;
             // 
             // lblEstado
             // 
@@ -290,6 +275,7 @@
             this.txtPrecioVenta.Name = "txtPrecioVenta";
             this.txtPrecioVenta.Size = new System.Drawing.Size(150, 20);
             this.txtPrecioVenta.TabIndex = 27;
+            this.txtPrecioVenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioVenta_KeyPress);
             // 
             // lblPrecioCompra
             // 
@@ -308,6 +294,7 @@
             this.txtPrecioCompra.Name = "txtPrecioCompra";
             this.txtPrecioCompra.Size = new System.Drawing.Size(150, 20);
             this.txtPrecioCompra.TabIndex = 25;
+            this.txtPrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCompra_KeyPress);
             // 
             // lblNombreProducto
             // 
@@ -399,16 +386,6 @@
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.Click += new System.EventHandler(this.txtLimpiar_Click);
             // 
-            // cmbEstado
-            // 
-            this.cmbEstado.DisplayMember = "Id_categoria";
-            this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Location = new System.Drawing.Point(183, 255);
-            this.cmbEstado.Name = "cmbEstado";
-            this.cmbEstado.Size = new System.Drawing.Size(150, 21);
-            this.cmbEstado.TabIndex = 62;
-            this.cmbEstado.ValueMember = "Id_categoria";
-            // 
             // lkCategories
             // 
             this.lkCategories.Location = new System.Drawing.Point(183, 332);
@@ -437,23 +414,89 @@
             // 
             this.categoria_productosTableAdapter.ClearBeforeFill = true;
             // 
+            // txtStock
+            // 
+            this.txtStock.EditValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtStock.Location = new System.Drawing.Point(183, 305);
+            this.txtStock.MenuManager = this.ribbon;
+            this.txtStock.Name = "txtStock";
+            this.txtStock.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtStock.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
+            this.txtStock.Properties.IsFloatValue = false;
+            this.txtStock.Properties.MaskSettings.Set("mask", "N00");
+            this.txtStock.Properties.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.txtStock.Properties.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtStock.Properties.ValidateOnEnterKey = true;
+            this.txtStock.Size = new System.Drawing.Size(150, 20);
+            this.txtStock.TabIndex = 33;
+            // 
+            // cmbEstado
+            // 
+            this.cmbEstado.Location = new System.Drawing.Point(183, 255);
+            this.cmbEstado.MenuManager = this.ribbon;
+            this.cmbEstado.Name = "cmbEstado";
+            this.cmbEstado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbEstado.Size = new System.Drawing.Size(150, 20);
+            this.cmbEstado.TabIndex = 75;
+            // 
+            // txtExistencia
+            // 
+            this.txtExistencia.EditValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtExistencia.Location = new System.Drawing.Point(183, 281);
+            this.txtExistencia.MenuManager = this.ribbon;
+            this.txtExistencia.Name = "txtExistencia";
+            this.txtExistencia.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtExistencia.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
+            this.txtExistencia.Properties.IsFloatValue = false;
+            this.txtExistencia.Properties.MaskSettings.Set("mask", "N00");
+            this.txtExistencia.Properties.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.txtExistencia.Properties.MinValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtExistencia.Properties.ValidateOnEnterKey = true;
+            this.txtExistencia.Size = new System.Drawing.Size(150, 20);
+            this.txtExistencia.TabIndex = 80;
+           // 
             // FrmProductList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1115, 512);
+            this.Controls.Add(this.txtExistencia);
             this.Controls.Add(this.lkCategories);
-            this.Controls.Add(this.cmbEstado);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.lblidCategoria);
             this.Controls.Add(this.lblStock);
-            this.Controls.Add(this.txtStock);
             this.Controls.Add(this.Existencia);
-            this.Controls.Add(this.txtExistencia);
             this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.lblPrecioVenta);
             this.Controls.Add(this.txtPrecioVenta);
@@ -465,6 +508,8 @@
             this.Controls.Add(this.txtCodigoProducto);
             this.Controls.Add(this.gridControlProducts);
             this.Controls.Add(this.ribbonStatusBar);
+            this.Controls.Add(this.txtStock);
+            this.Controls.Add(this.cmbEstado);
             this.Controls.Add(this.ribbon);
             this.IconOptions.ShowIcon = false;
             this.MinimizeBox = false;
@@ -478,8 +523,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlProducts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStock.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtExistencia.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrecioVenta.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrecioCompra.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreProducto.Properties)).EndInit();
@@ -487,6 +530,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.lkCategories.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaproductosBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.punto_ventasDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStock.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbEstado.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExistencia.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,9 +547,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewProducts;
         private DevExpress.XtraGrid.GridControl gridControlProducts;
         private DevExpress.XtraEditors.LabelControl lblStock;
-        private DevExpress.XtraEditors.TextEdit txtStock;
         private DevExpress.XtraEditors.LabelControl Existencia;
-        private DevExpress.XtraEditors.TextEdit txtExistencia;
         private DevExpress.XtraEditors.LabelControl lblEstado;
         private DevExpress.XtraEditors.LabelControl lblPrecioVenta;
         private DevExpress.XtraEditors.TextEdit txtPrecioVenta;
@@ -527,10 +571,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn colExistencia;
         private DevExpress.XtraGrid.Columns.GridColumn colStock;
         private DevExpress.XtraGrid.Columns.GridColumn colId_categoria;
-        private System.Windows.Forms.ComboBox cmbEstado;
         private DevExpress.XtraEditors.LookUpEdit lkCategories;
         private Punto_ventasDataSet punto_ventasDataSet;
         private System.Windows.Forms.BindingSource categoriaproductosBindingSource;
         private Punto_ventasDataSetTableAdapters.Categoria_productosTableAdapter categoria_productosTableAdapter;
+        private DevExpress.XtraEditors.SpinEdit txtStock;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbEstado;
+        private DevExpress.XtraEditors.SpinEdit txtExistencia;
     }
 }

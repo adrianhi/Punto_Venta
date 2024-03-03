@@ -16,7 +16,7 @@ namespace Punto_Venta.View.Mdi
         public mdiProducts ( )
         {
             InitializeComponent();
-           
+            Cursor.Current = Cursors.WaitCursor
             // Instantiate a new DBContext
             Punto_Venta.Model.EF.Punto_ventasEntities dbContext = new Punto_Venta.Model.EF.Punto_ventasEntities();
             // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System;
 using System.Windows.Forms;
+using DevExpress.Utils.About;
 public class VentaController
 {
     private readonly Punto_ventasEntities dbContext;
@@ -25,7 +26,6 @@ public class VentaController
         }
         else
         {
-            MessageBox.Show("Producto no encontrado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return null;
         }
     }
@@ -40,7 +40,6 @@ public class VentaController
         }
         else
         {
-            MessageBox.Show("Cliente no encontrado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return null;
         }
     }
@@ -86,4 +85,16 @@ public class VentaController
         }
     }
 
+  public int GetStockForProduct (int productId)
+    {
+        var product = dbContext.Productos.FirstOrDefault(p => p.Id_producto == productId);
+        if (product != null)
+        {
+            return (int)product.Stock; 
+        }
+        else
+        {
+            return 0; 
+        }
+    }
 }

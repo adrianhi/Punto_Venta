@@ -1,9 +1,16 @@
 ﻿using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using Punto_Venta.Controller;
 using Punto_Venta.Model.EF;
 using Punto_Venta.View.Mdi;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Punto_Venta.View
@@ -11,21 +18,24 @@ namespace Punto_Venta.View
     public partial class FrmVentas : RibbonForm
     {
         private readonly VentaController ventaController;
+        private DataTable dt = new DataTable();
 
         public FrmVentas ( )
         {
             InitializeComponent();
             ventaController = new VentaController();
+            txtCedula.Select();
             btnProcesar.Enabled = false;
             txtMontoPagar.Enabled = false;
+            btnEliminar.Enabled = false;
         }
 
         /// <summary>
         /// Messages
         /// </summary>
-        private void ShowWarningMessage (string message)
+        private void ShowErrorMessage (string message)
         {
-            XtraMessageBox.Show(message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            XtraMessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ShowSuccessMessage (string message)
@@ -93,7 +103,7 @@ namespace Punto_Venta.View
             var clientInfo = ClientExist(txtCedula.Text);
             if (clientInfo == null)
             {
-                ShowWarningMessage("Cliente no encontrado. Por favor, agregue un cliente antes de procesar la venta.");
+                ShowErrorMessage("Cliente no encontrado. Por favor, agregue un cliente antes de procesar la venta.");
                 txtNombreCliente.Text = "";
                 txtCorreo.Text = "";
                 return;
@@ -105,6 +115,8 @@ namespace Punto_Venta.View
             txtCorreo.Text = clientData.Correo;
         }
         //Products
+
+        //BD Checks
         private void CheckProduct ( )
         {
             if (string.IsNullOrWhiteSpace(txtIdProducto.Text))
@@ -124,7 +136,7 @@ namespace Punto_Venta.View
 
             if (productInfo == null || productInfo.ToString() == "Producto no encontrado")
             {
-                ShowWarningMessage("Producto no encontrado. Por favor, verifique el ID del producto.");
+                ShowErrorMessage("Producto no encontrado. Por favor, verifique el ID del producto.");
                 txtNombreProducto.Text = "";
                 txtPrecioProducto.Text = "";
                 txtStockProducto.Text = "";
@@ -137,30 +149,115 @@ namespace Punto_Venta.View
             txtStockProducto.Text = productData.Stock.ToString();
         }
 
-
-        private void ClearProductTextBox ( )
+        //dvg Actions
+        private bool dgvProductExists (int productId)
         {
-            txtIdProducto.Clear();
-            txtCantidadProducto.Clear();
-            txtPrecioProducto.Clear();
-            txtMontoPagar.Clear();
+            foreach (DataGridViewRow row in dgvVentas.Rows)
+            {
+                if (row.Cells["IdProducto"].Value != null && Convert.ToInt32(row.Cells["IdProducto"].Value) == productId)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-/*
-        private (bool exists, decimal price) GetProductInfo (int productId)
-        {
-            return ventaController.ProductExist(productId);
-        }*/
 
-        private decimal CalculateTotalPrice (decimal unitPrice, int quantity)
+        private void UpdateProduct (int productId, int quantity)
         {
-            return unitPrice * quantity;
+            foreach (DataGridViewRow row in dgvVentas.Rows)
+            {
+                if (row.Cells["IdProducto"].Value != null && Convert.ToInt32(row.Cells["IdProducto"].Value) == productId)
+                {
+                    int currentQuantity = Convert.ToInt32(row.Cells["Cantidad"].Value);
+                    row.Cells["Cantidad"].Value = currentQuantity + quantity;
+                    row.Cells["SubTotal"].Value = (currentQuantity + quantity) * Convert.ToDecimal(row.Cells["precioProducto"].Value);
+                    break;
+                }
+            }
         }
+
+        private void AddNewProduct (int productId, string productName, decimal price, int quantity)
+        {
+            dgvVentas.Rows.Add(new object[]
+            {
+        productId.ToString(),
+        productName,
+        price.ToString(),
+        quantity.ToString(),
+        (quantity * price).ToString()
+            });
+            CalcularTotal();
+        }
+
+
+
+
+
+        private void CalcularTotal ( )
+        {
+            decimal total = 0;
+
+            // Recorrer todas las filas del DataGridView
+            foreach (DataGridViewRow row in dgvVentas.Rows)
+            {
+                // Verificar si el valor de la celda no es null antes de intentar convertirlo y sumarlo al total
+                if (row.Cells["SubTotal"].Value != null)
+                {
+                    decimal subtotal;
+                    // Intentar convertir el valor de la celda a decimal
+                    if (decimal.TryParse(row.Cells["SubTotal"].Value.ToString(), out subtotal))
+                    {
+                        // Sumar el subtotal al total
+                        total += subtotal;
+                    }
+                
+                }
+                
+            }
+
+            // Mostrar el total en el TextBox txtMontoPagar
+            txtMontoPagar.Text = total.ToString();
+        }
+
+        private void checkQuantity ( )
+        {
+            int stockQuantity;
+            if (!int.TryParse(txtStockProducto.Text, out stockQuantity))
+            {
+                ShowErrorMessage("El valor del stock no es un número válido.");
+                return;
+            }
+
+            int selectedQuantity = (int)txtCantidadProducto.Value;
+
+            if (stockQuantity < selectedQuantity)
+            {
+                ShowErrorMessage("La cantidad no puede ser mayor al stock.");
+                return;
+            }
+        }
+
         private void ClearTextBox ( )
         {
+            txtNombreCliente.Clear();
+            txtCedula.Clear();
+            txtCorreo.Clear();
             txtIdProducto.Clear();
+            txtNombreProducto.Clear();
             txtCantidadProducto.Clear();
             txtPrecioProducto.Clear();
-            txtMontoPagar.Clear();
+            txtStockProducto.Clear();
+        }
+        private void ClearProducts( )
+        {
+            txtNombreCliente.Clear();
+            txtCedula.Clear();
+            txtCorreo.Clear();
+            txtIdProducto.Clear();
+            txtNombreProducto.Clear();
+            txtCantidadProducto.Clear();
+            txtPrecioProducto.Clear();
+            txtStockProducto.Clear();
         }
 
 
@@ -175,37 +272,8 @@ namespace Punto_Venta.View
         }
 
 
-        private void btnBuscar_Click (object sender, EventArgs e)
-        {/*
-            int productId;
-            if (!int.TryParse(txtIdProducto.Text, out productId))
-            {
-                ShowWarningMessage("Por favor, ingrese un ID de producto válido.");
-                return;
-            }
+       
 
-            var productInfo = GetProductInfo(productId);
-            if (!productInfo.exists)
-            {
-                ShowWarningMessage("El producto no existe. Por favor, agréguelo antes de procesar la venta.");
-                return;
-            }
-
-            txtPrecioProducto.Text = productInfo.price.ToString("C");
-
-            int quantity;
-            if (!int.TryParse(txtCantidadProducto.Text, out quantity))
-            {
-                ShowWarningMessage("Por favor, ingrese una cantidad válida.");
-                return;
-            }
-
-            decimal totalPrice = CalculateTotalPrice(productInfo.price, quantity);
-            txtMontoPagar.Text = totalPrice.ToString("C");
-
-            btnProcesar.Enabled = true;
-            txtMontoPagar.Enabled = true;*/
-        }
 
         private void btnProcesar_Click (object sender, EventArgs e)
         {
@@ -217,7 +285,7 @@ namespace Punto_Venta.View
             bool updated = ventaController.ActualizarCantidadProducto(idProducto, cantidad);
             if (!updated)
             {
-                ShowWarningMessage("Error al actualizar la cantidad en la base de datos.");
+                ShowErrorMessage("Error al actualizar la cantidad en la base de datos.");
                 return;
             }
 
@@ -231,6 +299,7 @@ namespace Punto_Venta.View
 
             ventaController.RealizarVenta(nuevaVenta);
             ClearTextBox();
+            txtIdProducto.Select();
         }
 
         private void btnSearchCedula_Click (object sender, EventArgs e)
@@ -242,6 +311,91 @@ namespace Punto_Venta.View
         private void btnSearchProduct_Click (object sender, EventArgs e)
         {
             CheckProduct();
+        }
+
+
+
+        private void btnAgregar_Click (object sender, EventArgs e)
+        {
+            checkQuantity();
+            int productId = Convert.ToInt32(txtIdProducto.Text);
+            string productName = txtNombreProducto.Text;
+            int quantity = Convert.ToInt32(txtCantidadProducto.Value);
+            decimal price = Convert.ToDecimal(txtPrecioProducto.Text);
+
+            ClearProducts();
+
+            if (dgvProductExists(productId))
+            {
+                UpdateProduct(productId, quantity);
+            }
+            else
+            {
+                AddNewProduct(productId, productName, price, quantity);
+            }
+        }
+
+        
+        private void dgvVentas_CellDoubleClick (object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Check if a valid row is double-clicked
+            {
+                DataGridViewRow selectedRow = dgvVentas.Rows[e.RowIndex];
+
+                // Retrieve information from the selected row
+                string productId = selectedRow.Cells["IdProducto"].Value.ToString();
+                string productName = selectedRow.Cells["Producto"].Value.ToString();
+                string price = selectedRow.Cells["precioProducto"].Value.ToString();
+                string quantity = selectedRow.Cells["Cantidad"].Value.ToString();
+
+                int stockQuantity = ventaController.GetStockForProduct(Convert.ToInt32(productId));
+                // Populate the product text boxes with the retrieved information
+                txtIdProducto.Text = productId;
+                txtNombreProducto.Text = productName;
+                txtPrecioProducto.Text = price;
+                txtCantidadProducto.Text = quantity;
+                txtStockProducto.Text = stockQuantity.ToString();
+                btnEliminar.Enabled = true;
+            }
+        }
+
+        private void btnEliminar_Click (object sender, EventArgs e)
+        {
+            if (dgvVentas.SelectedRows.Count > 0)
+            {
+                int productIdToDelete = Convert.ToInt32(dgvVentas.SelectedRows[0].Cells["IdProducto"].Value);
+
+                foreach (DataGridViewRow row in dgvVentas.Rows)
+                {
+                    if (row.Cells["IdProducto"].Value != null && Convert.ToInt32(row.Cells["IdProducto"].Value) == productIdToDelete)
+                    {
+                        dgvVentas.Rows.Remove(row);
+                        ClearProducts();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                ShowErrorMessage("Por favor, seleccione una fila para eliminar.");
+            }
+        }
+
+        private void txtIdProducto_KeyPress (object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+
+                CheckProduct();
+            }
+        }
+
+        private void txtCedula_KeyPress (object sender, KeyPressEventArgs e)
+        {
+             if (e.KeyChar == (char)Keys.Enter)
+            {
+                CheckClient();
+            }
         }
     }
 }

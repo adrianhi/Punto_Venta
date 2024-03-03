@@ -43,7 +43,7 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txtPrecioProducto = new DevExpress.XtraEditors.TextEdit();
             this.btnProcesar = new DevExpress.XtraEditors.SimpleButton();
-            this.btnBuscar = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAgregar = new DevExpress.XtraEditors.SimpleButton();
             this.txtMontoRecibido = new DevExpress.XtraEditors.TextEdit();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.txtCantidadProducto = new DevExpress.XtraEditors.SpinEdit();
@@ -61,8 +61,13 @@
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.txtMontoDevolver = new DevExpress.XtraEditors.TextEdit();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dgvVentas = new System.Windows.Forms.DataGridView();
+            this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEliminar = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCedula.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdProducto.Properties)).BeginInit();
@@ -79,8 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtStockProducto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreProducto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMontoDevolver.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -143,6 +147,7 @@
             this.txtCedula.Properties.NullValuePrompt = "40263556226";
             this.txtCedula.Size = new System.Drawing.Size(129, 20);
             this.txtCedula.TabIndex = 36;
+            this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
             // lblidProducto
             // 
@@ -159,9 +164,10 @@
             this.txtIdProducto.Location = new System.Drawing.Point(92, 38);
             this.txtIdProducto.MenuManager = this.ribbon;
             this.txtIdProducto.Name = "txtIdProducto";
-            this.txtIdProducto.Properties.NullValuePrompt = "VG100";
+            this.txtIdProducto.Properties.NullValuePrompt = "100";
             this.txtIdProducto.Size = new System.Drawing.Size(104, 20);
             this.txtIdProducto.TabIndex = 40;
+            this.txtIdProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIdProducto_KeyPress);
             // 
             // labelControl1
             // 
@@ -215,6 +221,8 @@
             // 
             this.btnProcesar.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProcesar.Appearance.Options.UseFont = true;
+            this.btnProcesar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnProcesar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnProcesar.ImageOptions.SvgImage")));
             this.btnProcesar.Location = new System.Drawing.Point(847, 517);
             this.btnProcesar.Name = "btnProcesar";
             this.btnProcesar.Size = new System.Drawing.Size(122, 34);
@@ -222,16 +230,18 @@
             this.btnProcesar.Text = "Procesar";
             this.btnProcesar.Click += new System.EventHandler(this.btnProcesar_Click);
             // 
-            // btnBuscar
+            // btnAgregar
             // 
-            this.btnBuscar.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Appearance.Options.UseFont = true;
-            this.btnBuscar.Location = new System.Drawing.Point(847, 218);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(122, 34);
-            this.btnBuscar.TabIndex = 51;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            this.btnAgregar.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Appearance.Options.UseFont = true;
+            this.btnAgregar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAgregar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAgregar.ImageOptions.SvgImage")));
+            this.btnAgregar.Location = new System.Drawing.Point(847, 218);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(122, 34);
+            this.btnAgregar.TabIndex = 51;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // txtMontoRecibido
             // 
@@ -434,35 +444,85 @@
             this.txtMontoDevolver.Size = new System.Drawing.Size(107, 20);
             this.txtMontoDevolver.TabIndex = 65;
             // 
-            // gridControl1
+            // dgvVentas
             // 
-            this.gridControl1.Location = new System.Drawing.Point(30, 327);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.MenuManager = this.ribbon;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(795, 290);
-            this.gridControl1.TabIndex = 66;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.dgvVentas.AllowUserToDeleteRows = false;
+            this.dgvVentas.AllowUserToOrderColumns = true;
+            this.dgvVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdProducto,
+            this.Producto,
+            this.precioProducto,
+            this.Cantidad,
+            this.SubTotal});
+            this.dgvVentas.GridColor = System.Drawing.Color.Silver;
+            this.dgvVentas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dgvVentas.Location = new System.Drawing.Point(30, 344);
+            this.dgvVentas.Name = "dgvVentas";
+            this.dgvVentas.ReadOnly = true;
+            this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvVentas.Size = new System.Drawing.Size(795, 273);
+            this.dgvVentas.TabIndex = 69;
+            this.dgvVentas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellDoubleClick);
             // 
-            // gridView1
+            // IdProducto
             // 
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
+            this.IdProducto.HeaderText = "Id";
+            this.IdProducto.Name = "IdProducto";
+            this.IdProducto.ReadOnly = true;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Nombre";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // precioProducto
+            // 
+            this.precioProducto.HeaderText = "Precio";
+            this.precioProducto.Name = "precioProducto";
+            this.precioProducto.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // SubTotal
+            // 
+            this.SubTotal.HeaderText = "Sub Total";
+            this.SubTotal.Name = "SubTotal";
+            this.SubTotal.ReadOnly = true;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Appearance.Options.UseFont = true;
+            this.btnEliminar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnEliminar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEliminar.ImageOptions.SvgImage")));
+            this.btnEliminar.Location = new System.Drawing.Point(847, 265);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(122, 34);
+            this.btnEliminar.TabIndex = 72;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // FrmVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1017, 645);
-            this.Controls.Add(this.gridControl1);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.dgvVentas);
             this.Controls.Add(this.txtMontoDevolver);
             this.Controls.Add(this.labelControl9);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gcClients);
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.txtMontoRecibido);
-            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnProcesar);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtMontoPagar);
@@ -492,8 +552,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtStockProducto.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreProducto.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMontoDevolver.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -515,7 +574,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.TextEdit txtPrecioProducto;
         private DevExpress.XtraEditors.SimpleButton btnProcesar;
-        private DevExpress.XtraEditors.SimpleButton btnBuscar;
+        private DevExpress.XtraEditors.SimpleButton btnAgregar;
         private DevExpress.XtraEditors.TextEdit txtMontoRecibido;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.SpinEdit txtCantidadProducto;
@@ -533,7 +592,12 @@
         private DevExpress.XtraEditors.TextEdit txtCorreo;
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.TextEdit txtMontoDevolver;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private System.Windows.Forms.DataGridView dgvVentas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SubTotal;
+        private DevExpress.XtraEditors.SimpleButton btnEliminar;
     }
 }

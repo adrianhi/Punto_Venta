@@ -28,6 +28,7 @@ namespace Punto_Venta.Model.EF
         public virtual DbSet<Categoria_productos> Categoria_productos { get; set; }
         public virtual DbSet<Detalles_ctasxcobrar> Detalles_ctasxcobrar { get; set; }
         public virtual DbSet<Detalles_ventas> Detalles_ventas { get; set; }
+        public virtual DbSet<Factura> Facturas { get; set; }
         public virtual DbSet<Maestro_Clientes> Maestro_Clientes { get; set; }
         public virtual DbSet<Maestro_ctasxcobrar> Maestro_ctasxcobrar { get; set; }
         public virtual DbSet<Maestro_ventas> Maestro_ventas { get; set; }

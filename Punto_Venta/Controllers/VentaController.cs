@@ -10,11 +10,14 @@ public class VentaController
 {
     private readonly Punto_ventasEntities dbContext;
     private readonly TransactionController transactionController;
-
+    private readonly CxcController cxcController;
+    private readonly FacturasController facturaController;
     public VentaController ( )
     {
         dbContext = new Punto_ventasEntities();
         transactionController = new TransactionController();
+        cxcController = new CxcController();
+        facturaController = new FacturasController();
     }
 
     public object ProductExist (int idProducto)
@@ -38,7 +41,7 @@ public class VentaController
         return product != null ? (int)product.Stock : 0;
     }
 
-    public void AddVenta (Maestro_ventas newVenta, List<Detalles_ventas> detallesVenta, Tipo_Transaccion Tipo_Transaccion)
+    public void AddVenta (Maestro_ventas newVenta, List<Detalles_ventas> detallesVenta, Tipo_Transaccion Tipo_Transaccion,bool CxC)
     {
         try
         {
@@ -60,6 +63,17 @@ public class VentaController
 
             AddDetalleVenta(detallesVenta, idVenta);
 
+            if (CxC)
+            {
+                cxcController.CreateCxC(newVenta);
+
+            }
+            else
+            {
+                facturaController.CreateFactura(newVenta, "Pagado");
+            }
+
+
             XtraMessageBox.Show("Venta agregada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (Exception ex)
@@ -67,6 +81,8 @@ public class VentaController
             XtraMessageBox.Show($"Error al agregar la venta: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
+
+   
 
     private void AddDetalleVenta (List<Detalles_ventas> detallesVenta, int idVenta)
     {

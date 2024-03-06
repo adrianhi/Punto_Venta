@@ -22,6 +22,5 @@ namespace Punto_Venta.Model.EF
         public Nullable<decimal> Monto_total { get; set; }
         public Nullable<decimal> Monto_recibido { get; set; }
         public Nullable<decimal> Balance { get; set; }
-        public Nullable<int> Ref_IdTransaccion { get; set; }
     }
 }

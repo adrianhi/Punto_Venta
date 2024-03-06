@@ -74,7 +74,8 @@
   <ItemGroup>
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\cxcController.cs" />
+    <Compile Include="Controllers\CxcController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
@@ -84,49 +85,52 @@
       <DependentUpon>DetalleVentas.xsd</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Categoria_productos.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Detalles_ctasxcobrar.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Detalles_ventas.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\Factura.cs">
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_Clientes.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_ctasxcobrar.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_ventas.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Producto.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\EF\PuntoVenta.Context.cs">
+    <Compile Include="Model\EF\PuntoVentas.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PuntoVenta.Context.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\EF\PuntoVenta.cs">
+    <Compile Include="Model\EF\PuntoVentas.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\EF\PuntoVenta.Designer.cs">
+    <Compile Include="Model\EF\PuntoVentas.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PuntoVenta.edmx</DependentUpon>
+      <DependentUpon>PuntoVentas.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\sysdiagram.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Tipo_Transaccion.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Transaccione.cs">
-      <DependentUpon>PuntoVenta.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,6 +150,12 @@
     </Compile>
     <Compile Include="View\FrmClientList.Designer.cs">
       <DependentUpon>FrmClientList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmCxC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmCxC.Designer.cs">
+      <DependentUpon>FrmCxC.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmDetalleVentas.cs">
       <SubType>Form</SubType>
@@ -199,6 +209,9 @@
     <EmbeddedResource Include="View\FrmClientList.resx">
       <DependentUpon>FrmClientList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmCxC.resx">
+      <DependentUpon>FrmCxC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmDetalleVentas.resx">
       <DependentUpon>FrmDetalleVentas.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,12 +242,12 @@
     <None Include="DetalleVentas.xss">
       <DependentUpon>DetalleVentas.xsd</DependentUpon>
     </None>
-    <EntityDeploy Include="Model\EF\PuntoVenta.edmx">
+    <EntityDeploy Include="Model\EF\PuntoVentas.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PuntoVenta.Designer.cs</LastGenOutput>
+      <LastGenOutput>PuntoVentas.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\EF\PuntoVenta.edmx.diagram">
-      <DependentUpon>PuntoVenta.edmx</DependentUpon>
+    <None Include="Model\EF\PuntoVentas.edmx.diagram">
+      <DependentUpon>PuntoVentas.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Categoria_productos.datasource" />
@@ -270,15 +283,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\EF\PuntoVenta.Context.tt">
+    <Content Include="Model\EF\PuntoVentas.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PuntoVenta.edmx</DependentUpon>
-      <LastGenOutput>PuntoVenta.Context.cs</LastGenOutput>
+      <DependentUpon>PuntoVentas.edmx</DependentUpon>
+      <LastGenOutput>PuntoVentas.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\EF\PuntoVenta.tt">
+    <Content Include="Model\EF\PuntoVentas.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PuntoVenta.edmx</DependentUpon>
-      <LastGenOutput>PuntoVenta.cs</LastGenOutput>
+      <DependentUpon>PuntoVentas.edmx</DependentUpon>
+      <LastGenOutput>PuntoVentas.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

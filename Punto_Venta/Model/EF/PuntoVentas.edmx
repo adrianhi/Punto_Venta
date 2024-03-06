@@ -18,12 +18,14 @@
             <PropertyRef Name="Id_detalleCxC" />
           </Key>
           <Property Name="Id_detalleCxC" Type="int" Nullable="false" />
-          <Property Name="Id_CxC" Type="int" />
-          <Property Name="Id_Transaccion" Type="int" />
-          <Property Name="Id_TipoTransaccion" Type="int" />
-          <Property Name="Ref_IdTransaccion" Type="int" />
-          <Property Name="Monto_Abonado" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Id_CxC" Type="int" Nullable="false" />
+          <Property Name="Id_Transaccion" Type="int" Nullable="false" />
+          <Property Name="Id_TipoTransaccion" Type="int" Nullable="false" />
+          <Property Name="Ref_IdTransaccion" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Monto_Abonado" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Detalles_ventas">
           <Key>
@@ -37,6 +39,20 @@
           <Property Name="Cantidad" Type="int" />
           <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="Id_Factura" />
+          </Key>
+          <Property Name="Id_Factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Venta" Type="int" Nullable="false" />
+          <Property Name="Id_TipoTransaccion" Type="int" Nullable="false" />
+          <Property Name="Id_Transaccion" Type="int" />
+          <Property Name="FechaEmision" Type="datetime" Nullable="false" />
+          <Property Name="Id_Cliente" Type="int" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Total_Pagado" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="EstadoPago" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Maestro_Clientes">
           <Key>
@@ -61,7 +77,6 @@
           <Property Name="Monto_total" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Monto_recibido" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Balance" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Ref_IdTransaccion" Type="int" />
         </EntityType>
         <EntityType Name="Maestro_ventas">
           <Key>
@@ -148,6 +163,7 @@
           <EntitySet Name="Categoria_productos" EntityType="Self.Categoria_productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detalles_ctasxcobrar" EntityType="Self.Detalles_ctasxcobrar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detalles_ventas" EntityType="Self.Detalles_ventas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Maestro_Clientes" EntityType="Self.Maestro_Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Maestro_ctasxcobrar" EntityType="Self.Maestro_ctasxcobrar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Maestro_ventas" EntityType="Self.Maestro_ventas" Schema="dbo" store:Type="Tables" />
@@ -183,12 +199,14 @@
             <PropertyRef Name="Id_detalleCxC" />
           </Key>
           <Property Name="Id_detalleCxC" Type="Int32" Nullable="false" />
-          <Property Name="Id_CxC" Type="Int32" />
-          <Property Name="Id_Transaccion" Type="Int32" />
-          <Property Name="Id_TipoTransaccion" Type="Int32" />
-          <Property Name="Ref_IdTransaccion" Type="Int32" />
-          <Property Name="Monto_Abonado" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Id_CxC" Type="Int32" Nullable="false" />
+          <Property Name="Id_Transaccion" Type="Int32" Nullable="false" />
+          <Property Name="Id_TipoTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="Ref_IdTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Monto_Abonado" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Detalles_ventas">
           <Key>
@@ -203,6 +221,20 @@
           <Property Name="Precio_venta" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Maestro_ventas" Relationship="Self.FK_DetallesVentas_MaestroVentas" FromRole="Detalles_ventas" ToRole="Maestro_ventas" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="Id_Factura" />
+          </Key>
+          <Property Name="Id_Factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Venta" Type="Int32" Nullable="false" />
+          <Property Name="Id_TipoTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="Id_Transaccion" Type="Int32" />
+          <Property Name="FechaEmision" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Total_Pagado" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="EstadoPago" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Maestro_Clientes">
           <Key>
@@ -227,7 +259,6 @@
           <Property Name="Monto_total" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Monto_recibido" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Balance" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Ref_IdTransaccion" Type="Int32" />
         </EntityType>
         <EntityType Name="Maestro_ventas">
           <Key>
@@ -316,6 +347,7 @@
           <EntitySet Name="Categoria_productos" EntityType="Self.Categoria_productos" />
           <EntitySet Name="Detalles_ctasxcobrar" EntityType="Self.Detalles_ctasxcobrar" />
           <EntitySet Name="Detalles_ventas" EntityType="Self.Detalles_ventas" />
+          <EntitySet Name="Facturas" EntityType="Self.Factura" />
           <EntitySet Name="Maestro_Clientes" EntityType="Self.Maestro_Clientes" />
           <EntitySet Name="Maestro_ctasxcobrar" EntityType="Self.Maestro_ctasxcobrar" />
           <EntitySet Name="Maestro_ventas" EntityType="Self.Maestro_ventas" />
@@ -355,6 +387,8 @@
                 <ScalarProperty Name="Id_Transaccion" ColumnName="Id_Transaccion" />
                 <ScalarProperty Name="Id_TipoTransaccion" ColumnName="Id_TipoTransaccion" />
                 <ScalarProperty Name="Ref_IdTransaccion" ColumnName="Ref_IdTransaccion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
                 <ScalarProperty Name="Monto_Abonado" ColumnName="Monto_Abonado" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
               </MappingFragment>
@@ -371,6 +405,21 @@
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Precio_venta" ColumnName="Precio_venta" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="Punto_ventasModel.Factura">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+                <ScalarProperty Name="Id_Venta" ColumnName="Id_Venta" />
+                <ScalarProperty Name="Id_TipoTransaccion" ColumnName="Id_TipoTransaccion" />
+                <ScalarProperty Name="Id_Transaccion" ColumnName="Id_Transaccion" />
+                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Total_Pagado" ColumnName="Total_Pagado" />
+                <ScalarProperty Name="EstadoPago" ColumnName="EstadoPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -397,7 +446,6 @@
                 <ScalarProperty Name="Monto_total" ColumnName="Monto_total" />
                 <ScalarProperty Name="Monto_recibido" ColumnName="Monto_recibido" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="Ref_IdTransaccion" ColumnName="Ref_IdTransaccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

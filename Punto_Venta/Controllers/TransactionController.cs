@@ -8,8 +8,7 @@ namespace Punto_Venta.Controllers
 {
     public class TransactionController
     {
-        private readonly Punto_ventasEntities context
-            ;
+        private readonly Punto_ventasEntities context;
         public TransactionController() {
             context = new Punto_ventasEntities();
         }

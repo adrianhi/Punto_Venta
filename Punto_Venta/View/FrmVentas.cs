@@ -14,12 +14,13 @@ namespace Punto_Venta.View
     public partial class FrmVentas : RibbonForm
     {
         private readonly VentaController ventaController;
-
+        private readonly CxcController cxcController;
         public FrmVentas ( )
         {
             InitializeComponent();
             Cursor.Current = Cursors.WaitCursor;
             ventaController = new VentaController();
+            cxcController=new CxcController(); 
             txtCedula.Select();
             btnProcesar.Enabled = false;
             txtMontoPagar.Enabled = false;
@@ -34,7 +35,43 @@ namespace Punto_Venta.View
             XtraMessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-      
+        //Clear
+        private void ClearTextBox ( )
+        {
+            txtNombreCliente.Clear();
+            txtCedula.Clear();
+            txtIdCliente.Clear();
+            txtIdProducto.Clear();
+            txtNombreProducto.Clear();
+            txtCantidadProducto.Clear();
+            txtPrecioProducto.Clear();
+            txtExistenciaProducto.Clear();
+            txtMontoPagar.Clear();
+            txtMontoRecibido.Clear();
+            txtMontoDevolver.Clear();
+            ChkCredito.Checked = false;
+            dateEdit1.DateTime = DateTime.Now;
+        }
+        private void ClearProducts ( )
+        {
+            txtIdProducto.Clear();
+            txtNombreProducto.Clear();
+            txtCantidadProducto.Clear();
+            txtPrecioProducto.Clear();
+            txtExistenciaProducto.Clear();
+        }
+        private void ClearAllFields ( )
+        {
+            ClearTextBox();
+            ClearDataGridView();
+        }
+
+        private void ClearDataGridView ( )
+        {
+            dgvVentas.Rows.Clear();
+            CalcularTotal();
+        }
+
 
         ///MDI
         private void openMdiClients ( )
@@ -214,7 +251,6 @@ namespace Punto_Venta.View
 
         private void CalculateChange (decimal subtotal)
         {
-
             decimal amountReceived;
             if (!decimal.TryParse(txtMontoRecibido.Text, out amountReceived))
             {
@@ -222,21 +258,32 @@ namespace Punto_Venta.View
                 return;
             }
 
-            // Calculate the change
-            decimal change = amountReceived - subtotal;
-
-            // Display the change
-            if (change >= 0)
+            if (ChkCredito.Checked)
             {
-                txtMontoDevolver.Text = change.ToString();
+                
+                decimal change = amountReceived - subtotal;
+                txtMontoDevolver.Text = Math.Max(change, 0).ToString();
+                btnProcesar.Select();
             }
             else
             {
-                ShowErrorMessage("La cantidad recibida es insuficiente.");
+               
+                if (amountReceived >= subtotal)
+                {
+                    decimal change = amountReceived - subtotal;
+                    txtMontoDevolver.Text = Math.Max(change, 0).ToString(); 
+                }
+                else
+                {
+                   
+                    ShowErrorMessage("La cantidad recibida es insuficiente para completar la transacción.");
+                }
             }
         }
 
-        private bool CheckQuantity ( )
+
+
+        private bool CheckProductQuantity ( )
         {
             int Existence;
             if (!int.TryParse(txtExistenciaProducto.Text, out Existence))
@@ -306,43 +353,53 @@ namespace Punto_Venta.View
             }
         }
 
+        private bool ValidarMontos ( )
+        {
+            decimal montoPagar;
+            decimal montoRecibido;
 
-        //Clear
-        private void ClearTextBox ( )
-        {
-            txtNombreCliente.Clear();
-            txtCedula.Clear();
-            txtIdCliente.Clear();
-            txtIdProducto.Clear();
-            txtNombreProducto.Clear();
-            txtCantidadProducto.Clear();
-            txtPrecioProducto.Clear();
-            txtExistenciaProducto.Clear();
-            txtMontoPagar.Clear();
-            txtMontoRecibido.Clear();
-            txtMontoDevolver.Clear();
-            ChkCredito.Checked = false;
-            dateEdit1.DateTime = DateTime.Now;
-        }
-        private void ClearProducts( )
-        {
-            txtIdProducto.Clear();
-            txtNombreProducto.Clear();
-            txtCantidadProducto.Clear();
-            txtPrecioProducto.Clear();
-            txtExistenciaProducto.Clear();
-        }
-        private void ClearAllFields ( )
-        {
-            ClearTextBox();
-            ClearDataGridView();
+            // Validar que los campos de monto existan y puedan ser convertidos a decimal
+            if (!decimal.TryParse(txtMontoPagar.Text, out montoPagar) || !decimal.TryParse(txtMontoRecibido.Text, out montoRecibido))
+            {
+                XtraMessageBox.Show("Ingrese montos válidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false; // Retornar false si no se pueden convertir los montos
+            }
+
+            // Validar que el monto recibido sea suficiente para cubrir el monto a pagar
+            if (montoRecibido < montoPagar)
+            {
+                XtraMessageBox.Show("El monto recibido es menor que el monto a pagar. No se puede procesar la venta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
-        private void ClearDataGridView ( )
+        private void IsCredit (bool EsCredito, DateTime fecha)
         {
-            dgvVentas.Rows.Clear();
-            CalcularTotal(); 
+            decimal montoPagar = Convert.ToDecimal(txtMontoPagar.Text);
+            decimal montoRecibido = Convert.ToDecimal(txtMontoRecibido.Text);
+
+            if (EsCredito && montoRecibido < montoPagar)
+            {
+                AddSale(EsCredito, fecha, true);
+                XtraMessageBox.Show("Se generará una venta a crédito porque el monto recibido es menor al monto total a pagar.", "Venta a crédito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (!EsCredito && montoRecibido < montoPagar)
+            {
+                XtraMessageBox.Show("El monto recibido es insuficiente para completar la transacción.", "Monto insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                AddSale(EsCredito, fecha, false);
+                ClearAllFields();
+                txtCedula.Select();
+            }
         }
+
+
+
+
 
 
         //DB checks
@@ -358,70 +415,46 @@ namespace Punto_Venta.View
 
 
         //CRUD
-        private void AddSale ( )
+        private void AddSale (bool EsCredito, DateTime fecha, bool IsCxC)
         {
-            bool EsCredito = ChkCredito.Checked;
-            DateTime fecha = dateEdit1.DateTime;
-
-            // Validar los campos obligatorios
-            if (!ValidateFields())
-            {
-                return;
-            }
-
-            // Obtener la descripción del tipo de transacción
             string tipoTransaccionDescripcion = InsertarTipoTransaccion(EsCredito);
             if (tipoTransaccionDescripcion == null)
             {
-                // No se puede procesar la venta, salimos del método
                 return;
             }
 
-            // Crear el objeto Tipo_Transaccion
             Tipo_Transaccion tipoTransaccion = new Tipo_Transaccion
             {
                 Descripcion = tipoTransaccionDescripcion,
                 EsCredito = EsCredito
             };
 
-            // Obtener la información del cliente
             Maestro_ventas nuevaVenta = CreateVentaObject(fecha);
-
-            // Obtener los detalles de la venta
             List<Detalles_ventas> detallesVenta = CreateDetallesVentaList(fecha);
 
-            // Agregar la venta
-            ventaController.AddVenta(nuevaVenta, detallesVenta, tipoTransaccion);
+            ventaController.AddVenta(nuevaVenta, detallesVenta, tipoTransaccion, IsCxC);
 
-            // Actualizar la existencia de productos vendidos
             foreach (var detalle in detallesVenta)
             {
                 ventaController.UpdateProductExistence((int)detalle.Id_producto, (int)detalle.Cantidad);
             }
 
-            // Limpiar todos los campos después de la venta
             ClearAllFields();
             txtIdProducto.Select();
         }
 
-        private string InsertarTipoTransaccion (bool EsCredito)
+
+        private string InsertarTipoTransaccion (bool esCredito)
         {
-            string tipoTransaccionDescripcion = EsCredito ? "Venta con crédito" : "Venta contado";
-            if (!EsCredito)
+            // Obtener la descripción del tipo de transacción
+            string tipoTransaccionDescripcion = esCredito ? "Venta con crédito" : "Venta contado";
+
+            // Si la transacción es a crédito, no se requiere validar los montos
+            if (!esCredito)
             {
-                decimal montoPagar;
-                decimal montoRecibido;
-
-                // Validar que los campos de monto existan y puedan ser convertidos a decimal
-                if (!decimal.TryParse(txtMontoPagar.Text, out montoPagar) || !decimal.TryParse(txtMontoRecibido.Text, out montoRecibido))
+                // Validar los montos y mostrar un mensaje de error si no son válidos
+                if (!ValidarMontos())
                 {
-                    XtraMessageBox.Show("Ingrese montos válidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return null; // Retornar null si no se pueden convertir los montos
-                }
-
-                if (montoRecibido < montoPagar)
-                {
-                    XtraMessageBox.Show("El monto recibido es menor que el monto a pagar. No se puede procesar la venta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
             }
@@ -429,7 +462,7 @@ namespace Punto_Venta.View
             return tipoTransaccionDescripcion;
         }
 
-
+    
 
         private Maestro_ventas CreateVentaObject (DateTime fechaSeleccionada)
         {
@@ -477,17 +510,16 @@ namespace Punto_Venta.View
         //Actions
         private void btnProcesar_Click (object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtMontoPagar.Text))
+            if (!ValidateFields())
             {
-                CalculateChange(Convert.ToDecimal(txtMontoPagar.Text));
-                AddSale();
-                ClearAllFields();
-                txtCedula.Select();
+                return;
             }
-         
+            bool EsCredito = ChkCredito.Checked;
+            DateTime fecha = dateEdit1.DateTime;
+            IsCredit(EsCredito, fecha);
         }
 
-       
+
 
         private void btnSearchCedula_Click (object sender, EventArgs e)
         {
@@ -502,7 +534,7 @@ namespace Punto_Venta.View
 
         private void btnAgregar_Click (object sender, EventArgs e)
         {
-            bool IsValid=CheckQuantity();
+            bool IsValid=CheckProductQuantity();
             int productId = Convert.ToInt32(txtIdProducto.Text);
             string productName = txtNombreProducto.Text;
             int quantity = Convert.ToInt32(txtCantidadProducto.Value);

@@ -10,7 +10,7 @@ namespace Punto_Venta.View.Mdi
     {
         public string CedulaSeleccionada { get; private set; }
         public string NombreSeleccionado { get; private set; }
-        public string CorreoSeleccionado { get; private set; }
+        public int idClienteSeleccionado { get; private set; }
 
         public mdiClients ( )
         {
@@ -38,7 +38,7 @@ namespace Punto_Venta.View.Mdi
             // Asignar los valores seleccionados a las propiedades
             CedulaSeleccionada = clienteSeleccionado.cedula;
             NombreSeleccionado = clienteSeleccionado.nombre;
-            CorreoSeleccionado = clienteSeleccionado.correo;
+            idClienteSeleccionado =clienteSeleccionado.idCliente ;
 
             // Cerrar el formulario después de seleccionar un cliente
             this.Close();

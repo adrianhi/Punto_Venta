@@ -32,7 +32,6 @@
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.lblidCategoria = new DevExpress.XtraEditors.LabelControl();
             this.lblNombre = new DevExpress.XtraEditors.LabelControl();
             this.lblDescripcion = new DevExpress.XtraEditors.LabelControl();
@@ -83,8 +82,7 @@
             this.ribbon.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Hide;
             this.ribbon.ShowQatLocationSelector = false;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(1115, 135);
-            this.ribbon.StatusBar = this.ribbonStatusBar;
+            this.ribbon.Size = new System.Drawing.Size(982, 37);
             this.ribbon.Toolbar.ShowCustomizeItem = false;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
@@ -100,18 +98,11 @@
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "ribbonPageGroup1";
             // 
-            // ribbonStatusBar
-            // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 490);
-            this.ribbonStatusBar.Name = "ribbonStatusBar";
-            this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1115, 22);
-            // 
             // lblidCategoria
             // 
             this.lblidCategoria.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblidCategoria.Appearance.Options.UseFont = true;
-            this.lblidCategoria.Location = new System.Drawing.Point(79, 205);
+            this.lblidCategoria.Location = new System.Drawing.Point(34, 90);
             this.lblidCategoria.Name = "lblidCategoria";
             this.lblidCategoria.Size = new System.Drawing.Size(15, 19);
             this.lblidCategoria.TabIndex = 2;
@@ -121,7 +112,7 @@
             // 
             this.lblNombre.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombre.Appearance.Options.UseFont = true;
-            this.lblNombre.Location = new System.Drawing.Point(79, 240);
+            this.lblNombre.Location = new System.Drawing.Point(34, 125);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(57, 19);
             this.lblNombre.TabIndex = 3;
@@ -131,7 +122,7 @@
             // 
             this.lblDescripcion.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescripcion.Appearance.Options.UseFont = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(79, 285);
+            this.lblDescripcion.Location = new System.Drawing.Point(34, 170);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(81, 19);
             this.lblDescripcion.TabIndex = 4;
@@ -139,7 +130,7 @@
             // 
             // txtIdCategoria
             // 
-            this.txtIdCategoria.Location = new System.Drawing.Point(173, 202);
+            this.txtIdCategoria.Location = new System.Drawing.Point(128, 87);
             this.txtIdCategoria.MenuManager = this.ribbon;
             this.txtIdCategoria.Name = "txtIdCategoria";
             this.txtIdCategoria.Size = new System.Drawing.Size(100, 20);
@@ -147,7 +138,7 @@
             // 
             // txtNombreCategoria
             // 
-            this.txtNombreCategoria.Location = new System.Drawing.Point(173, 237);
+            this.txtNombreCategoria.Location = new System.Drawing.Point(128, 122);
             this.txtNombreCategoria.MenuManager = this.ribbon;
             this.txtNombreCategoria.Name = "txtNombreCategoria";
             this.txtNombreCategoria.Size = new System.Drawing.Size(100, 20);
@@ -156,7 +147,7 @@
             // rtxtDescripcion
             // 
             this.rtxtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rtxtDescripcion.Location = new System.Drawing.Point(173, 285);
+            this.rtxtDescripcion.Location = new System.Drawing.Point(128, 170);
             this.rtxtDescripcion.Name = "rtxtDescripcion";
             this.rtxtDescripcion.Size = new System.Drawing.Size(212, 96);
             this.rtxtDescripcion.TabIndex = 8;
@@ -186,7 +177,7 @@
             // 
             this.btnLimpiar.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.Appearance.Options.UseFont = true;
-            this.btnLimpiar.Location = new System.Drawing.Point(349, 422);
+            this.btnLimpiar.Location = new System.Drawing.Point(304, 297);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(82, 23);
             this.btnLimpiar.TabIndex = 48;
@@ -197,7 +188,7 @@
             // 
             this.btnEliminar.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.Appearance.Options.UseFont = true;
-            this.btnEliminar.Location = new System.Drawing.Point(261, 422);
+            this.btnEliminar.Location = new System.Drawing.Point(216, 297);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(82, 23);
             this.btnEliminar.TabIndex = 47;
@@ -208,7 +199,7 @@
             // 
             this.btnActualizar.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualizar.Appearance.Options.UseFont = true;
-            this.btnActualizar.Location = new System.Drawing.Point(173, 422);
+            this.btnActualizar.Location = new System.Drawing.Point(128, 297);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(82, 23);
             this.btnActualizar.TabIndex = 46;
@@ -223,7 +214,7 @@
             this.btnAgregar.Appearance.Options.UseFont = true;
             this.btnAgregar.AppearanceHovered.BorderColor = System.Drawing.Color.White;
             this.btnAgregar.AppearanceHovered.Options.UseBorderColor = true;
-            this.btnAgregar.Location = new System.Drawing.Point(79, 422);
+            this.btnAgregar.Location = new System.Drawing.Point(34, 297);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(82, 23);
             this.btnAgregar.TabIndex = 45;
@@ -233,11 +224,11 @@
             // gridControl1
             // 
             this.gridControl1.DataSource = this.categoriaproductosBindingSource;
-            this.gridControl1.Location = new System.Drawing.Point(532, 141);
+            this.gridControl1.Location = new System.Drawing.Point(438, 80);
             this.gridControl1.MainView = this.gridViewCategories;
             this.gridControl1.MenuManager = this.ribbon;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(508, 281);
+            this.gridControl1.Size = new System.Drawing.Size(508, 240);
             this.gridControl1.TabIndex = 51;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCategories});
@@ -294,7 +285,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1115, 512);
+            this.ClientSize = new System.Drawing.Size(982, 374);
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnEliminar);
@@ -306,14 +297,13 @@
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblidCategoria);
-            this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.IconOptions.ShowIcon = false;
             this.MinimizeBox = false;
             this.Name = "FrmCategoryList";
             this.Ribbon = this.ribbon;
+            this.RibbonVisibility = DevExpress.XtraBars.Ribbon.RibbonVisibility.Hidden;
             this.ShowInTaskbar = false;
-            this.StatusBar = this.ribbonStatusBar;
             this.Text = "Category List";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdCategoria.Properties)).EndInit();
@@ -333,7 +323,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.XtraEditors.LabelControl lblidCategoria;
         private DevExpress.XtraEditors.LabelControl lblNombre;
         private DevExpress.XtraEditors.LabelControl lblDescripcion;

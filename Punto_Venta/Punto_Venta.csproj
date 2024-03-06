@@ -74,46 +74,59 @@
   <ItemGroup>
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\cxcController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
+    <Compile Include="DetalleVentas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DetalleVentas.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Model\EF\Categoria_productos.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\Detalles_ctasxcobrar.cs">
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Detalles_ventas.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_Clientes.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_ctasxcobrar.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EF\Maestro_Detalles_ctasxcobrar.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_ventas.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EF\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EF\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EF\PuntoVentas.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PuntoVentas.edmx</DependentUpon>
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Producto.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\PuntoVenta.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PuntoVenta.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\PuntoVenta.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\PuntoVenta.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PuntoVenta.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\Tipo_Transaccion.cs">
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\Transaccione.cs">
+      <DependentUpon>PuntoVenta.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +146,12 @@
     </Compile>
     <Compile Include="View\FrmClientList.Designer.cs">
       <DependentUpon>FrmClientList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmDetalleVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmDetalleVentas.Designer.cs">
+      <DependentUpon>FrmDetalleVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmMenu.cs">
       <SubType>Form</SubType>
@@ -180,6 +199,9 @@
     <EmbeddedResource Include="View\FrmClientList.resx">
       <DependentUpon>FrmClientList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmDetalleVentas.resx">
+      <DependentUpon>FrmDetalleVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,15 +218,27 @@
       <DependentUpon>mdiProducts.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
-    <EntityDeploy Include="Model\EF\PuntoVentas.edmx">
+    <None Include="DetalleVentas.xsc">
+      <DependentUpon>DetalleVentas.xsd</DependentUpon>
+    </None>
+    <None Include="DetalleVentas.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DetalleVentas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DetalleVentas.xss">
+      <DependentUpon>DetalleVentas.xsd</DependentUpon>
+    </None>
+    <EntityDeploy Include="Model\EF\PuntoVenta.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PuntoVentas.Designer.cs</LastGenOutput>
+      <LastGenOutput>PuntoVenta.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\EF\PuntoVentas.edmx.diagram">
-      <DependentUpon>PuntoVentas.edmx</DependentUpon>
+    <None Include="Model\EF\PuntoVenta.edmx.diagram">
+      <DependentUpon>PuntoVenta.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Categoria_productos.datasource" />
+    <None Include="Properties\DataSources\Punto_Venta.Model.EF.Detalles_ventas.datasource" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Maestro_Cliente.datasource" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Maestro_Clientes.datasource" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Producto.datasource" />
@@ -236,15 +270,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\EF\Model1.Context.tt">
+    <Content Include="Model\EF\PuntoVenta.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>PuntoVentas.edmx</DependentUpon>
+      <DependentUpon>PuntoVenta.edmx</DependentUpon>
+      <LastGenOutput>PuntoVenta.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\EF\Model1.tt">
+    <Content Include="Model\EF\PuntoVenta.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PuntoVentas.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>PuntoVenta.edmx</DependentUpon>
+      <LastGenOutput>PuntoVenta.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

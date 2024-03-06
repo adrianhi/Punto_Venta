@@ -12,11 +12,12 @@ namespace Punto_Venta.Model.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Maestro_Detalles_ctasxcobrar
+    public partial class Transaccione
     {
-        public int Id_detalleCxC { get; set; }
-        public Nullable<int> Id_CxC { get; set; }
+        public int Id_Transaccion { get; set; }
+        public Nullable<int> Id_Venta { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-        public string Estado { get; set; }
+        public Nullable<int> Tipo_transaccion_id { get; set; }
+        public Nullable<decimal> Total { get; set; }
     }
 }

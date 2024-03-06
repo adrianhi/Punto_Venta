@@ -30,16 +30,27 @@ namespace Punto_Venta.View
             mdiProductList.Show();
         }
 
-        private void Menu_Load(object sender, System.EventArgs e)
-        {
-
-            }
+       
 
         private void barButtonItem3_ItemClick (object sender, ItemClickEventArgs e)
         {
             FrmClientList mdiClientList = new FrmClientList();
             mdiClientList.MdiParent = ActiveForm;
             mdiClientList.Show();
+        }
+
+        private void barButtonItem4_ItemClick (object sender, ItemClickEventArgs e)
+        {
+            FrmVentas frmVentas = new FrmVentas();
+            frmVentas.MdiParent = ActiveForm;
+            frmVentas.Show();
+        }
+
+        private void barButtonItem5_ItemClick (object sender, ItemClickEventArgs e)
+        {
+            FrmDetalleVentas frmDetalleVentas = new FrmDetalleVentas();
+            frmDetalleVentas.MdiParent = ActiveForm;
+            frmDetalleVentas.Show();
         }
     }
 }

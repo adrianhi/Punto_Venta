@@ -14,6 +14,8 @@ namespace Punto_Venta.View
         public FrmCategoryList ( )
         {
             InitializeComponent();
+            txtIdCategoria.Select();
+            Cursor.Current = Cursors.WaitCursor;
             productCategoryController = new CategoryController();
             gridViewCategories.FocusedRowChanged -= gridViewCategories_FocusedRowChanged;
             gridViewCategories.FocusedRowChanged += gridViewCategories_FocusedRowChanged;

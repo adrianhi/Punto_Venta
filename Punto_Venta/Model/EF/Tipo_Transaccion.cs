@@ -12,16 +12,13 @@ namespace Punto_Venta.Model.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Maestro_ctasxcobrar
+    public partial class Tipo_Transaccion
     {
-        public int Id_CxC { get; set; }
-        public Nullable<int> Id_venta { get; set; }
-        public Nullable<int> Id_TipoTransaccion { get; set; }
-        public Nullable<int> Id_Transaccion { get; set; }
-        public Nullable<int> Id_Cliente { get; set; }
-        public Nullable<decimal> Monto_total { get; set; }
-        public Nullable<decimal> Monto_recibido { get; set; }
-        public Nullable<decimal> Balance { get; set; }
-        public Nullable<int> Ref_IdTransaccion { get; set; }
+        public int Id_TipoTransaccion { get; set; }
+        public string Descripcion { get; set; }
+        public bool EsCredito { get; set; }
+        public Nullable<bool> Fact_Credito { get; set; }
+        public Nullable<bool> Fact_contado { get; set; }
+        public Nullable<bool> Recibo_Cobro { get; set; }
     }
 }

@@ -32,7 +32,6 @@
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.lblCorreo = new DevExpress.XtraEditors.LabelControl();
             this.txtCedula = new DevExpress.XtraEditors.TextEdit();
             this.lblidProducto = new DevExpress.XtraEditors.LabelControl();
@@ -49,14 +48,14 @@
             this.txtCantidadProducto = new DevExpress.XtraEditors.SpinEdit();
             this.btnSearchProduct = new DevExpress.XtraEditors.SimpleButton();
             this.gcClients = new DevExpress.XtraEditors.GroupControl();
+            this.txtIdCliente = new DevExpress.XtraEditors.TextEdit();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            this.txtCorreo = new DevExpress.XtraEditors.TextEdit();
             this.btnSearchCedula = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.txtNombreCliente = new DevExpress.XtraEditors.TextEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
-            this.txtStockProducto = new DevExpress.XtraEditors.TextEdit();
+            this.txtExistenciaProducto = new DevExpress.XtraEditors.TextEdit();
             this.txtNombreProducto = new DevExpress.XtraEditors.TextEdit();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
@@ -68,6 +67,9 @@
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEliminar = new DevExpress.XtraEditors.SimpleButton();
+            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
+            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
+            this.ChkCredito = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCedula.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdProducto.Properties)).BeginInit();
@@ -77,14 +79,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCantidadProducto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcClients)).BeginInit();
             this.gcClients.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCorreo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtIdCliente.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreCliente.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStockProducto.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExistenciaProducto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreProducto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMontoDevolver.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChkCredito.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -105,8 +110,7 @@
             this.ribbon.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Hide;
             this.ribbon.ShowQatLocationSelector = false;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(1017, 158);
-            this.ribbon.StatusBar = this.ribbonStatusBar;
+            this.ribbon.Size = new System.Drawing.Size(1003, 37);
             this.ribbon.Toolbar.ShowCustomizeItem = false;
             // 
             // ribbonPage1
@@ -119,13 +123,6 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            // 
-            // ribbonStatusBar
-            // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 623);
-            this.ribbonStatusBar.Name = "ribbonStatusBar";
-            this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1017, 22);
             // 
             // lblCorreo
             // 
@@ -141,7 +138,7 @@
             // txtCedula
             // 
             this.txtCedula.EditValue = "";
-            this.txtCedula.Location = new System.Drawing.Point(68, 35);
+            this.txtCedula.Location = new System.Drawing.Point(74, 35);
             this.txtCedula.MenuManager = this.ribbon;
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Properties.NullValuePrompt = "40263556226";
@@ -173,7 +170,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(847, 348);
+            this.labelControl1.Location = new System.Drawing.Point(847, 345);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(83, 16);
             this.labelControl1.TabIndex = 43;
@@ -181,11 +178,11 @@
             // 
             // txtMontoPagar
             // 
-            this.txtMontoPagar.Location = new System.Drawing.Point(847, 373);
+            this.txtMontoPagar.Location = new System.Drawing.Point(847, 370);
             this.txtMontoPagar.MenuManager = this.ribbon;
             this.txtMontoPagar.Name = "txtMontoPagar";
             this.txtMontoPagar.Properties.ReadOnly = true;
-            this.txtMontoPagar.Size = new System.Drawing.Size(107, 20);
+            this.txtMontoPagar.Size = new System.Drawing.Size(122, 20);
             this.txtMontoPagar.TabIndex = 42;
             // 
             // labelControl2
@@ -223,7 +220,7 @@
             this.btnProcesar.Appearance.Options.UseFont = true;
             this.btnProcesar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnProcesar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnProcesar.ImageOptions.SvgImage")));
-            this.btnProcesar.Location = new System.Drawing.Point(847, 517);
+            this.btnProcesar.Location = new System.Drawing.Point(847, 514);
             this.btnProcesar.Name = "btnProcesar";
             this.btnProcesar.Size = new System.Drawing.Size(122, 34);
             this.btnProcesar.TabIndex = 48;
@@ -236,7 +233,7 @@
             this.btnAgregar.Appearance.Options.UseFont = true;
             this.btnAgregar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnAgregar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAgregar.ImageOptions.SvgImage")));
-            this.btnAgregar.Location = new System.Drawing.Point(847, 218);
+            this.btnAgregar.Location = new System.Drawing.Point(847, 103);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(122, 34);
             this.btnAgregar.TabIndex = 51;
@@ -245,17 +242,18 @@
             // 
             // txtMontoRecibido
             // 
-            this.txtMontoRecibido.Location = new System.Drawing.Point(847, 425);
+            this.txtMontoRecibido.Location = new System.Drawing.Point(847, 422);
             this.txtMontoRecibido.MenuManager = this.ribbon;
             this.txtMontoRecibido.Name = "txtMontoRecibido";
-            this.txtMontoRecibido.Size = new System.Drawing.Size(107, 20);
+            this.txtMontoRecibido.Size = new System.Drawing.Size(122, 20);
             this.txtMontoRecibido.TabIndex = 54;
+            this.txtMontoRecibido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontoRecibido_KeyPress);
             // 
             // labelControl4
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(847, 399);
+            this.labelControl4.Location = new System.Drawing.Point(847, 396);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(87, 16);
             this.labelControl4.TabIndex = 55;
@@ -304,8 +302,8 @@
             this.gcClients.Appearance.Options.UseBackColor = true;
             this.gcClients.AppearanceCaption.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gcClients.AppearanceCaption.Options.UseFont = true;
+            this.gcClients.Controls.Add(this.txtIdCliente);
             this.gcClients.Controls.Add(this.labelControl8);
-            this.gcClients.Controls.Add(this.txtCorreo);
             this.gcClients.Controls.Add(this.btnSearchCedula);
             this.gcClients.Controls.Add(this.labelControl5);
             this.gcClients.Controls.Add(this.txtNombreCliente);
@@ -313,11 +311,20 @@
             this.gcClients.Controls.Add(this.txtCedula);
             this.gcClients.Cursor = System.Windows.Forms.Cursors.Default;
             this.gcClients.GroupStyle = DevExpress.Utils.GroupStyle.Light;
-            this.gcClients.Location = new System.Drawing.Point(30, 188);
+            this.gcClients.Location = new System.Drawing.Point(35, 128);
             this.gcClients.Name = "gcClients";
             this.gcClients.Size = new System.Drawing.Size(248, 122);
             this.gcClients.TabIndex = 62;
             this.gcClients.Text = "Información del cliente";
+            // 
+            // txtIdCliente
+            // 
+            this.txtIdCliente.Location = new System.Drawing.Point(74, 88);
+            this.txtIdCliente.MenuManager = this.ribbon;
+            this.txtIdCliente.Name = "txtIdCliente";
+            this.txtIdCliente.Properties.ReadOnly = true;
+            this.txtIdCliente.Size = new System.Drawing.Size(129, 20);
+            this.txtIdCliente.TabIndex = 62;
             // 
             // labelControl8
             // 
@@ -325,23 +332,14 @@
             this.labelControl8.Appearance.Options.UseFont = true;
             this.labelControl8.Location = new System.Drawing.Point(5, 89);
             this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(48, 19);
+            this.labelControl8.Size = new System.Drawing.Size(65, 19);
             this.labelControl8.TabIndex = 61;
-            this.labelControl8.Text = "Correo";
-            // 
-            // txtCorreo
-            // 
-            this.txtCorreo.Location = new System.Drawing.Point(68, 88);
-            this.txtCorreo.MenuManager = this.ribbon;
-            this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Properties.ReadOnly = true;
-            this.txtCorreo.Size = new System.Drawing.Size(129, 20);
-            this.txtCorreo.TabIndex = 60;
+            this.labelControl8.Text = "Id cliente";
             // 
             // btnSearchCedula
             // 
             this.btnSearchCedula.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchCedula.ImageOptions.Image")));
-            this.btnSearchCedula.Location = new System.Drawing.Point(203, 34);
+            this.btnSearchCedula.Location = new System.Drawing.Point(206, 35);
             this.btnSearchCedula.Name = "btnSearchCedula";
             this.btnSearchCedula.Size = new System.Drawing.Size(23, 21);
             this.btnSearchCedula.TabIndex = 59;
@@ -360,7 +358,8 @@
             // 
             // txtNombreCliente
             // 
-            this.txtNombreCliente.Location = new System.Drawing.Point(68, 61);
+            this.txtNombreCliente.Enabled = false;
+            this.txtNombreCliente.Location = new System.Drawing.Point(74, 61);
             this.txtNombreCliente.MenuManager = this.ribbon;
             this.txtNombreCliente.Name = "txtNombreCliente";
             this.txtNombreCliente.Properties.ReadOnly = true;
@@ -372,7 +371,7 @@
             this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
             this.groupControl1.Controls.Add(this.labelControl7);
-            this.groupControl1.Controls.Add(this.txtStockProducto);
+            this.groupControl1.Controls.Add(this.txtExistenciaProducto);
             this.groupControl1.Controls.Add(this.txtNombreProducto);
             this.groupControl1.Controls.Add(this.labelControl6);
             this.groupControl1.Controls.Add(this.txtIdProducto);
@@ -383,7 +382,7 @@
             this.groupControl1.Controls.Add(this.btnSearchProduct);
             this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.GroupStyle = DevExpress.Utils.GroupStyle.Light;
-            this.groupControl1.Location = new System.Drawing.Point(311, 188);
+            this.groupControl1.Location = new System.Drawing.Point(316, 128);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(514, 122);
             this.groupControl1.TabIndex = 63;
@@ -395,24 +394,25 @@
             this.labelControl7.Appearance.Options.UseFont = true;
             this.labelControl7.Location = new System.Drawing.Point(284, 69);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(39, 19);
+            this.labelControl7.Size = new System.Drawing.Size(69, 19);
             this.labelControl7.TabIndex = 62;
-            this.labelControl7.Text = "Stock";
+            this.labelControl7.Text = "Existencia";
             // 
-            // txtStockProducto
+            // txtExistenciaProducto
             // 
-            this.txtStockProducto.Location = new System.Drawing.Point(329, 68);
-            this.txtStockProducto.MenuManager = this.ribbon;
-            this.txtStockProducto.Name = "txtStockProducto";
-            this.txtStockProducto.Properties.ReadOnly = true;
-            this.txtStockProducto.Size = new System.Drawing.Size(91, 20);
-            this.txtStockProducto.TabIndex = 61;
+            this.txtExistenciaProducto.Location = new System.Drawing.Point(359, 68);
+            this.txtExistenciaProducto.MenuManager = this.ribbon;
+            this.txtExistenciaProducto.Name = "txtExistenciaProducto";
+            this.txtExistenciaProducto.Properties.ReadOnly = true;
+            this.txtExistenciaProducto.Size = new System.Drawing.Size(91, 20);
+            this.txtExistenciaProducto.TabIndex = 61;
             // 
             // txtNombreProducto
             // 
             this.txtNombreProducto.Location = new System.Drawing.Point(299, 38);
             this.txtNombreProducto.MenuManager = this.ribbon;
             this.txtNombreProducto.Name = "txtNombreProducto";
+            this.txtNombreProducto.Properties.ReadOnly = true;
             this.txtNombreProducto.Size = new System.Drawing.Size(195, 20);
             this.txtNombreProducto.TabIndex = 59;
             // 
@@ -430,7 +430,7 @@
             // 
             this.labelControl9.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl9.Appearance.Options.UseFont = true;
-            this.labelControl9.Location = new System.Drawing.Point(847, 451);
+            this.labelControl9.Location = new System.Drawing.Point(847, 448);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(98, 16);
             this.labelControl9.TabIndex = 64;
@@ -438,14 +438,17 @@
             // 
             // txtMontoDevolver
             // 
-            this.txtMontoDevolver.Location = new System.Drawing.Point(847, 476);
+            this.txtMontoDevolver.Enabled = false;
+            this.txtMontoDevolver.Location = new System.Drawing.Point(847, 473);
             this.txtMontoDevolver.MenuManager = this.ribbon;
             this.txtMontoDevolver.Name = "txtMontoDevolver";
-            this.txtMontoDevolver.Size = new System.Drawing.Size(107, 20);
+            this.txtMontoDevolver.Properties.ReadOnly = true;
+            this.txtMontoDevolver.Size = new System.Drawing.Size(122, 20);
             this.txtMontoDevolver.TabIndex = 65;
             // 
             // dgvVentas
             // 
+            this.dgvVentas.AllowUserToAddRows = false;
             this.dgvVentas.AllowUserToDeleteRows = false;
             this.dgvVentas.AllowUserToOrderColumns = true;
             this.dgvVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -458,7 +461,7 @@
             this.SubTotal});
             this.dgvVentas.GridColor = System.Drawing.Color.Silver;
             this.dgvVentas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dgvVentas.Location = new System.Drawing.Point(30, 344);
+            this.dgvVentas.Location = new System.Drawing.Point(35, 284);
             this.dgvVentas.Name = "dgvVentas";
             this.dgvVentas.ReadOnly = true;
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -502,18 +505,57 @@
             this.btnEliminar.Appearance.Options.UseFont = true;
             this.btnEliminar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnEliminar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEliminar.ImageOptions.SvgImage")));
-            this.btnEliminar.Location = new System.Drawing.Point(847, 265);
+            this.btnEliminar.Location = new System.Drawing.Point(847, 150);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(122, 34);
             this.btnEliminar.TabIndex = 72;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // dateEdit1
+            // 
+            this.dateEdit1.EditValue = null;
+            this.dateEdit1.Location = new System.Drawing.Point(69, 100);
+            this.dateEdit1.MenuManager = this.ribbon;
+            this.dateEdit1.Name = "dateEdit1";
+            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit1.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.Classic;
+            this.dateEdit1.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
+            this.dateEdit1.Size = new System.Drawing.Size(100, 20);
+            this.dateEdit1.TabIndex = 79;
+            // 
+            // labelControl10
+            // 
+            this.labelControl10.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl10.Appearance.Options.UseFont = true;
+            this.labelControl10.Location = new System.Drawing.Point(33, 103);
+            this.labelControl10.Name = "labelControl10";
+            this.labelControl10.Size = new System.Drawing.Size(34, 16);
+            this.labelControl10.TabIndex = 80;
+            this.labelControl10.Text = "Fecha";
+            // 
+            // ChkCredito
+            // 
+            this.ChkCredito.Location = new System.Drawing.Point(199, 101);
+            this.ChkCredito.MenuManager = this.ribbon;
+            this.ChkCredito.Name = "ChkCredito";
+            this.ChkCredito.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkCredito.Properties.Appearance.Options.UseFont = true;
+            this.ChkCredito.Properties.Caption = "Es crédito";
+            this.ChkCredito.Size = new System.Drawing.Size(84, 20);
+            this.ChkCredito.TabIndex = 82;
+            // 
             // FrmVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 645);
+            this.ClientSize = new System.Drawing.Size(1003, 593);
+            this.Controls.Add(this.ChkCredito);
+            this.Controls.Add(this.labelControl10);
+            this.Controls.Add(this.dateEdit1);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.dgvVentas);
             this.Controls.Add(this.txtMontoDevolver);
@@ -526,13 +568,13 @@
             this.Controls.Add(this.btnProcesar);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtMontoPagar);
-            this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.IconOptions.ShowIcon = false;
             this.MinimizeBox = false;
             this.Name = "FrmVentas";
             this.Ribbon = this.ribbon;
-            this.StatusBar = this.ribbonStatusBar;
+            this.RibbonVisibility = DevExpress.XtraBars.Ribbon.RibbonVisibility.Hidden;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ventas";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCedula.Properties)).EndInit();
@@ -544,15 +586,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcClients)).EndInit();
             this.gcClients.ResumeLayout(false);
             this.gcClients.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCorreo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtIdCliente.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreCliente.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStockProducto.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtExistenciaProducto.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNombreProducto.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMontoDevolver.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChkCredito.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,7 +608,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.XtraEditors.LabelControl lblCorreo;
         private DevExpress.XtraEditors.TextEdit txtCedula;
         private DevExpress.XtraEditors.LabelControl lblidProducto;
@@ -587,9 +631,8 @@
         private DevExpress.XtraEditors.TextEdit txtNombreProducto;
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.LabelControl labelControl7;
-        private DevExpress.XtraEditors.TextEdit txtStockProducto;
+        private DevExpress.XtraEditors.TextEdit txtExistenciaProducto;
         private DevExpress.XtraEditors.LabelControl labelControl8;
-        private DevExpress.XtraEditors.TextEdit txtCorreo;
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.TextEdit txtMontoDevolver;
         private System.Windows.Forms.DataGridView dgvVentas;
@@ -599,5 +642,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn SubTotal;
         private DevExpress.XtraEditors.SimpleButton btnEliminar;
+        private DevExpress.XtraEditors.TextEdit txtIdCliente;
+        private DevExpress.XtraEditors.DateEdit dateEdit1;
+        private DevExpress.XtraEditors.LabelControl labelControl10;
+        private DevExpress.XtraEditors.CheckEdit ChkCredito;
     }
 }

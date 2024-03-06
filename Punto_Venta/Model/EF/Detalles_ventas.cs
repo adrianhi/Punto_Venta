@@ -16,6 +16,8 @@ namespace Punto_Venta.Model.EF
     {
         public int Id_detallesVentas { get; set; }
         public Nullable<int> Id_venta { get; set; }
+        public Nullable<int> Id_Transaccion { get; set; }
+        public Nullable<int> Id_TipoTransaccion { get; set; }
         public Nullable<int> Id_producto { get; set; }
         public Nullable<int> Cantidad { get; set; }
         public Nullable<decimal> Precio_venta { get; set; }

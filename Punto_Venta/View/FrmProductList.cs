@@ -23,6 +23,8 @@ namespace Punto_Venta.View
         public FrmProductList ( )
         {
             InitializeComponent();
+            txtCodigoProducto.Select();
+            Cursor.Current = Cursors.WaitCursor;
             productController = new ProductController();
             btnActualizar.Enabled = false;
             btnEliminar.Enabled = false;
@@ -113,7 +115,36 @@ namespace Punto_Venta.View
         }
 
 
+        private void ValidateNumericInput (TextEdit textBox, KeyPressEventArgs e)
+        {
+            // Permitir solo números, punto decimal y tecla retroceso.
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+                return;
+            }
 
+            // Si ya hay un punto decimal, no permitir otro.
+            if (e.KeyChar == '.' && textBox.Text.Contains('.'))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Si se ha introducido el número máximo de caracteres, no permitir más.
+            if (textBox.Text.Length >= 10 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Si el cursor está al principio, no permitir un punto decimal.
+            if (textBox.SelectionStart == 0 && e.KeyChar == '.')
+            {
+                e.Handled = true;
+                return;
+            }
+        }
 
         //CRUD ACTIONS
         private void AddProduct ( )
@@ -277,66 +308,15 @@ namespace Punto_Venta.View
 
         private void txtPrecioVenta_KeyPress (object sender, KeyPressEventArgs e)
         {
-            // Permitir solo números, punto decimal y tecla retroceso.
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Si ya hay un punto decimal, no permitir otro.
-            if (e.KeyChar == '.' && txtPrecioVenta.Text.Contains('.'))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Si se ha introducido el número máximo de decimales, no permitir más.
-            if (txtPrecioVenta.Text.Length >= 10 && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Si el cursor está al principio, no permitir un punto decimal.
-            if (txtPrecioVenta.SelectionStart == 0 && e.KeyChar == '.')
-            {
-                e.Handled = true;
-                return;
-            }
-
+            ValidateNumericInput(txtPrecioVenta, e);
         }
 
         private void txtPrecioCompra_KeyPress (object sender, KeyPressEventArgs e)
-        { // Permitir solo números, punto decimal y tecla retroceso.
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-                return;
-            }
+        {
+            ValidateNumericInput(txtPrecioCompra, e);
 
-            // Si ya hay un punto decimal, no permitir otro.
-            if (e.KeyChar == '.' && txtPrecioCompra.Text.Contains('.'))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Si se ha introducido el número máximo de decimales, no permitir más.
-            if (txtPrecioCompra.Text.Length >= 10 && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                return;
-            }
-
-            // Si el cursor está al principio, no permitir un punto decimal.
-            if (txtPrecioCompra.SelectionStart == 0 && e.KeyChar == '.')
-            {
-                e.Handled = true;
-                return;
-            }
         }
 
-        
+
     }
 }

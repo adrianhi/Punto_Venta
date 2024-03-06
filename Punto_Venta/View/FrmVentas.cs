@@ -1,16 +1,12 @@
 ﻿using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid;
-using Punto_Venta.Controller;
+using Punto_Venta.Controllers;
 using Punto_Venta.Model.EF;
 using Punto_Venta.View.Mdi;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Punto_Venta.View
@@ -18,11 +14,11 @@ namespace Punto_Venta.View
     public partial class FrmVentas : RibbonForm
     {
         private readonly VentaController ventaController;
-        private DataTable dt = new DataTable();
 
         public FrmVentas ( )
         {
             InitializeComponent();
+            Cursor.Current = Cursors.WaitCursor;
             ventaController = new VentaController();
             txtCedula.Select();
             btnProcesar.Enabled = false;
@@ -38,10 +34,7 @@ namespace Punto_Venta.View
             XtraMessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void ShowSuccessMessage (string message)
-        {
-            XtraMessageBox.Show(message, "Venta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+      
 
         ///MDI
         private void openMdiClients ( )
@@ -55,12 +48,12 @@ namespace Punto_Venta.View
             // Acceder a los valores seleccionados después de cerrar el formulario
             string cedula = mdiClientes.CedulaSeleccionada;
             string nombre = mdiClientes.NombreSeleccionado;
-            string correo = mdiClientes.CorreoSeleccionado;
+            int idCliente = mdiClientes.idClienteSeleccionado;
 
             // Mostrar los valores en los TextBoxes
             txtCedula.Text = cedula;
             txtNombreCliente.Text = nombre;
-            txtCorreo.Text = correo;
+            txtIdCliente.Text = idCliente.ToString();
         }
         private void openMdiProducts ( )
         {
@@ -74,13 +67,13 @@ namespace Punto_Venta.View
             int id = mdiProductos.IdSeleccionado;
             string nombre = mdiProductos.NombreSeleccionado;
             decimal precio = mdiProductos.PrecioSeleccionado;
-            int stock = mdiProductos.StockSeleccionado;
+            int stock = mdiProductos.ExistenciaSeleccionado;
 
             // Show the values in the text boxes
             txtIdProducto.Text = id.ToString();
             txtNombreProducto.Text = nombre;
             txtPrecioProducto.Text = precio.ToString();
-            txtStockProducto.Text = stock.ToString();
+            txtExistenciaProducto.Text = stock.ToString();
         }
 
         /// <summary>
@@ -105,14 +98,14 @@ namespace Punto_Venta.View
             {
                 ShowErrorMessage("Cliente no encontrado. Por favor, agregue un cliente antes de procesar la venta.");
                 txtNombreCliente.Text = "";
-                txtCorreo.Text = "";
+                txtIdCliente.Text = "";
                 return;
             }
 
             var clientData = (dynamic)clientInfo;
             txtCedula.Text = clientData.Cedula;
             txtNombreCliente.Text = clientData.Nombre;
-            txtCorreo.Text = clientData.Correo;
+            txtIdCliente.Text = clientData.idCliente;
         }
         //Products
 
@@ -139,15 +132,16 @@ namespace Punto_Venta.View
                 ShowErrorMessage("Producto no encontrado. Por favor, verifique el ID del producto.");
                 txtNombreProducto.Text = "";
                 txtPrecioProducto.Text = "";
-                txtStockProducto.Text = "";
+                txtExistenciaProducto.Text = "";
                 return;
             }
 
             var productData = (dynamic)productInfo;
             txtNombreProducto.Text = productData.Nombre;
             txtPrecioProducto.Text = productData.Precio.ToString();
-            txtStockProducto.Text = productData.Stock.ToString();
+            txtExistenciaProducto.Text = productData.Existencia.ToString();
         }
+
 
         //dvg Actions
         private bool dgvProductExists (int productId)
@@ -192,7 +186,7 @@ namespace Punto_Venta.View
 
 
 
-
+        //Products values checks
         private void CalcularTotal ( )
         {
             decimal total = 0;
@@ -214,50 +208,140 @@ namespace Punto_Venta.View
                 }
                 
             }
-
             // Mostrar el total en el TextBox txtMontoPagar
             txtMontoPagar.Text = total.ToString();
         }
 
-        private void checkQuantity ( )
+        private void CalculateChange (decimal subtotal)
         {
-            int stockQuantity;
-            if (!int.TryParse(txtStockProducto.Text, out stockQuantity))
+
+            decimal amountReceived;
+            if (!decimal.TryParse(txtMontoRecibido.Text, out amountReceived))
             {
-                ShowErrorMessage("El valor del stock no es un número válido.");
+                ShowErrorMessage("La cantidad recibida no es un número válido.");
                 return;
+            }
+
+            // Calculate the change
+            decimal change = amountReceived - subtotal;
+
+            // Display the change
+            if (change >= 0)
+            {
+                txtMontoDevolver.Text = change.ToString();
+            }
+            else
+            {
+                ShowErrorMessage("La cantidad recibida es insuficiente.");
+            }
+        }
+
+        private bool CheckQuantity ( )
+        {
+            int Existence;
+            if (!int.TryParse(txtExistenciaProducto.Text, out Existence))
+            {
+                ShowErrorMessage("El valor de la existencia no es un número válido.");
+                return false;
             }
 
             int selectedQuantity = (int)txtCantidadProducto.Value;
 
-            if (stockQuantity < selectedQuantity)
+            if (selectedQuantity > Existence)
             {
-                ShowErrorMessage("La cantidad no puede ser mayor al stock.");
+                ShowErrorMessage("La cantidad seleccionada supera los productos disponibles disponible.");
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+
+        //Validate
+        private bool ValidateFields ( )
+        {
+            if (string.IsNullOrWhiteSpace(txtCedula.Text))
+            {
+                ShowErrorMessage("Por favor, complete todos los campos obligatorios.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtMontoRecibido.Text))
+            {
+                ShowErrorMessage("Por favor, ingrese el monto recibido.");
+                return false;
+            }
+            return true;
+        }
+
+        private void ValidateNumericInput (TextEdit textBox, KeyPressEventArgs e)
+        {
+            // Permitir solo números, punto decimal y tecla retroceso.
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Si ya hay un punto decimal, no permitir otro.
+            if (e.KeyChar == '.' && textBox.Text.Contains('.'))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Si se ha introducido el número máximo de caracteres, no permitir más.
+            if (textBox.Text.Length >= 10 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Si el cursor está al principio, no permitir un punto decimal.
+            if (textBox.SelectionStart == 0 && e.KeyChar == '.')
+            {
+                e.Handled = true;
                 return;
             }
         }
 
+
+        //Clear
         private void ClearTextBox ( )
         {
             txtNombreCliente.Clear();
             txtCedula.Clear();
-            txtCorreo.Clear();
+            txtIdCliente.Clear();
             txtIdProducto.Clear();
             txtNombreProducto.Clear();
             txtCantidadProducto.Clear();
             txtPrecioProducto.Clear();
-            txtStockProducto.Clear();
+            txtExistenciaProducto.Clear();
+            txtMontoPagar.Clear();
+            txtMontoRecibido.Clear();
+            txtMontoDevolver.Clear();
+            ChkCredito.Checked = false;
+            dateEdit1.DateTime = DateTime.Now;
         }
         private void ClearProducts( )
         {
-            txtNombreCliente.Clear();
-            txtCedula.Clear();
-            txtCorreo.Clear();
             txtIdProducto.Clear();
             txtNombreProducto.Clear();
             txtCantidadProducto.Clear();
             txtPrecioProducto.Clear();
-            txtStockProducto.Clear();
+            txtExistenciaProducto.Clear();
+        }
+        private void ClearAllFields ( )
+        {
+            ClearTextBox();
+            ClearDataGridView();
+        }
+
+        private void ClearDataGridView ( )
+        {
+            dgvVentas.Rows.Clear();
+            CalcularTotal(); 
         }
 
 
@@ -272,40 +356,142 @@ namespace Punto_Venta.View
         }
 
 
-       
 
-
-        private void btnProcesar_Click (object sender, EventArgs e)
+        //CRUD
+        private void AddSale ( )
         {
-            int idProducto = Convert.ToInt32(txtIdProducto.Text);
-            int cantidad = Convert.ToInt32(txtCantidadProducto.Text);
-            decimal precioProducto = Convert.ToDecimal(txtPrecioProducto.Text, System.Globalization.CultureInfo.CurrentCulture);
-            decimal montoTotal = cantidad * precioProducto;
-            string correoCliente = txtCedula.Text;
-            bool updated = ventaController.ActualizarCantidadProducto(idProducto, cantidad);
-            if (!updated)
+            bool EsCredito = ChkCredito.Checked;
+            DateTime fecha = dateEdit1.DateTime;
+
+            // Validar los campos obligatorios
+            if (!ValidateFields())
             {
-                ShowErrorMessage("Error al actualizar la cantidad en la base de datos.");
                 return;
             }
 
-            Maestro_ventas nuevaVenta = new Maestro_ventas
+            // Obtener la descripción del tipo de transacción
+            string tipoTransaccionDescripcion = InsertarTipoTransaccion(EsCredito);
+            if (tipoTransaccionDescripcion == null)
             {
-                // Id_cliente = ventaController.FindClientID(correoCliente),
-                Id_producto = idProducto,
-                Monto_total = montoTotal,
-                Fecha = DateTime.Now
+                // No se puede procesar la venta, salimos del método
+                return;
+            }
+
+            // Crear el objeto Tipo_Transaccion
+            Tipo_Transaccion tipoTransaccion = new Tipo_Transaccion
+            {
+                Descripcion = tipoTransaccionDescripcion,
+                EsCredito = EsCredito
             };
 
-            ventaController.RealizarVenta(nuevaVenta);
-            ClearTextBox();
+            // Obtener la información del cliente
+            Maestro_ventas nuevaVenta = CreateVentaObject(fecha);
+
+            // Obtener los detalles de la venta
+            List<Detalles_ventas> detallesVenta = CreateDetallesVentaList(fecha);
+
+            // Agregar la venta
+            ventaController.AddVenta(nuevaVenta, detallesVenta, tipoTransaccion);
+
+            // Actualizar la existencia de productos vendidos
+            foreach (var detalle in detallesVenta)
+            {
+                ventaController.UpdateProductExistence((int)detalle.Id_producto, (int)detalle.Cantidad);
+            }
+
+            // Limpiar todos los campos después de la venta
+            ClearAllFields();
             txtIdProducto.Select();
         }
 
+        private string InsertarTipoTransaccion (bool EsCredito)
+        {
+            string tipoTransaccionDescripcion = EsCredito ? "Venta con crédito" : "Venta contado";
+            if (!EsCredito)
+            {
+                decimal montoPagar;
+                decimal montoRecibido;
+
+                // Validar que los campos de monto existan y puedan ser convertidos a decimal
+                if (!decimal.TryParse(txtMontoPagar.Text, out montoPagar) || !decimal.TryParse(txtMontoRecibido.Text, out montoRecibido))
+                {
+                    XtraMessageBox.Show("Ingrese montos válidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null; // Retornar null si no se pueden convertir los montos
+                }
+
+                if (montoRecibido < montoPagar)
+                {
+                    XtraMessageBox.Show("El monto recibido es menor que el monto a pagar. No se puede procesar la venta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+
+            return tipoTransaccionDescripcion;
+        }
+
+
+
+        private Maestro_ventas CreateVentaObject (DateTime fechaSeleccionada)
+        {
+            int clienteId = Convert.ToInt32(txtIdCliente.Text);
+            decimal montoTotal = Convert.ToDecimal(txtMontoPagar.Text);
+            decimal montoRecibido = Convert.ToDecimal(txtMontoRecibido.Text);
+
+            return new Maestro_ventas
+            {
+                Id_cliente = clienteId,
+                Monto_total = montoTotal,
+                Monto_recibido = montoRecibido,
+                Fecha = fechaSeleccionada
+            };
+        }
+
+        private List<Detalles_ventas> CreateDetallesVentaList (DateTime fecha)
+        {
+            List<Detalles_ventas> detallesVenta = new List<Detalles_ventas>();
+
+            foreach (DataGridViewRow fila in dgvVentas.Rows)
+            {
+                if (fila.Cells["IdProducto"].Value != null && !string.IsNullOrWhiteSpace(fila.Cells["IdProducto"].Value.ToString()))
+                {
+                    int idProducto = Convert.ToInt32(fila.Cells["IdProducto"].Value);
+                    int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
+                    decimal precioVenta = Convert.ToDecimal(fila.Cells["precioProducto"].Value);
+
+                    Detalles_ventas detalleVenta = new Detalles_ventas
+                    {
+                        Id_producto = idProducto,
+                        Cantidad = cantidad,
+                        Precio_venta = precioVenta,
+                        Fecha = fecha
+                    };
+
+                    detallesVenta.Add(detalleVenta);
+                }
+            }
+
+            return detallesVenta;
+        }
+
+
+        //Actions
+        private void btnProcesar_Click (object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtMontoPagar.Text))
+            {
+                CalculateChange(Convert.ToDecimal(txtMontoPagar.Text));
+                AddSale();
+                ClearAllFields();
+                txtCedula.Select();
+            }
+         
+        }
+
+       
+
         private void btnSearchCedula_Click (object sender, EventArgs e)
         {
-            CheckClient();
-           
+            CheckClient();  
         }
 
         private void btnSearchProduct_Click (object sender, EventArgs e)
@@ -314,28 +500,31 @@ namespace Punto_Venta.View
         }
 
 
-
         private void btnAgregar_Click (object sender, EventArgs e)
         {
-            checkQuantity();
+            bool IsValid=CheckQuantity();
             int productId = Convert.ToInt32(txtIdProducto.Text);
             string productName = txtNombreProducto.Text;
             int quantity = Convert.ToInt32(txtCantidadProducto.Value);
             decimal price = Convert.ToDecimal(txtPrecioProducto.Text);
-
             ClearProducts();
+            btnProcesar.Enabled = true;
+            btnEliminar.Enabled = true;
+            if (IsValid)
+            {
+                if (dgvProductExists(productId))
+                {
+                    UpdateProduct(productId, quantity);
+                }
+                else
+                {
+                    AddNewProduct(productId, productName, price, quantity);
+                }
 
-            if (dgvProductExists(productId))
-            {
-                UpdateProduct(productId, quantity);
-            }
-            else
-            {
-                AddNewProduct(productId, productName, price, quantity);
             }
         }
 
-        
+
         private void dgvVentas_CellDoubleClick (object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Check if a valid row is double-clicked
@@ -354,7 +543,7 @@ namespace Punto_Venta.View
                 txtNombreProducto.Text = productName;
                 txtPrecioProducto.Text = price;
                 txtCantidadProducto.Text = quantity;
-                txtStockProducto.Text = stockQuantity.ToString();
+                txtExistenciaProducto.Text = stockQuantity.ToString();
                 btnEliminar.Enabled = true;
             }
         }
@@ -371,6 +560,7 @@ namespace Punto_Venta.View
                     {
                         dgvVentas.Rows.Remove(row);
                         ClearProducts();
+                        CalcularTotal();
                         break;
                     }
                 }
@@ -383,9 +573,9 @@ namespace Punto_Venta.View
 
         private void txtIdProducto_KeyPress (object sender, KeyPressEventArgs e)
         {
+            ValidateNumericInput(txtIdProducto, e);
             if (e.KeyChar == (char)Keys.Enter)
             {
-
                 CheckProduct();
             }
         }
@@ -395,7 +585,23 @@ namespace Punto_Venta.View
              if (e.KeyChar == (char)Keys.Enter)
             {
                 CheckClient();
+                txtIdProducto.Select();
             }
         }
+
+        private void txtMontoRecibido_KeyPress (object sender, KeyPressEventArgs e)
+        {
+            ValidateNumericInput(txtMontoRecibido, e);
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (!string.IsNullOrWhiteSpace(txtMontoPagar.Text))
+                {
+                    CalculateChange(Convert.ToDecimal(txtMontoPagar.Text));
+                }
+                
+            }
+        }
+
+       
     }
 }

@@ -47,7 +47,7 @@ namespace Punto_Venta.View.Mdi
         private Maestro_Clientes ObtenerClienteSeleccionado ( )
         {
             
-            var selectedRow = gridViewClients.GetFocusedRow() as Maestro_Clientes; // Asegúrate de reemplazar "Maestro_Clientes" con el tipo real de tus entidades
+            var selectedRow = gridViewClients.GetFocusedRow() as Maestro_Clientes;
             return selectedRow;
         }
     }

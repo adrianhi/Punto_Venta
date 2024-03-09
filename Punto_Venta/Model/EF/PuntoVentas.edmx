@@ -17,7 +17,7 @@
           <Key>
             <PropertyRef Name="Id_detalleCxC" />
           </Key>
-          <Property Name="Id_detalleCxC" Type="int" Nullable="false" />
+          <Property Name="Id_detalleCxC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_CxC" Type="int" Nullable="false" />
           <Property Name="Id_Transaccion" Type="int" Nullable="false" />
           <Property Name="Id_TipoTransaccion" Type="int" Nullable="false" />
@@ -198,7 +198,7 @@
           <Key>
             <PropertyRef Name="Id_detalleCxC" />
           </Key>
-          <Property Name="Id_detalleCxC" Type="Int32" Nullable="false" />
+          <Property Name="Id_detalleCxC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_CxC" Type="Int32" Nullable="false" />
           <Property Name="Id_Transaccion" Type="Int32" Nullable="false" />
           <Property Name="Id_TipoTransaccion" Type="Int32" Nullable="false" />

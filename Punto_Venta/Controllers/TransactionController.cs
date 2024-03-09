@@ -18,7 +18,6 @@ namespace Punto_Venta.Controllers
             {
                 if (IsCxC)
                 {
-
                     SetTransactionTypeForCxC(TransactionType);
                 }
                 else

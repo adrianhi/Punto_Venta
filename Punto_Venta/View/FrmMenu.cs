@@ -1,14 +1,10 @@
 ﻿using DevExpress.XtraBars;
-using DevExpress.XtraEditors.ColorPick.Picker;
-using System.Data.Entity;
 
 
 namespace Punto_Venta.View
 {
     public partial class FrmMenu : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-       
-
         public FrmMenu()
         {
             InitializeComponent();
@@ -30,8 +26,6 @@ namespace Punto_Venta.View
             mdiProductList.Show();
         }
 
-       
-
         private void barButtonItem3_ItemClick (object sender, ItemClickEventArgs e)
         {
             FrmClientList mdiClientList = new FrmClientList();
@@ -51,6 +45,20 @@ namespace Punto_Venta.View
             FrmDetalleVentas frmDetalleVentas = new FrmDetalleVentas();
             frmDetalleVentas.MdiParent = ActiveForm;
             frmDetalleVentas.Show();
+        }
+
+        private void btnCxC_ItemClick (object sender, ItemClickEventArgs e)
+        {
+            FrmCxC frmCxC = new FrmCxC();
+            frmCxC.MdiParent = ActiveForm;
+            frmCxC.Show();  
+        }
+
+        private void btnCxCd_ItemClick (object sender, ItemClickEventArgs e)
+        {
+            FrmDetallesCxC frmCxCd = new FrmDetallesCxC();
+            frmCxCd.MdiParent = ActiveForm;
+            frmCxCd.Show();
         }
     }
 }

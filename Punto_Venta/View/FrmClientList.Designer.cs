@@ -31,7 +31,6 @@
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.txtTelefono = new DevExpress.XtraEditors.TextEdit();
             this.txtDireccion = new DevExpress.XtraEditors.TextEdit();
             this.txtNombreCliente = new DevExpress.XtraEditors.TextEdit();
@@ -83,8 +82,7 @@
             this.ribbon.ShowMoreCommandsButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowQatLocationSelector = false;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(964, 158);
-            this.ribbon.StatusBar = this.ribbonStatusBar;
+            this.ribbon.Size = new System.Drawing.Size(948, 37);
             this.ribbon.Toolbar.ShowCustomizeItem = false;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             this.ribbon.TransparentEditorsMode = DevExpress.Utils.DefaultBoolean.False;
@@ -99,16 +97,9 @@
             // 
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
-            // ribbonStatusBar
-            // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 451);
-            this.ribbonStatusBar.Name = "ribbonStatusBar";
-            this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(964, 22);
-            // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(123, 276);
+            this.txtTelefono.Location = new System.Drawing.Point(111, 172);
             this.txtTelefono.MenuManager = this.ribbon;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(150, 20);
@@ -116,7 +107,7 @@
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(123, 251);
+            this.txtDireccion.Location = new System.Drawing.Point(111, 147);
             this.txtDireccion.MenuManager = this.ribbon;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(150, 20);
@@ -124,7 +115,7 @@
             // 
             // txtNombreCliente
             // 
-            this.txtNombreCliente.Location = new System.Drawing.Point(123, 199);
+            this.txtNombreCliente.Location = new System.Drawing.Point(111, 95);
             this.txtNombreCliente.MenuManager = this.ribbon;
             this.txtNombreCliente.Name = "txtNombreCliente";
             this.txtNombreCliente.Size = new System.Drawing.Size(150, 20);
@@ -134,7 +125,7 @@
             // 
             this.lblNombre.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombre.Appearance.Options.UseFont = true;
-            this.lblNombre.Location = new System.Drawing.Point(36, 202);
+            this.lblNombre.Location = new System.Drawing.Point(24, 98);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(57, 19);
             this.lblNombre.TabIndex = 32;
@@ -144,7 +135,7 @@
             // 
             this.lblDireccion.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDireccion.Appearance.Options.UseFont = true;
-            this.lblDireccion.Location = new System.Drawing.Point(36, 249);
+            this.lblDireccion.Location = new System.Drawing.Point(24, 145);
             this.lblDireccion.Name = "lblDireccion";
             this.lblDireccion.Size = new System.Drawing.Size(65, 19);
             this.lblDireccion.TabIndex = 33;
@@ -154,7 +145,7 @@
             // 
             this.lblTelefono.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTelefono.Appearance.Options.UseFont = true;
-            this.lblTelefono.Location = new System.Drawing.Point(36, 277);
+            this.lblTelefono.Location = new System.Drawing.Point(24, 173);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(62, 19);
             this.lblTelefono.TabIndex = 34;
@@ -164,7 +155,7 @@
             // 
             this.lblCorreo.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCorreo.Appearance.Options.UseFont = true;
-            this.lblCorreo.Location = new System.Drawing.Point(36, 303);
+            this.lblCorreo.Location = new System.Drawing.Point(24, 199);
             this.lblCorreo.Name = "lblCorreo";
             this.lblCorreo.Size = new System.Drawing.Size(48, 19);
             this.lblCorreo.TabIndex = 35;
@@ -174,7 +165,7 @@
             // 
             this.btnLimpiar.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.Appearance.Options.UseFont = true;
-            this.btnLimpiar.Location = new System.Drawing.Point(302, 346);
+            this.btnLimpiar.Location = new System.Drawing.Point(290, 242);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(82, 23);
             this.btnLimpiar.TabIndex = 48;
@@ -185,7 +176,7 @@
             // 
             this.btnEliminar.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.Appearance.Options.UseFont = true;
-            this.btnEliminar.Location = new System.Drawing.Point(216, 346);
+            this.btnEliminar.Location = new System.Drawing.Point(204, 242);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(82, 23);
             this.btnEliminar.TabIndex = 47;
@@ -196,7 +187,7 @@
             // 
             this.btnActualizar.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualizar.Appearance.Options.UseFont = true;
-            this.btnActualizar.Location = new System.Drawing.Point(128, 346);
+            this.btnActualizar.Location = new System.Drawing.Point(116, 242);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(82, 23);
             this.btnActualizar.TabIndex = 46;
@@ -207,7 +198,7 @@
             // 
             this.btnAgregar.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.Appearance.Options.UseFont = true;
-            this.btnAgregar.Location = new System.Drawing.Point(31, 346);
+            this.btnAgregar.Location = new System.Drawing.Point(19, 242);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(82, 23);
             this.btnAgregar.TabIndex = 45;
@@ -216,7 +207,7 @@
             // 
             // txtCedula
             // 
-            this.txtCedula.Location = new System.Drawing.Point(123, 225);
+            this.txtCedula.Location = new System.Drawing.Point(111, 121);
             this.txtCedula.MenuManager = this.ribbon;
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(150, 20);
@@ -226,7 +217,7 @@
             // 
             this.lblCedula.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCedula.Appearance.Options.UseFont = true;
-            this.lblCedula.Location = new System.Drawing.Point(36, 226);
+            this.lblCedula.Location = new System.Drawing.Point(24, 122);
             this.lblCedula.Name = "lblCedula";
             this.lblCedula.Size = new System.Drawing.Size(48, 19);
             this.lblCedula.TabIndex = 53;
@@ -235,7 +226,7 @@
             // gridControlClients
             // 
             this.gridControlClients.DataSource = typeof(Punto_Venta.Model.EF.Maestro_Clientes);
-            this.gridControlClients.Location = new System.Drawing.Point(418, 164);
+            this.gridControlClients.Location = new System.Drawing.Point(406, 60);
             this.gridControlClients.MainView = this.gridViewClients;
             this.gridControlClients.MenuManager = this.ribbon;
             this.gridControlClients.Name = "gridControlClients";
@@ -323,7 +314,7 @@
             // 
             // txtIdCliente
             // 
-            this.txtIdCliente.Location = new System.Drawing.Point(123, 174);
+            this.txtIdCliente.Location = new System.Drawing.Point(111, 70);
             this.txtIdCliente.MenuManager = this.ribbon;
             this.txtIdCliente.Name = "txtIdCliente";
             this.txtIdCliente.Size = new System.Drawing.Size(150, 20);
@@ -333,7 +324,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(36, 177);
+            this.labelControl1.Location = new System.Drawing.Point(24, 73);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(68, 19);
             this.labelControl1.TabIndex = 69;
@@ -341,7 +332,7 @@
             // 
             // txtCorreo
             // 
-            this.txtCorreo.Location = new System.Drawing.Point(123, 302);
+            this.txtCorreo.Location = new System.Drawing.Point(111, 198);
             this.txtCorreo.MenuManager = this.ribbon;
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(150, 20);
@@ -352,7 +343,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 473);
+            this.ClientSize = new System.Drawing.Size(948, 371);
             this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtIdCliente);
@@ -370,13 +361,12 @@
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.txtNombreCliente);
-            this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.IconOptions.ShowIcon = false;
             this.MinimizeBox = false;
             this.Name = "FrmClientList";
             this.Ribbon = this.ribbon;
-            this.StatusBar = this.ribbonStatusBar;
+            this.RibbonVisibility = DevExpress.XtraBars.Ribbon.RibbonVisibility.Hidden;
             this.Text = "FrmClientList";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTelefono.Properties)).EndInit();
@@ -397,7 +387,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.XtraEditors.TextEdit txtTelefono;
         private DevExpress.XtraEditors.TextEdit txtDireccion;
         private DevExpress.XtraEditors.TextEdit txtNombreCliente;

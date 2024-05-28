@@ -21,13 +21,14 @@ namespace Punto_Venta.Model.EF
         }
     
         public int Id_venta { get; set; }
+        public Nullable<int> Id_TipoTransaccion { get; set; }
+        public Nullable<int> Id_Transaccion { get; set; }
         public Nullable<int> Id_cliente { get; set; }
-        public Nullable<int> Id_producto { get; set; }
         public Nullable<decimal> Monto_total { get; set; }
+        public Nullable<decimal> Monto_recibido { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalles_ventas> Detalles_ventas { get; set; }
-        public virtual Maestro_Clientes Maestro_Clientes { get; set; }
     }
 }

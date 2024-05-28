@@ -23,6 +23,8 @@ namespace Punto_Venta.View
         public FrmProductList ( )
         {
             InitializeComponent();
+            txtCodigoProducto.Select();
+            Cursor.Current = Cursors.WaitCursor;
             productController = new ProductController();
             btnActualizar.Enabled = false;
             btnEliminar.Enabled = false;
@@ -30,10 +32,9 @@ namespace Punto_Venta.View
             gridViewProducts.FocusedRowChanged -= gridViewProducts_FocusedRowChanged;
             gridViewProducts.FocusedRowChanged += gridViewProducts_FocusedRowChanged;
             LoadData();
-            cmbEstado.Items.Add("No disponible");
-            cmbEstado.Items.Add("Disponible");
+            cmbEstado.Properties.Items.Add("Disponible");
+            cmbEstado.Properties.Items.Add("No disponible");
 
-          
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace Punto_Venta.View
             lkCategories.EditValue = selectedProduct.Id_categoria;
         }
 
-        private void productExist (int productId )
+        private void productExist (int productId)
         {
             if (!productController.ProductExist(productId))
             {
@@ -114,7 +115,36 @@ namespace Punto_Venta.View
         }
 
 
+        private void ValidateNumericInput (TextEdit textBox, KeyPressEventArgs e)
+        {
+            // Permitir solo números, punto decimal y tecla retroceso.
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+                return;
+            }
 
+            // Si ya hay un punto decimal, no permitir otro.
+            if (e.KeyChar == '.' && textBox.Text.Contains('.'))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Si se ha introducido el número máximo de caracteres, no permitir más.
+            if (textBox.Text.Length >= 10 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Si el cursor está al principio, no permitir un punto decimal.
+            if (textBox.SelectionStart == 0 && e.KeyChar == '.')
+            {
+                e.Handled = true;
+                return;
+            }
+        }
 
         //CRUD ACTIONS
         private void AddProduct ( )
@@ -128,7 +158,7 @@ namespace Punto_Venta.View
                     Precio_compra = Convert.ToDecimal(txtPrecioCompra.Text),
                     Precio_venta = Convert.ToDecimal(txtPrecioVenta.Text),
                     Estado = cmbEstado.SelectedItem.ToString(),
-                    Existencia = Convert.ToInt32(txtExistencia.Text),
+                    Existencia = Convert.ToInt32(txtExistencia.Value),
                     Stock = Convert.ToInt32(txtStock.Text),
                     Id_categoria = Convert.ToInt32(lkCategories.EditValue)
                 };
@@ -137,7 +167,7 @@ namespace Punto_Venta.View
                 LoadData();
                 ClearTextBox();
             }
-         
+
             catch (Exception ex)
             {
                 MessageBox.Show("Error " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -178,7 +208,7 @@ namespace Punto_Venta.View
                 decimal nuevoPrecioCompra = Convert.ToDecimal(txtPrecioCompra.Text);
                 decimal nuevoPrecioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
                 string nuevoEstado = cmbEstado.SelectedItem.ToString();
-                int nuevaExistencia = Convert.ToInt32(txtExistencia.Text);
+                int nuevaExistencia = Convert.ToInt32(txtExistencia.Value);
                 int nuevoStock = Convert.ToInt32(txtStock.Text);
                 int nuevoIdCategoria = Convert.ToInt32(lkCategories.EditValue);
 
@@ -197,7 +227,7 @@ namespace Punto_Venta.View
 
                 ClearTextBox();
             }
-           
+
             catch (Exception ex)
             {
                 MessageBox.Show("Error al actualizar producto " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -229,7 +259,7 @@ namespace Punto_Venta.View
                     SetTextBoxState(true);
                     btnAgregar.Text = "Guardar";
 
-                  
+
                 }
                 else if (btnAgregar.Text == "Guardar")
                 {
@@ -267,10 +297,7 @@ namespace Punto_Venta.View
             }
         }
 
-        private void productoBindingSource_CurrentChanged (object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void FrmProductList_Load (object sender, EventArgs e)
         {
@@ -278,5 +305,18 @@ namespace Punto_Venta.View
             this.categoria_productosTableAdapter.Fill(this.punto_ventasDataSet.Categoria_productos);
 
         }
+
+        private void txtPrecioVenta_KeyPress (object sender, KeyPressEventArgs e)
+        {
+            ValidateNumericInput(txtPrecioVenta, e);
+        }
+
+        private void txtPrecioCompra_KeyPress (object sender, KeyPressEventArgs e)
+        {
+            ValidateNumericInput(txtPrecioCompra, e);
+
+        }
+
+
     }
 }

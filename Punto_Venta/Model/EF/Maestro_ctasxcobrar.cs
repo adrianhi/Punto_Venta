@@ -16,6 +16,11 @@ namespace Punto_Venta.Model.EF
     {
         public int Id_CxC { get; set; }
         public Nullable<int> Id_venta { get; set; }
-        public Nullable<decimal> monto { get; set; }
+        public Nullable<int> Id_TipoTransaccion { get; set; }
+        public Nullable<int> Id_Transaccion { get; set; }
+        public Nullable<int> Id_Cliente { get; set; }
+        public Nullable<decimal> Monto_total { get; set; }
+        public Nullable<decimal> Monto_recibido { get; set; }
+        public Nullable<decimal> Balance { get; set; }
     }
 }

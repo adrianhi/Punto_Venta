@@ -17,6 +17,8 @@ namespace Punto_Venta.View
         public FrmClientList ( )
         {
             InitializeComponent();
+            txtIdCliente.Select();
+            Cursor.Current = Cursors.WaitCursor;
             clientController = new ClientController();
             txtIdCliente.Enabled= false;
             SetTextBoxState(false);

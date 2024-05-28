@@ -4,18 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1de2418073134cd8964a771e310ccb2d" Name="Diagram1">
-        <EntityTypeShape EntityType="Punto_ventasModel.Categoria_productos" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Punto_ventasModel.Detalles_ventas" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_Clientes" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_ctasxcobrar" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_Detalles_ctasxcobrar" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_ventas" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Punto_ventasModel.Producto" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Punto_ventasModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="f9a6b9188c3d4526a6852d5e343223b6" Name="Diagram1">
+        <EntityTypeShape EntityType="Punto_ventasModel.Categoria_productos" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Detalles_ctasxcobrar" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Detalles_ventas" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Factura" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_Clientes" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_ctasxcobrar" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Maestro_ventas" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Producto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Tipo_Transaccion" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Punto_ventasModel.Transaccione" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="Punto_ventasModel.FK__Productos__Id_ca__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="Punto_ventasModel.FK_DetallesVentas_MaestroVentas" ManuallyRouted="false" />
-        <AssociationConnector Association="Punto_ventasModel.FK_MaestroVentas_MaestroClientes" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

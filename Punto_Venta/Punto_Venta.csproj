@@ -28,7 +28,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -36,17 +36,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v23.2" />
+    <Reference Include="DevExpress.Charts.v23.2.Core, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.CodeParser.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.Desktop.v23.2" />
     <Reference Include="DevExpress.Data.v23.2" />
+    <Reference Include="DevExpress.DataAccess.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v23.2.Core, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v23.2.Core, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v23.2.Drawing, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.PivotGrid.v23.2.Core, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v23.2.Core, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v23.2.Export, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v23.2" />
     <Reference Include="DevExpress.Sparkline.v23.2.Core" />
+    <Reference Include="DevExpress.Utils.v23.2.UI, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v23.2" />
     <Reference Include="DevExpress.Printing.v23.2.Core" />
     <Reference Include="DevExpress.Drawing.v23.2" />
+    <Reference Include="DevExpress.XtraGauges.v23.2.Core, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v23.2.Extensions, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -74,46 +90,63 @@
   <ItemGroup>
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CxcController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
+    <Compile Include="DetalleVentas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DetalleVentas.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Model\EF\Categoria_productos.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\Detalles_ctasxcobrar.cs">
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Detalles_ventas.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\Factura.cs">
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_Clientes.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_ctasxcobrar.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\EF\Maestro_Detalles_ctasxcobrar.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\Maestro_ventas.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\EF\Model1.Context.cs">
+    <Compile Include="Model\EF\Producto.cs">
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\PuntoVentas.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\EF\Model1.cs">
+    <Compile Include="Model\EF\PuntoVentas.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EF\PuntoVentas.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PuntoVentas.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\EF\Producto.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\EF\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\Tipo_Transaccion.cs">
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF\Transaccione.cs">
+      <DependentUpon>PuntoVentas.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +154,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LkCodigoCategoria.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\FacturaReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\FacturaReport.Designer.cs">
+      <DependentUpon>FacturaReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportSale.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportSale.Designer.cs">
+      <DependentUpon>ReportSale.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmCategoryList.cs">
       <SubType>Form</SubType>
@@ -133,6 +178,24 @@
     </Compile>
     <Compile Include="View\FrmClientList.Designer.cs">
       <DependentUpon>FrmClientList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmCxC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmCxC.Designer.cs">
+      <DependentUpon>FrmCxC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmDetallesCxC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmDetallesCxC.Designer.cs">
+      <DependentUpon>FrmDetallesCxC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmDetalleVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmDetalleVentas.Designer.cs">
+      <DependentUpon>FrmDetalleVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmMenu.cs">
       <SubType>Form</SubType>
@@ -152,6 +215,18 @@
     <Compile Include="View\FrmVentas.Designer.cs">
       <DependentUpon>FrmVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Mdi\mdiClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Mdi\mdiClients.Designer.cs">
+      <DependentUpon>mdiClients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Mdi\mdiProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Mdi\mdiProducts.Designer.cs">
+      <DependentUpon>mdiProducts.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -162,11 +237,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reports\FacturaReport.resx">
+      <DependentUpon>FacturaReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportSale.resx">
+      <DependentUpon>ReportSale.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmCategoryList.resx">
       <DependentUpon>FrmCategoryList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmClientList.resx">
       <DependentUpon>FrmClientList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmCxC.resx">
+      <DependentUpon>FrmCxC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmDetallesCxC.resx">
+      <DependentUpon>FrmDetallesCxC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmDetalleVentas.resx">
+      <DependentUpon>FrmDetalleVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
@@ -177,7 +267,24 @@
     <EmbeddedResource Include="View\FrmVentas.resx">
       <DependentUpon>FrmVentas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Mdi\mdiClients.resx">
+      <DependentUpon>mdiClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Mdi\mdiProducts.resx">
+      <DependentUpon>mdiProducts.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="DetalleVentas.xsc">
+      <DependentUpon>DetalleVentas.xsd</DependentUpon>
+    </None>
+    <None Include="DetalleVentas.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DetalleVentas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DetalleVentas.xss">
+      <DependentUpon>DetalleVentas.xsd</DependentUpon>
+    </None>
     <EntityDeploy Include="Model\EF\PuntoVentas.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PuntoVentas.Designer.cs</LastGenOutput>
@@ -187,6 +294,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Categoria_productos.datasource" />
+    <None Include="Properties\DataSources\Punto_Venta.Model.EF.Detalles_ventas.datasource" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Maestro_Cliente.datasource" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Maestro_Clientes.datasource" />
     <None Include="Properties\DataSources\Punto_Venta.Model.EF.Producto.datasource" />
@@ -218,17 +326,18 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\EF\Model1.Context.tt">
+    <Content Include="Model\EF\PuntoVentas.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>PuntoVentas.edmx</DependentUpon>
+      <LastGenOutput>PuntoVentas.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\EF\Model1.tt">
+    <Content Include="Model\EF\PuntoVentas.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PuntoVentas.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <LastGenOutput>PuntoVentas.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

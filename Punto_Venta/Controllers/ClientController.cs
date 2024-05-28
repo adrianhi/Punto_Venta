@@ -21,10 +21,7 @@ namespace Punto_Venta.Controller
             dbContext = new Punto_ventasEntities();
         }
 
-        public List<Maestro_Clientes> getClients()
-        {
-            return dbContext.Maestro_Clientes.ToList();
-        }
+      
         public void AddClient (Maestro_Clientes newClient)
         {
             try

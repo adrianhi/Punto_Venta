@@ -1,14 +1,10 @@
 ﻿using DevExpress.XtraBars;
-using DevExpress.XtraEditors.ColorPick.Picker;
-using System.Data.Entity;
 
 
 namespace Punto_Venta.View
 {
     public partial class FrmMenu : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-       
-
         public FrmMenu()
         {
             InitializeComponent();
@@ -30,16 +26,39 @@ namespace Punto_Venta.View
             mdiProductList.Show();
         }
 
-        private void Menu_Load(object sender, System.EventArgs e)
-        {
-
-            }
-
         private void barButtonItem3_ItemClick (object sender, ItemClickEventArgs e)
         {
             FrmClientList mdiClientList = new FrmClientList();
             mdiClientList.MdiParent = ActiveForm;
             mdiClientList.Show();
+        }
+
+        private void barButtonItem4_ItemClick (object sender, ItemClickEventArgs e)
+        {
+            FrmVentas frmVentas = new FrmVentas();
+            frmVentas.MdiParent = ActiveForm;
+            frmVentas.Show();
+        }
+
+        private void barButtonItem5_ItemClick (object sender, ItemClickEventArgs e)
+        {
+            FrmDetalleVentas frmDetalleVentas = new FrmDetalleVentas();
+            frmDetalleVentas.MdiParent = ActiveForm;
+            frmDetalleVentas.Show();
+        }
+
+        private void btnCxC_ItemClick (object sender, ItemClickEventArgs e)
+        {
+            FrmCxC frmCxC = new FrmCxC();
+            frmCxC.MdiParent = ActiveForm;
+            frmCxC.Show();  
+        }
+
+        private void btnCxCd_ItemClick (object sender, ItemClickEventArgs e)
+        {
+            FrmDetallesCxC frmCxCd = new FrmDetallesCxC();
+            frmCxCd.MdiParent = ActiveForm;
+            frmCxCd.Show();
         }
     }
 }

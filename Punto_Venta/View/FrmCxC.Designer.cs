@@ -32,8 +32,6 @@
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcCuentas = new DevExpress.XtraGrid.GridControl();
-            this.gvCuentas = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.txtIdCxC = new DevExpress.XtraEditors.TextEdit();
             this.lbl = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -56,9 +54,10 @@
             this.txtActualizar = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.txtMontoFinal = new DevExpress.XtraEditors.TextEdit();
+            this.gridSplitContainer1 = new DevExpress.XtraGrid.GridSplitContainer();
+            this.gcCuentas = new DevExpress.XtraGrid.GridControl();
+            this.gvCuentas = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcCuentas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvCuentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdCxC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdVenta.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdCliente.Properties)).BeginInit();
@@ -70,6 +69,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtAbono.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtAbono.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMontoFinal.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel2)).BeginInit();
+            this.gridSplitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcCuentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCuentas)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonPage1
@@ -94,40 +99,15 @@
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
-            this.ribbon.Size = new System.Drawing.Size(1085, 37);
+            this.ribbon.Size = new System.Drawing.Size(845, 37);
             // 
             // gridColumn2
             // 
             this.gridColumn2.Name = "gridColumn2";
             // 
-            // gcCuentas
-            // 
-            this.gcCuentas.DataSource = typeof(Punto_Venta.Model.EF.Maestro_ctasxcobrar);
-            this.gcCuentas.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gcCuentas.Location = new System.Drawing.Point(0, 297);
-            this.gcCuentas.MainView = this.gvCuentas;
-            this.gcCuentas.Name = "gcCuentas";
-            this.gcCuentas.Size = new System.Drawing.Size(1085, 222);
-            this.gcCuentas.TabIndex = 4;
-            this.gcCuentas.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvCuentas});
-            // 
-            // gvCuentas
-            // 
-            this.gvCuentas.GridControl = this.gcCuentas;
-            this.gvCuentas.Name = "gvCuentas";
-            this.gvCuentas.OptionsBehavior.ReadOnly = true;
-            this.gvCuentas.OptionsView.RowAutoHeight = true;
-            this.gvCuentas.OptionsView.ShowAutoFilterRow = true;
-            this.gvCuentas.OptionsView.ShowGroupExpandCollapseButtons = false;
-            this.gvCuentas.OptionsView.ShowGroupPanel = false;
-            this.gvCuentas.OptionsView.ShowViewCaption = true;
-            this.gvCuentas.ViewCaption = "Cuentas x Cobrar";
-            this.gvCuentas.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvCuentas_FocusedRowChanged);
-            // 
             // txtIdCxC
             // 
-            this.txtIdCxC.Location = new System.Drawing.Point(116, 83);
+            this.txtIdCxC.Location = new System.Drawing.Point(122, 43);
             this.txtIdCxC.MenuManager = this.ribbon;
             this.txtIdCxC.Name = "txtIdCxC";
             this.txtIdCxC.Properties.ReadOnly = true;
@@ -136,7 +116,7 @@
             // 
             // lbl
             // 
-            this.lbl.Location = new System.Drawing.Point(9, 86);
+            this.lbl.Location = new System.Drawing.Point(15, 46);
             this.lbl.Name = "lbl";
             this.lbl.Size = new System.Drawing.Size(33, 13);
             this.lbl.TabIndex = 7;
@@ -144,7 +124,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(9, 112);
+            this.labelControl1.Location = new System.Drawing.Point(15, 72);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(42, 13);
             this.labelControl1.TabIndex = 9;
@@ -152,7 +132,7 @@
             // 
             // txtIdVenta
             // 
-            this.txtIdVenta.Location = new System.Drawing.Point(116, 109);
+            this.txtIdVenta.Location = new System.Drawing.Point(122, 69);
             this.txtIdVenta.MenuManager = this.ribbon;
             this.txtIdVenta.Name = "txtIdVenta";
             this.txtIdVenta.Properties.ReadOnly = true;
@@ -161,7 +141,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(9, 138);
+            this.labelControl2.Location = new System.Drawing.Point(15, 98);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(46, 13);
             this.labelControl2.TabIndex = 11;
@@ -169,7 +149,7 @@
             // 
             // txtIdCliente
             // 
-            this.txtIdCliente.Location = new System.Drawing.Point(116, 135);
+            this.txtIdCliente.Location = new System.Drawing.Point(122, 95);
             this.txtIdCliente.MenuManager = this.ribbon;
             this.txtIdCliente.Name = "txtIdCliente";
             this.txtIdCliente.Properties.ReadOnly = true;
@@ -178,7 +158,7 @@
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(9, 164);
+            this.labelControl3.Location = new System.Drawing.Point(15, 124);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(73, 13);
             this.labelControl3.TabIndex = 13;
@@ -186,7 +166,7 @@
             // 
             // txtTransaccionId
             // 
-            this.txtTransaccionId.Location = new System.Drawing.Point(116, 161);
+            this.txtTransaccionId.Location = new System.Drawing.Point(122, 121);
             this.txtTransaccionId.MenuManager = this.ribbon;
             this.txtTransaccionId.Name = "txtTransaccionId";
             this.txtTransaccionId.Properties.ReadOnly = true;
@@ -195,7 +175,7 @@
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(9, 190);
+            this.labelControl4.Location = new System.Drawing.Point(15, 150);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(97, 13);
             this.labelControl4.TabIndex = 15;
@@ -203,7 +183,7 @@
             // 
             // txtTipoTransaccion
             // 
-            this.txtTipoTransaccion.Location = new System.Drawing.Point(116, 187);
+            this.txtTipoTransaccion.Location = new System.Drawing.Point(122, 147);
             this.txtTipoTransaccion.MenuManager = this.ribbon;
             this.txtTipoTransaccion.Name = "txtTipoTransaccion";
             this.txtTipoTransaccion.Properties.ReadOnly = true;
@@ -212,7 +192,7 @@
             // 
             // labelControl6
             // 
-            this.labelControl6.Location = new System.Drawing.Point(12, 246);
+            this.labelControl6.Location = new System.Drawing.Point(18, 206);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(39, 13);
             this.labelControl6.TabIndex = 19;
@@ -220,7 +200,7 @@
             // 
             // txtBalance
             // 
-            this.txtBalance.Location = new System.Drawing.Point(116, 239);
+            this.txtBalance.Location = new System.Drawing.Point(122, 199);
             this.txtBalance.MenuManager = this.ribbon;
             this.txtBalance.Name = "txtBalance";
             this.txtBalance.Properties.ReadOnly = true;
@@ -229,7 +209,7 @@
             // 
             // labelControl7
             // 
-            this.labelControl7.Location = new System.Drawing.Point(11, 268);
+            this.labelControl7.Location = new System.Drawing.Point(17, 228);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(70, 13);
             this.labelControl7.TabIndex = 21;
@@ -237,7 +217,7 @@
             // 
             // txtMontoRecibido
             // 
-            this.txtMontoRecibido.Location = new System.Drawing.Point(116, 265);
+            this.txtMontoRecibido.Location = new System.Drawing.Point(122, 225);
             this.txtMontoRecibido.MenuManager = this.ribbon;
             this.txtMontoRecibido.Name = "txtMontoRecibido";
             this.txtMontoRecibido.Properties.ReadOnly = true;
@@ -246,7 +226,7 @@
             // 
             // labelControl9
             // 
-            this.labelControl9.Location = new System.Drawing.Point(564, 86);
+            this.labelControl9.Location = new System.Drawing.Point(570, 46);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(75, 13);
             this.labelControl9.TabIndex = 25;
@@ -254,7 +234,7 @@
             // 
             // txtMontoAbornar
             // 
-            this.txtMontoAbornar.Location = new System.Drawing.Point(669, 83);
+            this.txtMontoAbornar.Location = new System.Drawing.Point(675, 43);
             this.txtMontoAbornar.MenuManager = this.ribbon;
             this.txtMontoAbornar.Name = "txtMontoAbornar";
             this.txtMontoAbornar.Size = new System.Drawing.Size(100, 20);
@@ -263,7 +243,7 @@
             // 
             // labelControl10
             // 
-            this.labelControl10.Location = new System.Drawing.Point(564, 123);
+            this.labelControl10.Location = new System.Drawing.Point(570, 83);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(78, 13);
             this.labelControl10.TabIndex = 27;
@@ -271,7 +251,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(657, 193);
+            this.btnClear.Location = new System.Drawing.Point(663, 153);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(112, 19);
             this.btnClear.TabIndex = 29;
@@ -281,7 +261,7 @@
             // dtAbono
             // 
             this.dtAbono.EditValue = null;
-            this.dtAbono.Location = new System.Drawing.Point(669, 116);
+            this.dtAbono.Location = new System.Drawing.Point(675, 76);
             this.dtAbono.MenuManager = this.ribbon;
             this.dtAbono.Name = "dtAbono";
             this.dtAbono.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -293,7 +273,7 @@
             // 
             // txtActualizar
             // 
-            this.txtActualizar.Location = new System.Drawing.Point(657, 161);
+            this.txtActualizar.Location = new System.Drawing.Point(663, 121);
             this.txtActualizar.Name = "txtActualizar";
             this.txtActualizar.Size = new System.Drawing.Size(112, 19);
             this.txtActualizar.TabIndex = 33;
@@ -302,7 +282,7 @@
             // 
             // labelControl11
             // 
-            this.labelControl11.Location = new System.Drawing.Point(11, 216);
+            this.labelControl11.Location = new System.Drawing.Point(17, 176);
             this.labelControl11.Name = "labelControl11";
             this.labelControl11.Size = new System.Drawing.Size(53, 13);
             this.labelControl11.TabIndex = 36;
@@ -310,18 +290,53 @@
             // 
             // txtMontoFinal
             // 
-            this.txtMontoFinal.Location = new System.Drawing.Point(116, 213);
+            this.txtMontoFinal.Location = new System.Drawing.Point(122, 173);
             this.txtMontoFinal.MenuManager = this.ribbon;
             this.txtMontoFinal.Name = "txtMontoFinal";
             this.txtMontoFinal.Properties.ReadOnly = true;
             this.txtMontoFinal.Size = new System.Drawing.Size(100, 20);
             this.txtMontoFinal.TabIndex = 35;
             // 
+            // gridSplitContainer1
+            // 
+            this.gridSplitContainer1.Grid = null;
+            this.gridSplitContainer1.Location = new System.Drawing.Point(0, 297);
+            this.gridSplitContainer1.Name = "gridSplitContainer1";
+            this.gridSplitContainer1.Size = new System.Drawing.Size(1085, 222);
+            this.gridSplitContainer1.TabIndex = 38;
+            // 
+            // gcCuentas
+            // 
+            this.gcCuentas.DataSource = typeof(Punto_Venta.Model.EF.Maestro_ctasxcobrar);
+            this.gcCuentas.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gcCuentas.Location = new System.Drawing.Point(0, 277);
+            this.gcCuentas.MainView = this.gvCuentas;
+            this.gcCuentas.MenuManager = this.ribbon;
+            this.gcCuentas.Name = "gcCuentas";
+            this.gcCuentas.Size = new System.Drawing.Size(845, 197);
+            this.gcCuentas.TabIndex = 38;
+            this.gcCuentas.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvCuentas});
+            // 
+            // gvCuentas
+            // 
+            this.gvCuentas.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gvCuentas.GridControl = this.gcCuentas;
+            this.gvCuentas.Name = "gvCuentas";
+            this.gvCuentas.OptionsBehavior.ReadOnly = true;
+            this.gvCuentas.OptionsView.RowAutoHeight = true;
+            this.gvCuentas.OptionsView.ShowAutoFilterRow = true;
+            this.gvCuentas.OptionsView.ShowGroupPanel = false;
+            this.gvCuentas.OptionsView.ShowViewCaption = true;
+            this.gvCuentas.ViewCaption = "Cuentas por Cobrar";
+            this.gvCuentas.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvCuentas_FocusedRowChanged);
+            // 
             // FrmCxC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1085, 519);
+            this.ClientSize = new System.Drawing.Size(845, 474);
+            this.Controls.Add(this.gcCuentas);
             this.Controls.Add(this.labelControl11);
             this.Controls.Add(this.txtMontoFinal);
             this.Controls.Add(this.txtActualizar);
@@ -344,16 +359,12 @@
             this.Controls.Add(this.txtIdVenta);
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.txtIdCxC);
-            this.Controls.Add(this.gcCuentas);
             this.Controls.Add(this.ribbon);
             this.Name = "FrmCxC";
             this.Ribbon = this.ribbon;
             this.RibbonVisibility = DevExpress.XtraBars.Ribbon.RibbonVisibility.Hidden;
             this.Text = "FrmCxC";
-            this.Load += new System.EventHandler(this.FrmCxC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcCuentas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvCuentas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdCxC.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdVenta.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtIdCliente.Properties)).EndInit();
@@ -365,6 +376,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtAbono.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtAbono.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMontoFinal.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1)).EndInit();
+            this.gridSplitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcCuentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvCuentas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,8 +393,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.GridControl gcCuentas;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvCuentas;
         private DevExpress.XtraEditors.TextEdit txtIdCxC;
         private DevExpress.XtraEditors.LabelControl lbl;
         private DevExpress.XtraEditors.LabelControl labelControl1;
@@ -400,5 +415,8 @@
         private DevExpress.XtraEditors.SimpleButton txtActualizar;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.TextEdit txtMontoFinal;
+        private DevExpress.XtraGrid.GridSplitContainer gridSplitContainer1;
+        private DevExpress.XtraGrid.GridControl gcCuentas;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvCuentas;
     }
 }

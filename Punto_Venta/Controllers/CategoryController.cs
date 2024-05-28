@@ -19,7 +19,7 @@ namespace Punto_Venta.Controllers
         }  
 
 
-    public List<Categoria_productos> GetCategories(){
+        public List<Categoria_productos> GetCategories(){
             return dbcontext.Categoria_productos.ToList();
         }
 

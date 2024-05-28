@@ -110,7 +110,7 @@
             this.ribbon.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Hide;
             this.ribbon.ShowQatLocationSelector = false;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(1003, 37);
+            this.ribbon.Size = new System.Drawing.Size(961, 37);
             this.ribbon.Toolbar.ShowCustomizeItem = false;
             // 
             // ribbonPage1
@@ -170,7 +170,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(847, 345);
+            this.labelControl1.Location = new System.Drawing.Point(822, 274);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(83, 16);
             this.labelControl1.TabIndex = 43;
@@ -178,7 +178,7 @@
             // 
             // txtMontoPagar
             // 
-            this.txtMontoPagar.Location = new System.Drawing.Point(847, 370);
+            this.txtMontoPagar.Location = new System.Drawing.Point(822, 299);
             this.txtMontoPagar.MenuManager = this.ribbon;
             this.txtMontoPagar.Name = "txtMontoPagar";
             this.txtMontoPagar.Properties.ReadOnly = true;
@@ -220,7 +220,7 @@
             this.btnProcesar.Appearance.Options.UseFont = true;
             this.btnProcesar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnProcesar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnProcesar.ImageOptions.SvgImage")));
-            this.btnProcesar.Location = new System.Drawing.Point(847, 514);
+            this.btnProcesar.Location = new System.Drawing.Point(822, 443);
             this.btnProcesar.Name = "btnProcesar";
             this.btnProcesar.Size = new System.Drawing.Size(122, 34);
             this.btnProcesar.TabIndex = 48;
@@ -233,7 +233,7 @@
             this.btnAgregar.Appearance.Options.UseFont = true;
             this.btnAgregar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnAgregar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAgregar.ImageOptions.SvgImage")));
-            this.btnAgregar.Location = new System.Drawing.Point(847, 103);
+            this.btnAgregar.Location = new System.Drawing.Point(822, 103);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(122, 34);
             this.btnAgregar.TabIndex = 51;
@@ -242,7 +242,7 @@
             // 
             // txtMontoRecibido
             // 
-            this.txtMontoRecibido.Location = new System.Drawing.Point(847, 422);
+            this.txtMontoRecibido.Location = new System.Drawing.Point(822, 351);
             this.txtMontoRecibido.MenuManager = this.ribbon;
             this.txtMontoRecibido.Name = "txtMontoRecibido";
             this.txtMontoRecibido.Size = new System.Drawing.Size(122, 20);
@@ -253,7 +253,7 @@
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(847, 396);
+            this.labelControl4.Location = new System.Drawing.Point(822, 325);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(87, 16);
             this.labelControl4.TabIndex = 55;
@@ -311,7 +311,7 @@
             this.gcClients.Controls.Add(this.txtCedula);
             this.gcClients.Cursor = System.Windows.Forms.Cursors.Default;
             this.gcClients.GroupStyle = DevExpress.Utils.GroupStyle.Light;
-            this.gcClients.Location = new System.Drawing.Point(35, 128);
+            this.gcClients.Location = new System.Drawing.Point(12, 76);
             this.gcClients.Name = "gcClients";
             this.gcClients.Size = new System.Drawing.Size(248, 122);
             this.gcClients.TabIndex = 62;
@@ -382,7 +382,7 @@
             this.groupControl1.Controls.Add(this.btnSearchProduct);
             this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.GroupStyle = DevExpress.Utils.GroupStyle.Light;
-            this.groupControl1.Location = new System.Drawing.Point(316, 128);
+            this.groupControl1.Location = new System.Drawing.Point(293, 76);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(514, 122);
             this.groupControl1.TabIndex = 63;
@@ -430,7 +430,7 @@
             // 
             this.labelControl9.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl9.Appearance.Options.UseFont = true;
-            this.labelControl9.Location = new System.Drawing.Point(847, 448);
+            this.labelControl9.Location = new System.Drawing.Point(822, 377);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(98, 16);
             this.labelControl9.TabIndex = 64;
@@ -439,7 +439,7 @@
             // txtMontoDevolver
             // 
             this.txtMontoDevolver.Enabled = false;
-            this.txtMontoDevolver.Location = new System.Drawing.Point(847, 473);
+            this.txtMontoDevolver.Location = new System.Drawing.Point(822, 402);
             this.txtMontoDevolver.MenuManager = this.ribbon;
             this.txtMontoDevolver.Name = "txtMontoDevolver";
             this.txtMontoDevolver.Properties.ReadOnly = true;
@@ -461,7 +461,7 @@
             this.SubTotal});
             this.dgvVentas.GridColor = System.Drawing.Color.Silver;
             this.dgvVentas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dgvVentas.Location = new System.Drawing.Point(35, 284);
+            this.dgvVentas.Location = new System.Drawing.Point(10, 213);
             this.dgvVentas.Name = "dgvVentas";
             this.dgvVentas.ReadOnly = true;
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -505,7 +505,7 @@
             this.btnEliminar.Appearance.Options.UseFont = true;
             this.btnEliminar.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnEliminar.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEliminar.ImageOptions.SvgImage")));
-            this.btnEliminar.Location = new System.Drawing.Point(847, 150);
+            this.btnEliminar.Location = new System.Drawing.Point(822, 150);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(122, 34);
             this.btnEliminar.TabIndex = 72;
@@ -515,7 +515,7 @@
             // dateEdit1
             // 
             this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(69, 100);
+            this.dateEdit1.Location = new System.Drawing.Point(48, 50);
             this.dateEdit1.MenuManager = this.ribbon;
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -531,7 +531,7 @@
             // 
             this.labelControl10.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl10.Appearance.Options.UseFont = true;
-            this.labelControl10.Location = new System.Drawing.Point(33, 103);
+            this.labelControl10.Location = new System.Drawing.Point(12, 53);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(34, 16);
             this.labelControl10.TabIndex = 80;
@@ -539,7 +539,7 @@
             // 
             // ChkCredito
             // 
-            this.ChkCredito.Location = new System.Drawing.Point(199, 101);
+            this.ChkCredito.Location = new System.Drawing.Point(178, 51);
             this.ChkCredito.MenuManager = this.ribbon;
             this.ChkCredito.Name = "ChkCredito";
             this.ChkCredito.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -552,7 +552,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 593);
+            this.ClientSize = new System.Drawing.Size(961, 502);
             this.Controls.Add(this.ChkCredito);
             this.Controls.Add(this.labelControl10);
             this.Controls.Add(this.dateEdit1);
